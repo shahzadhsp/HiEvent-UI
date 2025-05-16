@@ -48,6 +48,7 @@ class AppAssets {
 
   // event costs screens
   static const String eventCostIcon = '$baseImagePath/event_cost_icon.png';
+  static const String yourCost = '$baseImagePath/your_cost.png';
 
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';
