@@ -5,9 +5,10 @@ import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/declined_list/declined_list_screen.dart';
+import 'package:weddinghall/view/event_cost/event_cost_screen.dart';
 import 'package:weddinghall/view/guest_list/guest_list_screen.dart';
 import 'package:weddinghall/view/home_screeen/hall/hall_screen.dart';
-import 'package:weddinghall/view/pending_guests/pending_guest.dart';
+import 'package:weddinghall/view/pending_guests/pending_guest_screen.dart';
 import 'package:weddinghall/view/sms/sms_screen.dart';
 import 'package:weddinghall/view/tahani_go/record_screen.dart';
 import 'package:weddinghall/view/tahani_go/tahani_go_screen.dart';
@@ -133,6 +134,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => PendingGuestScreen(),
+                            ),
+                          );
+                        } else if (index == 10) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EventCostScreen(),
                             ),
                           );
                         }

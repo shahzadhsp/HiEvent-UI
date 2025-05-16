@@ -46,6 +46,9 @@ class AppAssets {
   static const String iosUpArrow = '$baseImagePath/ios_up_arrow.png';
   static const String phoneNumber = '$baseImagePath/phone_number.png';
 
+  // event costs screens
+  static const String eventCostIcon = '$baseImagePath/event_cost_icon.png';
+
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';
 }
