@@ -27,6 +27,24 @@ class AppAssets {
   static const String sendMessage = '$baseImagePath/send_Message.png';
   static const String camera = '$baseImagePath/camera.png';
   static const String mic = '$baseImagePath/mic.png';
+  // tahani go
+  static const String tahanigo2 = '$baseImagePath/tahanigo2.png';
+  static const String uploadVideos = '$baseImagePath/upload_video.png';
+  static const String uploadVideos2 = '$baseImagePath/upload_video2.png';
+  static const String etCamera = '$baseImagePath/et_camera.png';
+  static const String nav = '$baseImagePath/nav.png';
+  static const String recordingIcon = '$baseImagePath/recording_icon.png';
+  static const String blackMic = '$baseImagePath/black_mic.png';
+  // guest list screen
+  static const String guestList2 = '$baseImagePath/guest_list2.png';
+  static const String fieldImage = '$baseImagePath/field_image.png';
+  static const String searchIcon2 = '$baseImagePath/search_icon2.png';
+  static const String iosDownArrow = '$baseImagePath/ios_down_arrow.png';
+  static const String delete = '$baseImagePath/delete.png';
+  // declined guests screen
+  static const String expandedView = '$baseImagePath/expanded_view.png';
+  static const String iosUpArrow = '$baseImagePath/ios_up_arrow.png';
+  static const String phoneNumber = '$baseImagePath/phone_number.png';
 
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';

@@ -136,12 +136,9 @@ class _SmsScreenState extends State<SmsScreen> {
                           Checkbox(
                             value: true,
                             onChanged: (val) {},
-                            checkColor: Colors.white, // ✅ Tick color
-                            fillColor: MaterialStateProperty.all(
-                              Colors.green,
-                            ), // ✅ Background color
+                            checkColor: Colors.white,
+                            fillColor: MaterialStateProperty.all(Colors.green),
                           ),
-
                           Text(
                             '10 Accepted',
                             style: Theme.of(

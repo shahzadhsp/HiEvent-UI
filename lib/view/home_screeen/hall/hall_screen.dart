@@ -173,48 +173,95 @@ class _HallScreenState extends State<HallScreen> {
                                 ),
                               ),
                               SizedBox(height: 4.h),
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w,
-                                      vertical: 4.h,
+                              Container(
+                                width: 60.w,
+                                decoration: BoxDecoration(
+                                  color: AppColors.greyColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withValues(alpha: 0.2),
+                                      offset: Offset(0, 4),
+                                      blurRadius: 6,
+                                      spreadRadius: 0,
                                     ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.greyColor,
-                                      borderRadius: BorderRadius.circular(4.r),
-                                    ),
-                                    child: Text(
-                                      '10',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.labelSmall!.copyWith(
-                                        color: AppColors.blackColor,
-                                        fontSize: 8.sp,
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w,
+                                          vertical: 4.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.greyColor,
+                                          borderRadius: BorderRadius.circular(
+                                            4.r,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withValues(
+                                                alpha: 0.2,
+                                              ),
+                                              offset: Offset(4, 0),
+                                              blurRadius: 6,
+                                              spreadRadius: 0,
+                                            ),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '10',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.labelSmall!.copyWith(
+                                              color: AppColors.blackColor,
+                                              fontSize: 8.sp,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w,
-                                      vertical: 4.h,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.greyColor,
-                                      borderRadius: BorderRadius.circular(4.r),
-                                    ),
-                                    child: Text(
-                                      '+',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.labelSmall!.copyWith(
-                                        color: AppColors.blackColor,
-                                        fontSize: 8.sp,
+                                    Container(width: 2.w),
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w,
+                                          vertical: 4.h,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.greyColor,
+                                          borderRadius: BorderRadius.circular(
+                                            4.r,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withValues(
+                                                alpha: 0.2,
+                                              ),
+                                              offset: Offset(0, 4),
+                                              blurRadius: 6,
+                                              spreadRadius: 0,
+                                            ),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '+',
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.labelSmall!.copyWith(
+                                              color: AppColors.blackColor,
+                                              fontSize: 8.sp,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),
