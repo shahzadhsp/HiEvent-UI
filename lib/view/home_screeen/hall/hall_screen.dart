@@ -617,7 +617,7 @@ class _HallScreenState extends State<HallScreen> {
                                 top: 3,
                                 bottom: 3,
                                 child: CircleAvatar(
-                                  radius: 5.r,
+                                  radius: 6.r,
                                   backgroundColor: AppColors.darkYellow,
                                 ),
                               ),

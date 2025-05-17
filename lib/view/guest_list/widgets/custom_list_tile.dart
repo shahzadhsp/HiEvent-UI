@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 
 class CustomListTileWidget extends StatelessWidget {
@@ -23,10 +25,10 @@ class CustomListTileWidget extends StatelessWidget {
                 Checkbox(
                   value: true,
                   onChanged: (val) {},
-                  checkColor: Colors.white,
+                  checkColor: AppColors.darkYellow,
                   fillColor: MaterialStateProperty.all(Colors.green),
                 ),
-
+            SizedBox(width: 6.w),
             Text(
               text,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(

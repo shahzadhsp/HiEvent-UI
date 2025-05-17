@@ -72,6 +72,7 @@ class AppTheme {
       brightness: Brightness.light,
       primarySwatch: Colors.blue,
       textTheme: AppTextTheme.textTheme,
+      fontFamily: 'Roboto',
     );
   }
 
@@ -80,6 +81,7 @@ class AppTheme {
       brightness: Brightness.dark,
       primarySwatch: Colors.blue,
       textTheme: AppTextTheme.darkTextTheme,
+      fontFamily: 'Roboto',
     );
   }
 }

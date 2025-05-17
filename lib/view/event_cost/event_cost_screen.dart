@@ -12,6 +12,13 @@ class EventCostScreen extends StatefulWidget {
 }
 
 class _EventCostScreenState extends State<EventCostScreen> {
+  List<String> headings = [
+    ' Venue Providers',
+    ' Caterers',
+    'Photographers',
+    'Florists',
+    ' Musicians / DJs / Bands',
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,7 +84,7 @@ class _EventCostScreenState extends State<EventCostScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Venue Providers',
+                                      headings[index],
                                       style: Theme.of(
                                         context,
                                       ).textTheme.titleMedium!.copyWith(
@@ -101,9 +108,10 @@ class _EventCostScreenState extends State<EventCostScreen> {
                                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.edit,
-                                      color: AppColors.primaryColor,
+                                    Image.asset(
+                                      AppAssets.edit,
+                                      height: 16.h,
+                                      width: 16.w,
                                     ),
                                     SizedBox(width: 4.w),
                                     Text(

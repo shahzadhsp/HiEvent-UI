@@ -153,17 +153,15 @@ class _SmsScreenState extends State<SmsScreen> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Icon(Icons.block, color: AppColors.redColor),
-                          ),
-
-                          Text(
-                            '8 Rejected',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodyLarge!.copyWith(
-                              color: AppColors.blackColor,
-                              fontWeight: FontWeight.w500,
+                            padding: EdgeInsets.symmetric(horizontal: 18.w),
+                            child: Text(
+                              '8 Pending',
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyLarge!.copyWith(
+                                color: AppColors.blackColor,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ],
@@ -182,7 +180,7 @@ class _SmsScreenState extends State<SmsScreen> {
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  border: Border.all(color: AppColors.whiteColor),
+                  border: Border.all(color: AppColors.borderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Stack(
@@ -193,7 +191,7 @@ class _SmsScreenState extends State<SmsScreen> {
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Type Your message here...",
-                        hintStyle: TextStyle(color: Colors.white54),
+                        hintStyle: TextStyle(color: AppColors.borderColor),
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.only(
                           top: 12,

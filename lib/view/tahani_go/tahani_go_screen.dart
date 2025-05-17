@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
@@ -40,7 +41,6 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                   'TahaniGo',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-
                 Image.asset(AppAssets.tahanigo2, height: 50.h, width: 50.w),
               ],
             ),
@@ -131,6 +131,7 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                                     width: 30.w,
                                     color: AppColors.whiteColor,
                                   ),
+
                                   SizedBox(width: 3.w),
                                   Text(
                                     'Record Now',

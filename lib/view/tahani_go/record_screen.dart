@@ -47,9 +47,9 @@ class _RecordScreenState extends State<RecordScreen> {
                     horizontal: 12,
                   ),
                   hintText: 'Recode your message',
-                  hintStyle: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge!.copyWith(color: AppColors.blackColor),
+                  hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: AppColors.primaryColor,
+                  ),
                   fillColor: Colors.white,
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(12.0),

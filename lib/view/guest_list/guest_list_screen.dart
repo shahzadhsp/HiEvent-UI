@@ -65,7 +65,7 @@ class _GuestListScreenState extends State<GuestListScreen> {
                       hintText: 'search...',
 
                       hintStyle: Theme.of(context).textTheme.bodySmall!
-                          .copyWith(color: const Color.fromRGBO(0, 0, 0, 1)),
+                          .copyWith(color: AppColors.primaryColor),
                       suffixIcon: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Container(
@@ -178,29 +178,59 @@ class _GuestListScreenState extends State<GuestListScreen> {
 
                           child: CustomListTileWidget(
                             text: 'Invite Status',
-                            widget: Icon(Icons.downhill_skiing),
+                            widget: Image.asset(
+                              AppAssets.iosDownArrow2,
+                              height: 14.h,
+                              width: 14.w,
+                            ),
                           ),
                         ),
                         SizedBox(height: 30.h),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          padding: EdgeInsets.symmetric(horizontal: 24.w),
 
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Edit',
-                                style: Theme.of(context).textTheme.labelMedium!
-                                    .copyWith(color: AppColors.blackColor),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Edit',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .copyWith(color: AppColors.blackColor),
+                                  ),
+                                  SizedBox(width: 3.h),
+                                  Image.asset(
+                                    AppAssets.edit,
+                                    height: 12.h,
+                                    width: 12.w,
+                                  ),
+                                ],
                               ),
-                              Image.asset(
-                                AppAssets.delete,
-                                height: 40.h,
-                                width: 40.h,
+
+                              Row(
+                                children: [
+                                  Text(
+                                    'delete',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .copyWith(color: AppColors.blackColor),
+                                  ),
+                                  SizedBox(width: 3.h),
+                                  Image.asset(
+                                    AppAssets.deleteIcon,
+                                    height: 12.h,
+                                    width: 12.w,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ),
+                        SizedBox(height: 10.h),
                       ],
                     ),
                   ),

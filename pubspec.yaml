@@ -36,18 +36,19 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.1.0
-  flutter_launcher_icons: ^0.14.3
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.14.3"
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/icons/icon.png"
-  min_sdk_android: 24
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

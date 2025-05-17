@@ -1,5 +1,7 @@
 class AppAssets {
   static const baseImagePath = 'assets/images';
+  static const baseIconPath = 'assets/icons';
+
   static const String appLogo = '$baseImagePath/applogo.png';
   static const String instagramLogo = '$baseImagePath/instagram.png';
   static const String translator = '$baseImagePath/translator.png';
@@ -49,7 +51,25 @@ class AppAssets {
   // event costs screens
   static const String eventCostIcon = '$baseImagePath/event_cost_icon.png';
   static const String yourCost = '$baseImagePath/your_cost.png';
+  // vendosrs screen
+  static const String cameraMan = '$baseImagePath/camera_man.png';
+  static const String makeUp = '$baseImagePath/make_up.png';
+  static const String selfie = '$baseImagePath/selfie.png';
+  static const String travel = '$baseImagePath/travel.png';
+  static const String jewlery = '$baseImagePath/jewlery.png';
+  static const String flower = '$baseImagePath/flower.png';
+  static const String decor = '$baseImagePath/decor.png';
+  static const String clothing = '$baseImagePath/clothing.png';
+  static const String clothing2 = '$baseImagePath/clothing2.png';
+  static const String edit = '$baseImagePath/edit_icon.png';
+  static const String deleteIcon = '$baseImagePath/delete_icon.png';
+  static const String iosDownArrow2 = '$baseImagePath/ios_down_arrow2.png';
+  static const String greenCheckBox = '$baseImagePath/green_checkbox.png';
+  static const String seatNo = '$baseImagePath/seat_no.png';
+  static const String tableLocation = '$baseImagePath/table_location.png';
+  static const String phoneNumber2 = '$baseImagePath/phone_number2.png';
 
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';
+  static const String etCameraSvg = '$baseIconPath/et_camera.svg';
 }

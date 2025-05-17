@@ -12,6 +12,7 @@ import 'package:weddinghall/view/pending_guests/pending_guest_screen.dart';
 import 'package:weddinghall/view/sms/sms_screen.dart';
 import 'package:weddinghall/view/tahani_go/record_screen.dart';
 import 'package:weddinghall/view/tahani_go/tahani_go_screen.dart';
+import 'package:weddinghall/view/vendors/vendors_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,7 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   hintStyle: Theme.of(
                     context,
                   ).textTheme.bodySmall!.copyWith(color: AppColors.blackColor),
-                  suffixIcon: Icon(Icons.search),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Image.asset(
+                      AppAssets.searchIcon2,
+                      height: 16.h,
+                      width: 16.w,
+                      color: AppColors.blackColor,
+                    ),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide.none,
@@ -141,6 +150,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => EventCostScreen(),
+                            ),
+                          );
+                        } else if (index == 11) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VendorsScreen(),
                             ),
                           );
                         }

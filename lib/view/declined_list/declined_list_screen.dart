@@ -101,11 +101,17 @@ class _DeclinedListScreenState extends State<DeclinedListScreen> {
                               width: double.maxFinite,
                               child: Column(
                                 children: [
+                                  SizedBox(height: 10.h),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 12.w,
                                     ),
                                     child: CustomListTileWidget(
+                                      leadingWidget: Image.asset(
+                                        AppAssets.greenCheckBox,
+                                        height: 16.h,
+                                        width: 16.w,
+                                      ),
                                       text: 'Name',
                                       widget: Text(
                                         'Ayesha Khan',
@@ -117,11 +123,17 @@ class _DeclinedListScreenState extends State<DeclinedListScreen> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: 6.h),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 12.w,
                                     ),
                                     child: CustomListTileWidget(
+                                      leadingWidget: Image.asset(
+                                        AppAssets.phoneNumber2,
+                                        height: 16.h,
+                                        width: 16.w,
+                                      ),
                                       text: 'Phone Number',
                                       widget: Text(
                                         '0300-1234567',
@@ -133,12 +145,18 @@ class _DeclinedListScreenState extends State<DeclinedListScreen> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: 6.h),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 12.w,
                                     ),
                                     child: CustomListTileWidget(
-                                      text: 'Invite Status',
+                                      leadingWidget: Image.asset(
+                                        AppAssets.seatNo,
+                                        height: 16.h,
+                                        width: 16.w,
+                                      ),
+                                      text: 'Seat No',
                                       widget: Text(
                                         '12A',
                                         style: Theme.of(
@@ -149,12 +167,18 @@ class _DeclinedListScreenState extends State<DeclinedListScreen> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: 6.h),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 12.w,
                                     ),
 
                                     child: CustomListTileWidget(
+                                      leadingWidget: Image.asset(
+                                        AppAssets.tableLocation,
+                                        height: 16.h,
+                                        width: 16.w,
+                                      ),
                                       text: 'Invite Status',
                                       widget: Text(
                                         'Table 4 - Left Wing',
@@ -166,6 +190,7 @@ class _DeclinedListScreenState extends State<DeclinedListScreen> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: 10.h),
                                 ],
                               ),
                             ),
