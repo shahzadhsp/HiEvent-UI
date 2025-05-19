@@ -13,6 +13,12 @@ class HallScreen extends StatefulWidget {
 
 class _HallScreenState extends State<HallScreen> {
   List<String> chooseTable = ['Round', 'Square', 'Rectangle'];
+  List<String> tableList = [
+    AppAssets.table,
+    AppAssets.table2,
+    AppAssets.table3,
+  ];
+  List<String> tablesNumberList = ['A1 Table', 'A2 Table', 'A3 Table'];
   int selectedValue = 0;
   List<String> tableRowOne = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8'];
   List<String> tableRowTwp = ['A1', 'A2', 'A3', 'A4'];
@@ -147,14 +153,14 @@ class _HallScreenState extends State<HallScreen> {
                             children: [
                               Center(
                                 child: Image.asset(
-                                  AppAssets.table,
+                                  tableList[index],
                                   height: 60.h,
-                                  width: 50.w,
+                                  width: index == 2 ? 120.h : 50.w,
                                 ),
                               ),
                               SizedBox(height: 6.h),
                               Text(
-                                'A1 Table',
+                                tablesNumberList[index],
                                 style: Theme.of(
                                   context,
                                 ).textTheme.labelSmall!.copyWith(
@@ -487,7 +493,7 @@ class _HallScreenState extends State<HallScreen> {
                                       ),
                                       SizedBox(height: 4.h),
                                       Text(
-                                        'Row 2',
+                                        'Table 2',
                                         style: Theme.of(
                                           context,
                                         ).textTheme.labelMedium!.copyWith(

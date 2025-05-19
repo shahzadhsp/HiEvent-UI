@@ -55,9 +55,7 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                       color: AppColors.blackColor,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(
-                          'https://images.unsplash.com/photo-1490723186985-6d7672633c86?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        ),
+                        image: AssetImage(AppAssets.image),
                       ),
                     ),
                     child: Center(
@@ -98,9 +96,7 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                         color: AppColors.blackColor,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                            'https://media.istockphoto.com/id/1190043570/photo/happy-wedding-photography-of-bride-and-groom-at-wedding-ceremony-wedding-tradition-sprinkled.jpg?s=1024x1024&w=is&k=20&c=dEnXwMGSpfySpEepRWDVY_c7pHyhOZpv2RG5_QggqzY=',
-                          ),
+                          image: AssetImage(AppAssets.image2),
                         ),
                       ),
                       child: Center(
@@ -126,12 +122,11 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    AppAssets.camera,
+                                    AppAssets.etCamera2,
                                     height: 30.h,
                                     width: 30.w,
                                     color: AppColors.whiteColor,
                                   ),
-
                                   SizedBox(width: 3.w),
                                   Text(
                                     'Record Now',
@@ -154,9 +149,7 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                       color: AppColors.blackColor,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(
-                          'https://plus.unsplash.com/premium_photo-1661391163776-9cc7d8e541e4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        ),
+                        image: AssetImage(AppAssets.image3),
                       ),
                     ),
                     child: Center(

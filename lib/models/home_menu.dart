@@ -17,7 +17,7 @@ List<HomeMenu> homeMenuList = [
   HomeMenu(image: AppAssets.event, text: 'Event 1'),
   HomeMenu(image: AppAssets.event, text: 'Event 2'),
   HomeMenu(image: AppAssets.event, text: 'Event 3'),
-  HomeMenu(image: AppAssets.tahaniGo, text: 'Tahani Go'),
+  HomeMenu(image: AppAssets.tahaniGo, text: 'TahaniGo'),
   HomeMenu(image: AppAssets.eventCost, text: 'Event Cost'),
   HomeMenu(image: AppAssets.vendors, text: 'Vendors'),
 ];

@@ -29,6 +29,9 @@ class AppAssets {
   static const String sendMessage = '$baseImagePath/send_Message.png';
   static const String camera = '$baseImagePath/camera.png';
   static const String mic = '$baseImagePath/mic.png';
+  static const String table2 = '$baseImagePath/table2.png';
+  static const String table3 = '$baseImagePath/table3.png';
+
   // tahani go
   static const String tahanigo2 = '$baseImagePath/tahanigo2.png';
   static const String uploadVideos = '$baseImagePath/upload_video.png';
@@ -68,6 +71,12 @@ class AppAssets {
   static const String seatNo = '$baseImagePath/seat_no.png';
   static const String tableLocation = '$baseImagePath/table_location.png';
   static const String phoneNumber2 = '$baseImagePath/phone_number2.png';
+  static const String attachFile = '$baseImagePath/attach_file.png';
+  static const String sendSms = '$baseImagePath/send_sms.png';
+  static const String image = '$baseImagePath/image.png';
+  static const String image2 = '$baseImagePath/image2.png';
+  static const String image3 = '$baseImagePath/image3.png';
+  static const String etCamera2 = '$baseImagePath/et_camera2.png';
 
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';

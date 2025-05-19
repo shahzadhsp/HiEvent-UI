@@ -42,11 +42,7 @@ class _SmsScreenState extends State<SmsScreen> {
                           ),
                         ),
                       ),
-                      Icon(
-                        Icons.attach_file,
-                        color: Colors.brown[800],
-                        size: 20,
-                      ),
+                      Image.asset(AppAssets.sendSms, height: 20.h, width: 20.w),
                     ],
                   ),
                 ),
@@ -130,15 +126,16 @@ class _SmsScreenState extends State<SmsScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+                      SizedBox(height: 6.h),
 
                       Row(
                         children: [
-                          Checkbox(
-                            value: true,
-                            onChanged: (val) {},
-                            checkColor: Colors.white,
-                            fillColor: MaterialStateProperty.all(Colors.green),
+                          Image.asset(
+                            AppAssets.greenCheckBox,
+                            height: 16.h,
+                            width: 16.w,
                           ),
+                          SizedBox(width: 4.w),
                           Text(
                             '10 Accepted',
                             style: Theme.of(
@@ -150,18 +147,28 @@ class _SmsScreenState extends State<SmsScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 8.h),
                       Row(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 18.w),
-                            child: Text(
-                              '8 Pending',
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyLarge!.copyWith(
-                                color: AppColors.blackColor,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          Text(
+                            ' 8',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge!.copyWith(
+                              color: AppColors.blackColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+
+                          SizedBox(width: 9.w),
+
+                          Text(
+                            'Pending',
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge!.copyWith(
+                              color: AppColors.blackColor,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
@@ -207,16 +214,17 @@ class _SmsScreenState extends State<SmsScreen> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            Icons.attach_file,
-                            color: AppColors.greyColor,
-                            size: 18,
+                          Image.asset(
+                            AppAssets.attachFile,
+                            height: 36.h,
+                            width: 36.w,
                           ),
-                          SizedBox(width: 4),
+                          SizedBox(width: 2.w),
                           Text(
                             "Attach file",
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
+                          SizedBox(width: 8.w),
                         ],
                       ),
                     ),
