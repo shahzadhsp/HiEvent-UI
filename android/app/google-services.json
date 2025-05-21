@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93995081174",
+    "project_id": "hi-event-6d353",
+    "storage_bucket": "hi-event-6d353.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93995081174:android:129654144c7507662e1877",
+        "android_client_info": {
+          "package_name": "com.example.weddinghall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBstVZ2xd18xDKKlhQlS8ZNndfc5d-qM4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

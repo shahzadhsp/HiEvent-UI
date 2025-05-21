@@ -7,7 +7,6 @@ import 'package:weddinghall/view/sms/widgets/custom_list_tile.dart';
 
 class SmsScreen extends StatefulWidget {
   const SmsScreen({super.key});
-
   @override
   State<SmsScreen> createState() => _SmsScreenState();
 }
@@ -127,7 +126,6 @@ class _SmsScreenState extends State<SmsScreen> {
                         ),
                       ),
                       SizedBox(height: 6.h),
-
                       Row(
                         children: [
                           Image.asset(
