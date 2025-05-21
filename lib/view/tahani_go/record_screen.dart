@@ -12,6 +12,7 @@ class RecordScreen extends StatefulWidget {
 }
 
 class _RecordScreenState extends State<RecordScreen> {
+  final _messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,38 +38,43 @@ class _RecordScreenState extends State<RecordScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 40.h),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: TextFormField(
+                controller: _messageController,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge!.copyWith(color: Colors.black),
                 decoration: InputDecoration(
                   filled: true,
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 16.h,
-                    horizontal: 12,
+                    horizontal: 12.w,
                   ),
-                  hintText: 'Recode your message',
+                  hintText: 'Record your message',
                   hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.primaryColor,
                   ),
                   fillColor: Colors.white,
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(12.w),
                     child: Image.asset(
                       AppAssets.blackMic,
-                      width: 24,
-                      height: 24,
+                      width: 24.w,
+                      height: 24.w,
                     ),
                   ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
                   ),
                 ),
