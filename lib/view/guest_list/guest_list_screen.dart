@@ -8,7 +8,6 @@ import 'package:weddinghall/view/guest_list/widgets/custom_list_tile.dart';
 
 class GuestListScreen extends StatefulWidget {
   const GuestListScreen({super.key});
-
   @override
   State<GuestListScreen> createState() => _GuestListScreenState();
 }
@@ -64,11 +63,9 @@ class _GuestListScreenState extends State<GuestListScreen> {
                     TextFormField(
                       decoration: InputDecoration(
                         filled: true,
-
                         constraints: BoxConstraints(maxHeight: 33.h),
                         fillColor: AppColors.lightYellow,
                         hintText: 'search...',
-
                         hintStyle: Theme.of(context).textTheme.bodySmall!
                             .copyWith(color: AppColors.primaryColor),
                         suffixIcon: Padding(
@@ -121,26 +118,38 @@ class _GuestListScreenState extends State<GuestListScreen> {
                         ),
                         SizedBox(width: 6.w),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8.h,
-                              vertical: 6.h,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.lightYellow),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            child: Text(
-                              'Import from Excel',
-                              style: Theme.of(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
                                 context,
-                              ).textTheme.bodyLarge!.copyWith(
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.yellow,
-                                decorationThickness: 2,
-                                color: AppColors.darkYellow,
+                                MaterialPageRoute(
+                                  builder: (context) => FileUploadScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.h,
+                                vertical: 6.h,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.lightYellow,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: Text(
+                                'Import from Excel',
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge!.copyWith(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.yellow,
+                                  decorationThickness: 2,
+                                  color: AppColors.darkYellow,
+                                ),
                               ),
                             ),
                           ),

@@ -8,6 +8,7 @@ import 'package:weddinghall/view/auth/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
     name: 'shahzad12121',
