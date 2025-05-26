@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sound/flutter_sound.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
@@ -12,7 +15,101 @@ class RecordScreen extends StatefulWidget {
 }
 
 class _RecordScreenState extends State<RecordScreen> {
+  final FlutterSoundRecorder _recorder = FlutterSoundRecorder();
+  bool _isRecording = false;
+  int _recordDuration = 0;
+  String _recordStatus = "Ready to record";
+  Timer? _timer;
   final _messageController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _initRecorder();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _recorder.closeRecorder();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _initRecorder() async {
+    try {
+      // Request microphone permission
+      final status = await Permission.microphone.request();
+      if (status != PermissionStatus.granted) {
+        throw 'Microphone permission not granted';
+      }
+
+      await _recorder.openRecorder();
+      _recorder.setSubscriptionDuration(const Duration(milliseconds: 500));
+    } catch (e) {
+      debugPrint('Error initializing recorder: $e');
+      setState(() {
+        _recordStatus = "Failed to initialize recorder";
+      });
+    }
+  }
+
+  Future<void> _toggleRecording() async {
+    if (_isRecording) {
+      await _stopRecording();
+    } else {
+      await _startRecording();
+    }
+  }
+
+  Future<void> _startRecording() async {
+    try {
+      await _recorder.startRecorder(
+        toFile: 'wedding_message.aac',
+        codec: Codec.aacADTS,
+      );
+
+      setState(() {
+        _isRecording = true;
+        _recordDuration = 0;
+        _recordStatus = "Recording...";
+      });
+
+      _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+        setState(() => _recordDuration++);
+      });
+    } catch (e) {
+      debugPrint('Error starting recording: $e');
+      setState(() {
+        _recordStatus = "Error: Failed to start recording";
+      });
+    }
+  }
+
+  Future<void> _stopRecording() async {
+    try {
+      final path = await _recorder.stopRecorder();
+      _timer?.cancel();
+
+      setState(() {
+        _isRecording = false;
+        _recordStatus = "Recording saved";
+      });
+
+      // Here you can use the recorded file path (path) as needed
+      debugPrint('Recording saved to: $path');
+    } catch (e) {
+      debugPrint('Error stopping recording: $e');
+      setState(() {
+        _recordStatus = "Error: Failed to stop recording";
+      });
+    }
+  }
+
+  String _formatDuration(int seconds) {
+    return '${(seconds ~/ 60).toString().padLeft(2, '0')}:${(seconds % 60).toString().padLeft(2, '0')}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +124,7 @@ class _RecordScreenState extends State<RecordScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(),
+                  const SizedBox(),
                   TransltorWidget(image: AppAssets.translator, text: 'English'),
                 ],
               ),
@@ -38,7 +135,6 @@ class _RecordScreenState extends State<RecordScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 40.h),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: TextFormField(
@@ -82,7 +178,7 @@ class _RecordScreenState extends State<RecordScreen> {
             ),
             SizedBox(height: 20.h),
             Text(
-              'Press the button to start recoding your',
+              'Press the button to start recording your',
               style: Theme.of(
                 context,
               ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
@@ -94,9 +190,21 @@ class _RecordScreenState extends State<RecordScreen> {
               ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20.h),
-            Image.asset(AppAssets.recordingIcon, height: 60.h, width: 60.w),
+            GestureDetector(
+              onTap: _toggleRecording,
+              child: Image.asset(
+                _isRecording ? AppAssets.playIcon : AppAssets.recordingIcon,
+                height: 60.h,
+                width: 60.w,
+              ),
+            ),
             SizedBox(height: 12.h),
-            Text('00.00', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              _formatDuration(_recordDuration),
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            SizedBox(height: 12.h),
+            Text(_recordStatus, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
       ),
