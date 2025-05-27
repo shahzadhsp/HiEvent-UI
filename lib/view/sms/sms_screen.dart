@@ -245,6 +245,7 @@ class _SmsScreenState extends State<SmsScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 20.h),
             ],
           ),
         ),

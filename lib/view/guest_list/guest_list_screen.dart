@@ -1,10 +1,16 @@
+import 'dart:developer';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/guest_list/widgets/add_manual_list.dart';
+import 'package:weddinghall/view/guest_list/widgets/contacts_import_screen.dart';
 import 'package:weddinghall/view/guest_list/widgets/custom_list_tile.dart';
+import 'package:weddinghall/view/guest_list/widgets/file_upload_screen.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GuestListScreen extends StatefulWidget {
   const GuestListScreen({super.key});
@@ -202,19 +208,8 @@ class _GuestListScreenState extends State<GuestListScreen> {
                           Divider(
                             color: AppColors.blackColor.withValues(alpha: 0.50),
                           ),
-                          // Padding(
-                          //   padding: EdgeInsets.symmetric(horizontal: 12.w),
-                          //   child: CustomListTileWidget(
-                          //     text: 'Invite Status',
-                          //     widget: Image.asset(
-                          //       AppAssets.iosDownArrow2,
-                          //       height: 14.h,
-                          //       width: 14.w,
-                          //     ),
-                          //   ),
-                          // ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            padding: EdgeInsets.only(left: 12.w),
                             child: CustomListTileWidget(
                               text: 'Invite Status',
                               widget: PopupMenuButton<String>(
@@ -240,8 +235,29 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                           ),
                                         ],
                                 onSelected: (String value) {
-                                  // Handle menu item selection
-                                  print('Selected: $value');
+                                  log('selected value $value');
+                                  if (value == 'pending') {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PendingList(),
+                                      ),
+                                    );
+                                  } else if (value == 'accepted') {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AcceptedList(),
+                                      ),
+                                    );
+                                  } else if (value == 'declined') {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DeclinedList(),
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                             ),
@@ -370,6 +386,235 @@ class _GuestListScreenState extends State<GuestListScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class PendingList extends StatefulWidget {
+  const PendingList({super.key});
+
+  @override
+  State<PendingList> createState() => _PendingListState();
+}
+
+class _PendingListState extends State<PendingList> {
+  // Reference to your Firebase Realtime Database
+  final DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child(
+    'guests',
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Pending List')),
+      body: _buildPendingList(),
+    );
+  }
+
+  Widget _buildPendingList() {
+    // Using FirebaseAnimatedList for real-time updates
+    return FirebaseAnimatedList(
+      query: _databaseRef,
+      itemBuilder: (context, snapshot, animation, index) {
+        // Convert snapshot to Map
+        Map<dynamic, dynamic> data = snapshot.value as Map<dynamic, dynamic>;
+        // Create ListTile for each item
+        return ListTile(
+          title: Text(data['name'] ?? 'No Name'),
+          subtitle: Text(data['phone'] ?? 'No Phone'),
+          trailing: const Icon(Icons.arrow_forward),
+        );
+      },
+    );
+
+    // Alternative if you don't need real-time updates:
+    /*
+    return FutureBuilder(
+      future: _databaseRef.once(),
+      builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (!snapshot.hasData || snapshot.data!.value == null) {
+          return const Center(child: Text('No pending items'));
+        }
+
+        Map<dynamic, dynamic> data = snapshot.data!.value as Map<dynamic, dynamic>;
+
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            String key = data.keys.elementAt(index);
+            return ListTile(
+              title: Text(data[key]['name'] ?? 'No Name'),
+              subtitle: Text(data[key]['phone'] ?? 'No Phone'),
+            );
+          },
+        );
+      },
+    );
+    */
+  }
+}
+
+// class CombinedContact {
+//   final String id;
+//   final String name;
+//   final String phone;
+//   final String source; // 'firestore' or 'realtime'
+
+//   CombinedContact({
+//     required this.id,
+//     required this.name,
+//     required this.phone,
+//     required this.source,
+//   });
+// }
+
+// class PendingList extends StatefulWidget {
+//   const PendingList({super.key});
+
+//   @override
+//   State<PendingList> createState() => _PendingListState();
+// }
+
+// class _PendingListState extends State<PendingList> {
+//   final CollectionReference _firestoreContacts = FirebaseFirestore.instance
+//       .collection('imported_contacts');
+//   final DatabaseReference _realtimeContacts = FirebaseDatabase.instance
+//       .ref()
+//       .child('guests');
+
+//   List<CombinedContact> _combinedContacts = [];
+//   bool _isLoading = true;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _loadCombinedContacts();
+//   }
+
+//   Future<void> _loadCombinedContacts() async {
+//     try {
+//       // Fetch from Firestore
+//       final firestoreSnapshot = await _firestoreContacts.get();
+//       final firestoreContacts =
+//           firestoreSnapshot.docs.map((doc) {
+//             final data = doc.data() as Map<String, dynamic>;
+//             return CombinedContact(
+//               id: doc.id,
+//               name: data['name'] ?? 'No Name',
+//               phone: data['phone'] ?? 'No Phone',
+//               source: 'firestore',
+//             );
+//           }).toList();
+
+//       // Fetch from Realtime Database
+//       final realtimeSnapshot = await _realtimeContacts.once();
+//       final realtimeData =
+//           realtimeSnapshot.snapshot.value as Map<dynamic, dynamic>? ?? {};
+//       final realtimeContacts =
+//           realtimeData.entries.map((entry) {
+//             return CombinedContact(
+//               id: entry.key.toString(),
+//               name: entry.value['name'] ?? 'No Name',
+//               phone: entry.value['phone'] ?? 'No Phone',
+//               source: 'realtime',
+//             );
+//           }).toList();
+
+//       setState(() {
+//         _combinedContacts = [...firestoreContacts, ...realtimeContacts];
+//         _isLoading = false;
+//       });
+//     } catch (e) {
+//       setState(() {
+//         _isLoading = false;
+//       });
+//       // Handle error
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Combined Contacts List')),
+//       body:
+//           _isLoading
+//               ? const Center(child: CircularProgressIndicator())
+//               : _combinedContacts.isEmpty
+//               ? const Center(child: Text('No contacts available'))
+//               : _buildCombinedList(),
+//     );
+//   }
+
+//   Widget _buildCombinedList() {
+//     return ListView.builder(
+//       itemCount: _combinedContacts.length,
+//       itemBuilder: (context, index) {
+//         final contact = _combinedContacts[index];
+//         return ListTile(
+//           title: Text(contact.name),
+//           subtitle: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text(contact.phone),
+//               Text(
+//                 'Source: ${contact.source}',
+//                 style: const TextStyle(fontSize: 12, color: Colors.grey),
+//               ),
+//             ],
+//           ),
+//           trailing: const Icon(Icons.arrow_forward),
+//         );
+//       },
+//     );
+//   }
+// }
+
+class AcceptedList extends StatefulWidget {
+  const AcceptedList({super.key});
+
+  @override
+  State<AcceptedList> createState() => _AcceptedListState();
+}
+
+class _AcceptedListState extends State<AcceptedList> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Accepted List')),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('No Data Found', style: Theme.of(context).textTheme.bodyLarge),
+        ],
+      ),
+    );
+  }
+}
+
+class DeclinedList extends StatefulWidget {
+  const DeclinedList({super.key});
+
+  @override
+  State<DeclinedList> createState() => _DeclinedListState();
+}
+
+class _DeclinedListState extends State<DeclinedList> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Declined List')),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('No Data Found', style: Theme.of(context).textTheme.bodyLarge),
+        ],
       ),
     );
   }

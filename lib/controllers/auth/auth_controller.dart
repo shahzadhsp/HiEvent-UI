@@ -9,6 +9,23 @@ import 'package:weddinghall/view/home_screeen/home_screen.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  static AuthController instance = Get.find();
+
+  // RX for reactive programming
+  final Rx<User?> _user = Rx<User?>(FirebaseAuth.instance.currentUser);
+
+  @override
+  void onReady() {
+    super.onReady();
+    // Bind to auth state changes
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      _user.value = user;
+    });
+  }
+
+  User? get user => _user.value;
+
+  bool get isLoggedIn => user != null;
 
   final RxBool isLoading = false.obs;
 
