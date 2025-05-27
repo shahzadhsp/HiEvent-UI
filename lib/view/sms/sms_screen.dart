@@ -70,7 +70,6 @@ class _SmsScreenState extends State<SmsScreen> {
                   ],
                 ),
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

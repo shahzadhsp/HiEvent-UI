@@ -44,7 +44,6 @@ class _GuestListScreenState extends State<GuestListScreen> {
                     'Guest List',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-
                   Image.asset(AppAssets.guestList2, height: 40.h, width: 40.w),
                 ],
               ),
@@ -92,26 +91,38 @@ class _GuestListScreenState extends State<GuestListScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8.h,
-                              vertical: 6.h,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.lightYellow),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            child: Text(
-                              'Import from Phonebook',
-                              style: Theme.of(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
                                 context,
-                              ).textTheme.bodyLarge!.copyWith(
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.yellow,
-                                decorationThickness: 2,
-                                color: AppColors.darkYellow,
+                                MaterialPageRoute(
+                                  builder: (context) => ContactsImportScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.h,
+                                vertical: 6.h,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.lightYellow,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: Text(
+                                'Import from Phonebook',
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge!.copyWith(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.yellow,
+                                  decorationThickness: 2,
+                                  color: AppColors.darkYellow,
+                                ),
                               ),
                             ),
                           ),
@@ -191,15 +202,47 @@ class _GuestListScreenState extends State<GuestListScreen> {
                           Divider(
                             color: AppColors.blackColor.withValues(alpha: 0.50),
                           ),
+                          // Padding(
+                          //   padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          //   child: CustomListTileWidget(
+                          //     text: 'Invite Status',
+                          //     widget: Image.asset(
+                          //       AppAssets.iosDownArrow2,
+                          //       height: 14.h,
+                          //       width: 14.w,
+                          //     ),
+                          //   ),
+                          // ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.w),
-
                             child: CustomListTileWidget(
                               text: 'Invite Status',
-                              widget: Image.asset(
-                                AppAssets.iosDownArrow2,
-                                height: 14.h,
-                                width: 14.w,
+                              widget: PopupMenuButton<String>(
+                                icon: Image.asset(
+                                  AppAssets.iosDownArrow2,
+                                  height: 14.h,
+                                  width: 14.w,
+                                ),
+                                itemBuilder:
+                                    (BuildContext context) =>
+                                        <PopupMenuEntry<String>>[
+                                          const PopupMenuItem<String>(
+                                            value: 'pending',
+                                            child: Text('Pending'),
+                                          ),
+                                          const PopupMenuItem<String>(
+                                            value: 'accepted',
+                                            child: Text('Accepted'),
+                                          ),
+                                          const PopupMenuItem<String>(
+                                            value: 'declined',
+                                            child: Text('Declined'),
+                                          ),
+                                        ],
+                                onSelected: (String value) {
+                                  // Handle menu item selection
+                                  print('Selected: $value');
+                                },
                               ),
                             ),
                           ),
