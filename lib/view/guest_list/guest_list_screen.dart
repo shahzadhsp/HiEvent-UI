@@ -10,7 +10,6 @@ import 'package:weddinghall/view/guest_list/widgets/contacts_import_screen.dart'
 import 'package:weddinghall/view/guest_list/widgets/custom_list_tile.dart';
 import 'package:weddinghall/view/guest_list/widgets/file_upload_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GuestListScreen extends StatefulWidget {
   const GuestListScreen({super.key});

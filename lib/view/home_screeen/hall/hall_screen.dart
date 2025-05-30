@@ -1,5 +1,8 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weddinghall/config/enums.dart';
+import 'package:weddinghall/controllers/hall_screen_controller.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
@@ -12,16 +15,27 @@ class HallScreen extends StatefulWidget {
 }
 
 class _HallScreenState extends State<HallScreen> {
-  List<String> chooseTable = ['Round', 'Square', 'Rectangle'];
+  final tableShapes = TableShape.values;
+  TableNumber? selectedTable;
+
+  TableShape selectedTableShape = TableShape.round;
+
+  String selectedSide = 'Left';
+  int chairCount = 0;
   List<String> tableList = [
     AppAssets.table,
     AppAssets.table2,
     AppAssets.table3,
   ];
-  List<String> tablesNumberList = ['A1 Table', 'A2 Table', 'A3 Table'];
+
+  final List<TableNumber> tableNumbers = TableNumber.values;
+
   int selectedValue = 0;
   List<String> tableRowOne = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8'];
   List<String> tableRowTwp = ['A1', 'A2', 'A3', 'A4'];
+
+  TableShape tableShape = TableShape.round;
+  int selectTable = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -136,140 +150,163 @@ class _HallScreenState extends State<HallScreen> {
                   ),
                 ),
                 SizedBox(height: 8.h),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(3, (index) {
+                  children: List.generate(tableNumbers.length, (index) {
+                    final table = tableNumbers[index];
+                    final isSelected = selectedTable == table;
                     return Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: Container(
-                          padding: EdgeInsets.all(10.w),
-                          decoration: BoxDecoration(
-                            color: AppColors.whiteColor,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: Image.asset(
-                                  tableList[index],
-                                  height: 60.h,
-                                  width: index == 2 ? 120.h : 50.w,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedTable = table;
+                          });
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 6.w),
+                          child: Container(
+                            padding: EdgeInsets.all(10.w),
+                            decoration: BoxDecoration(
+                              color:
+                                  isSelected
+                                      ? AppColors.primaryColor
+                                      : AppColors.whiteColor,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Image.asset(
+                                    tableList[index], // assumes tableList still matches index
+                                    height: 60.h,
+                                    width: index == 2 ? 120.h : 50.w,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 6.h),
-                              Text(
-                                tablesNumberList[index],
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.labelSmall!.copyWith(
-                                  color: AppColors.blackColor,
-                                  fontWeight: FontWeight.bold,
+                                SizedBox(height: 6.h),
+                                Text(
+                                  table.label,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.labelSmall!.copyWith(
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 6.h),
-                              Text(
-                                'No of chairs',
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.labelSmall!.copyWith(
-                                  color: AppColors.blackColor,
-                                  fontSize: 7.sp,
+                                SizedBox(height: 6.h),
+                                Text(
+                                  'No of chairs',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.labelSmall!.copyWith(
+                                    color: AppColors.blackColor,
+                                    fontSize: 7.sp,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4.h),
-                              Container(
-                                width: 60.w,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greyColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withValues(alpha: 0.2),
-                                      offset: Offset(0, 4),
-                                      blurRadius: 6,
-                                      spreadRadius: 0,
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 8.w,
-                                          vertical: 4.h,
+                                SizedBox(height: 4.h),
+                                Container(
+                                  width: 60.w,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.greyColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withValues(
+                                          alpha: 0.2,
                                         ),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.greyColor,
-                                          borderRadius: BorderRadius.circular(
-                                            4.r,
+                                        offset: Offset(0, 4),
+                                        blurRadius: 6,
+                                        spreadRadius: 0,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 8.w,
+                                            vertical: 4.h,
                                           ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withValues(
-                                                alpha: 0.2,
-                                              ),
-                                              offset: Offset(4, 0),
-                                              blurRadius: 6,
-                                              spreadRadius: 0,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.greyColor,
+                                            borderRadius: BorderRadius.circular(
+                                              4.r,
                                             ),
-                                          ],
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            '10',
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.labelSmall!.copyWith(
-                                              color: AppColors.blackColor,
-                                              fontSize: 8.sp,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withValues(
+                                                  alpha: 0.2,
+                                                ),
+                                                offset: Offset(4, 0),
+                                                blurRadius: 6,
+                                                spreadRadius: 0,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '10',
+                                              style: Theme.of(
+                                                context,
+                                              ).textTheme.labelSmall!.copyWith(
+                                                color: AppColors.blackColor,
+                                                fontSize: 8.sp,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Container(width: 2.w),
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 8.w,
-                                          vertical: 4.h,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.greyColor,
-                                          borderRadius: BorderRadius.circular(
-                                            4.r,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withValues(
-                                                alpha: 0.2,
-                                              ),
-                                              offset: Offset(0, 4),
-                                              blurRadius: 6,
-                                              spreadRadius: 0,
+                                      Container(width: 2.w),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              chairCount++;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 8.w,
+                                              vertical: 4.h,
                                             ),
-                                          ],
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            '+',
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.labelSmall!.copyWith(
-                                              color: AppColors.blackColor,
-                                              fontSize: 8.sp,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.greyColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(4.r),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey.withValues(
+                                                    alpha: 0.2,
+                                                  ),
+                                                  offset: Offset(0, 4),
+                                                  blurRadius: 6,
+                                                  spreadRadius: 0,
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                '+',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall!
+                                                    .copyWith(
+                                                      color:
+                                                          AppColors.blackColor,
+                                                      fontSize: 8.sp,
+                                                    ),
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -293,32 +330,45 @@ class _HallScreenState extends State<HallScreen> {
                       SizedBox(height: 10.h),
 
                       Row(
-                        children: List.generate(3, (index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20.0,
-                                vertical: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                color:
-                                    index == 0
-                                        ? AppColors.lightYellow
-                                        : AppColors.greyColor,
-                                borderRadius: BorderRadius.circular(60.r),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  chooseTable[index],
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.bodySmall!.copyWith(
-                                    color:
-                                        index == 0
-                                            ? AppColors.whiteColor
-                                            : AppColors.blackColor,
-                                    fontWeight: FontWeight.w500,
+                        children: List.generate(tableShapes.length, (index) {
+                          final shape = tableShapes[index];
+                          final isSelected = shape == selectedTableShape;
+
+                          return InkWell(
+                            overlayColor: WidgetStateProperty.all(
+                              Colors.transparent,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                selectedTableShape = shape;
+                              });
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                  vertical: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  color:
+                                      isSelected
+                                          ? AppColors.lightYellow
+                                          : AppColors.greyColor,
+                                  borderRadius: BorderRadius.circular(60.r),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    shape.label,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall!.copyWith(
+                                      color:
+                                          isSelected
+                                              ? AppColors.whiteColor
+                                              : AppColors.blackColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -350,7 +400,7 @@ class _HallScreenState extends State<HallScreen> {
                                 borderRadius: BorderRadius.circular(4.r),
                               ),
                               child: Text(
-                                '10',
+                                '$chairCount',
                                 style: Theme.of(
                                   context,
                                 ).textTheme.labelSmall!.copyWith(
@@ -359,23 +409,29 @@ class _HallScreenState extends State<HallScreen> {
                                 ),
                               ),
                             ),
-
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 4.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.greyColor,
-                                borderRadius: BorderRadius.circular(4.r),
-                              ),
-                              child: Text(
-                                '+',
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.labelSmall!.copyWith(
-                                  color: AppColors.blackColor,
-                                  fontSize: 10.sp,
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  chairCount++;
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w,
+                                  vertical: 4.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.greyColor,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                ),
+                                child: Text(
+                                  '+',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.labelSmall!.copyWith(
+                                    color: AppColors.blackColor,
+                                    fontSize: 10.sp,
+                                  ),
                                 ),
                               ),
                             ),
@@ -429,7 +485,6 @@ class _HallScreenState extends State<HallScreen> {
                               }),
                             ),
                             SizedBox(height: 8.h),
-
                             Text(
                               'Row 2',
                               style: Theme.of(context).textTheme.bodyLarge,
@@ -459,8 +514,8 @@ class _HallScreenState extends State<HallScreen> {
                         ),
                       ),
                       Container(
-                        height: 100.h,
-                        width: 130.w,
+                        height: 90.h,
+                        width: 120.w,
                         decoration: BoxDecoration(
                           color: AppColors.whiteColor,
                           borderRadius: BorderRadius.circular(10.r),
@@ -477,7 +532,7 @@ class _HallScreenState extends State<HallScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CircleAvatar(
-                                    radius: 28,
+                                    radius: 24,
                                     backgroundColor: AppColors.darkYellow,
                                     child: Image.asset(AppAssets.person),
                                   ),
@@ -509,9 +564,13 @@ class _HallScreenState extends State<HallScreen> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 12.w),
                               child: Text(
-                                'Emaan\nParker',
-                                style: Theme.of(context).textTheme.bodyLarge!
-                                    .copyWith(color: AppColors.blackColor),
+                                'Emaan Parker',
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge!.copyWith(
+                                  color: AppColors.blackColor,
+                                  fontSize: 12.sp,
+                                ),
                               ),
                             ),
                           ],
@@ -579,59 +638,79 @@ class _HallScreenState extends State<HallScreen> {
                   ),
                 ),
                 SizedBox(height: 7.h),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Stack(
-                            children: [
-                              CircleAvatar(
-                                radius: 8.r,
-                                backgroundColor: AppColors.whiteColor,
-                              ),
-                              Positioned(
-                                left: 3,
-                                right: 3,
-                                top: 3,
-                                bottom: 3,
-                                child: CircleAvatar(
-                                  radius: 5.r,
+                      /// Left Button
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedSide = 'Left';
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 8.r,
                                   backgroundColor: AppColors.whiteColor,
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: 4.w),
-                          Text('Left'),
-                        ],
+                                if (selectedSide == 'Left')
+                                  Positioned(
+                                    left: 3,
+                                    right: 3,
+                                    top: 3,
+                                    bottom: 3,
+                                    child: CircleAvatar(
+                                      radius: 5.r,
+                                      backgroundColor: AppColors.darkYellow,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            SizedBox(width: 4.w),
+                            Text('Left'),
+                          ],
+                        ),
                       ),
                       SizedBox(width: 30),
-                      Row(
-                        children: [
-                          Stack(
-                            children: [
-                              CircleAvatar(
-                                radius: 8.r,
-                                backgroundColor: AppColors.whiteColor,
-                              ),
-                              Positioned(
-                                left: 3,
-                                right: 1.8,
-                                top: 3,
-                                bottom: 3,
-                                child: CircleAvatar(
-                                  radius: 6.r,
-                                  backgroundColor: AppColors.darkYellow,
+
+                      /// Right Button
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedSide = 'Right';
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 8.r,
+                                  backgroundColor: AppColors.whiteColor,
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: 4.w),
-                          Text('Right'),
-                        ],
+                                if (selectedSide == 'Right')
+                                  Positioned(
+                                    left: 3,
+                                    right: 3,
+                                    top: 3,
+                                    bottom: 3,
+                                    child: CircleAvatar(
+                                      radius: 5.r,
+                                      backgroundColor: AppColors.darkYellow,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            SizedBox(width: 4.w),
+                            Text('Right'),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -639,7 +718,6 @@ class _HallScreenState extends State<HallScreen> {
                 SizedBox(height: 30.h),
                 ElevatedButton(
                   onPressed: () {},
-
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.whiteColor,
                     foregroundColor: AppColors.blackColor,
@@ -659,7 +737,42 @@ class _HallScreenState extends State<HallScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 20.h),
+                ElevatedButton(
+                  onPressed: () async {
+                    log('selected table$selectTable');
+                    log('selected table shape$selectedTableShape');
+                    log('chair count$chairCount');
+                    log('selected side$selectedSide');
+                    await saveBooking(
+                      context: context,
+                      selectedTable: selectedTable!,
+                      selectedShape: selectedTableShape,
+                      selectedSide: selectedSide,
+                      chairCount: chairCount,
+                    );
+                  },
+
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.whiteColor,
+                    foregroundColor: AppColors.blackColor,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 12.h,
+                      horizontal: 80.h,
+                    ),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Save',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: AppColors.blackColor,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
               ],
             ),
           ),
