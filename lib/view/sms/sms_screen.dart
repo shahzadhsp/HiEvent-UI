@@ -1,5 +1,7 @@
+import 'package:appinio_social_share/appinio_social_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
@@ -12,6 +14,79 @@ class SmsScreen extends StatefulWidget {
 }
 
 class _SmsScreenState extends State<SmsScreen> {
+  final AppinioSocialShare appinioSocialShare = AppinioSocialShare();
+
+  final String phoneNumber = '923044978989';
+  final String email = 'mshahzadofficial89@gmail.com';
+
+  Future<void> _openWhatsApp() async {
+    final url = 'https://wa.me/$phoneNumber';
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  // open email
+  // Future<void> _openEmail() async {
+  //   final Uri emailUri = Uri(
+  //     scheme: 'mailto',
+  //     path: email,
+  //     query: 'subject=Support&body=Salam! Mujhe app se related madad chahiye.',
+  //   );
+  //   if (await canLaunchUrl(emailUri,)) {
+  //     await launchUrl(emailUri);
+  //   } else {
+  //     throw 'Could not launch $emailUri';
+  //   }
+  // }
+
+  // Future<void> _openEmail() async {
+  //   final Uri emailUri = Uri(
+  //     scheme: 'mailto',
+  //     path: 'mshahzadofficial89@gmail.com',
+  //     query: 'subject=Support&body=Salam! Mujhe app se related madad chahiye.',
+  //   );
+
+  //   if (await canLaunchUrl(emailUri)) {
+  //     await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+  //   } else {
+  //     debugPrint('Could not launch $emailUri');
+  //   }
+  // }
+  Future<void> _openEmail() async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'mshahzadofficial89@gmail.com',
+      query: Uri.encodeFull(
+        'subject=Support&body=Salam! Mujhe app se related madad chahiye.',
+      ),
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Could not launch $emailUri');
+    }
+  }
+
+  // open sms inbox
+  Future<void> _openSMS() async {
+    final Uri smsUri = Uri(
+      scheme: 'sms',
+      path: '03044978989',
+      queryParameters: <String, String>{
+        'body': 'Salam! Mujhe app se related madad chahiye.',
+      },
+    );
+
+    if (await canLaunchUrl(smsUri)) {
+      await launchUrl(smsUri, mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Could not launch $smsUri');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -92,24 +167,37 @@ class _SmsScreenState extends State<SmsScreen> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(height: 20.h),
-
-              CustomListTile(
-                leadingImage: AppAssets.whatsappLogo,
-                text: 'Send on wahtsapp',
-                trailingImage: AppAssets.eyeContent,
+              InkWell(
+                onTap: () async {
+                  _openWhatsApp();
+                },
+                child: CustomListTile(
+                  leadingImage: AppAssets.whatsappLogo,
+                  text: 'Send on WhatsApp',
+                  trailingImage: AppAssets.eyeContent,
+                ),
               ),
               SizedBox(height: 12.h),
-              CustomListTile(
-                leadingImage: AppAssets.emailLogo,
-                text: 'Send on Email',
-                trailingImage: AppAssets.eyeContent,
+              InkWell(
+                onTap: () {
+                  _openEmail();
+                },
+                child: CustomListTile(
+                  leadingImage: AppAssets.emailLogo,
+                  text: 'Send on Email',
+                  trailingImage: AppAssets.eyeContent,
+                ),
               ),
               SizedBox(height: 14.h),
-
-              CustomListTile(
-                leadingImage: AppAssets.roundSSmsIcon,
-                text: 'Send on SMS',
-                trailingImage: AppAssets.eyeContent,
+              InkWell(
+                onTap: () {
+                  _openSMS();
+                },
+                child: CustomListTile(
+                  leadingImage: AppAssets.roundSSmsIcon,
+                  text: 'Send on SMS',
+                  trailingImage: AppAssets.eyeContent,
+                ),
               ),
               SizedBox(height: 28.h),
               Padding(
@@ -169,9 +257,7 @@ class _SmsScreenState extends State<SmsScreen> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-
                             SizedBox(width: 9.w),
-
                             Text(
                               'Pending',
                               style: Theme.of(

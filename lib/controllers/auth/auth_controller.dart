@@ -28,6 +28,8 @@ class AuthController extends GetxController {
   bool get isLoggedIn => user != null;
 
   final RxBool isLoading = false.obs;
+  final RxBool isGoogleLoading = false.obs;
+  final RxBool isPasswordShow = false.obs;
 
   Future<void> signUpWithEmailAndPassword(
     String email,
@@ -104,7 +106,7 @@ class AuthController extends GetxController {
 
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      isLoading.value = true;
+      isGoogleLoading.value = true;
 
       // Initialize Google Sign-In
       final GoogleSignIn googleSignIn = GoogleSignIn();

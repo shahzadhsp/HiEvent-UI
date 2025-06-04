@@ -1,5 +1,10 @@
+import 'dart:developer';
+import 'dart:math' as Get;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+import 'package:weddinghall/models/cost_model.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
@@ -12,13 +17,7 @@ class EventCostScreen extends StatefulWidget {
 }
 
 class _EventCostScreenState extends State<EventCostScreen> {
-  List<String> headings = [
-    ' Venue Providers',
-    ' Caterers',
-    'Photographers',
-    'Florists',
-    ' Musicians / DJs / Bands',
-  ];
+  int? selectedIndex;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,77 +54,112 @@ class _EventCostScreenState extends State<EventCostScreen> {
                 ],
               ),
               SizedBox(height: 26.h),
+
               ListView.builder(
                 shrinkWrap: true,
-                itemCount: 5,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: eventCostPrice.length,
                 itemBuilder: (context, index) {
+                  final isSelected = selectedIndex == index;
+
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 90.h,
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                            color: AppColors.lightYellow,
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 12.h),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      headings[index],
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleMedium!.copyWith(
-                                        fontSize: 18.sp,
-                                        color: AppColors.primaryColor,
+                        InkWell(
+                          onTap: () async {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                            final selectedEvent =
+                                eventCostPrice[selectedIndex!];
+                            await FirebaseFirestore.instance
+                                .collection('event_selections')
+                                .add({
+                                  'eventName': selectedEvent.eventName,
+                                  'eventPrice': selectedEvent.eventPrice,
+                                  'timestamp': FieldValue.serverTimestamp(),
+                                });
+
+                            GetSnackBar(
+                              title: 'Success',
+                              message: 'Event saved successfully!',
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.green.shade100,
+                              margin: EdgeInsets.all(12),
+                              duration: Duration(seconds: 2),
+                              borderRadius: 10,
+                              isDismissible: true,
+                            );
+                          },
+                          child: Container(
+                            height: 90.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color:
+                                  isSelected
+                                      ? AppColors.lightYellow
+                                      : AppColors.darkYellow,
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 12.h),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        eventCostPrice[index].eventName,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.titleMedium!.copyWith(
+                                          fontSize: 18.sp,
+                                          color: AppColors.primaryColor,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'INR 1700.00',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyLarge!.copyWith(
-                                        color: AppColors.blackColor,
+                                      Text(
+                                        eventCostPrice[index].eventPrice,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge!.copyWith(
+                                          color: AppColors.blackColor,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              // SizedBox(height: 10.h),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      AppAssets.edit,
-                                      height: 16.h,
-                                      width: 16.w,
-                                    ),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      'Write about your costs',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyLarge!.copyWith(
-                                        color: AppColors.blackColor,
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        AppAssets.edit,
+                                        height: 16.h,
+                                        width: 16.w,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 4.w),
+                                      Text(
+                                        'Write about your costs',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge!.copyWith(
+                                          color: AppColors.blackColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(height: 10.h),
@@ -136,7 +170,7 @@ class _EventCostScreenState extends State<EventCostScreen> {
               ),
               SizedBox(height: 12.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 110.w),
+                padding: EdgeInsets.symmetric(horizontal: 100.w),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.h, vertical: 6.h),
                   decoration: BoxDecoration(
@@ -162,6 +196,7 @@ class _EventCostScreenState extends State<EventCostScreen> {
                   ),
                 ),
               ),
+
               SizedBox(height: 50.h),
             ],
           ),

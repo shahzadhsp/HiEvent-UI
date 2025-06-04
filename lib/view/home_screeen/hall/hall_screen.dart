@@ -158,6 +158,9 @@ class _HallScreenState extends State<HallScreen> {
                     final isSelected = selectedTable == table;
                     return Expanded(
                       child: InkWell(
+                        overlayColor: WidgetStateProperty.all(
+                          Colors.transparent,
+                        ),
                         onTap: () {
                           setState(() {
                             selectedTable = table;
@@ -170,7 +173,7 @@ class _HallScreenState extends State<HallScreen> {
                             decoration: BoxDecoration(
                               color:
                                   isSelected
-                                      ? AppColors.primaryColor
+                                      ? AppColors.darkYellow
                                       : AppColors.whiteColor,
                               borderRadius: BorderRadius.circular(8.r),
                             ),
@@ -179,7 +182,7 @@ class _HallScreenState extends State<HallScreen> {
                               children: [
                                 Center(
                                   child: Image.asset(
-                                    tableList[index], // assumes tableList still matches index
+                                    tableList[index],
                                     height: 60.h,
                                     width: index == 2 ? 120.h : 50.w,
                                   ),

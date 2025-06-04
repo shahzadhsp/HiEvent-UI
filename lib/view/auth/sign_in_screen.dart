@@ -16,7 +16,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
   final AuthController _authController = Get.find<AuthController>();
 
   @override
@@ -103,11 +102,22 @@ class _SignInScreenState extends State<SignInScreen> {
                 ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8.h),
-              CustomTextFormField(
-                controller: _passwordController,
-                hintText: 'enter password',
-                validator: _validatePassword,
-                obscureText: true,
+              Obx(
+                () => CustomTextFormField(
+                  controller: _passwordController,
+                  hintText: 'Enter password',
+                  validator: _validatePassword,
+                  obscureText: !_authController.isPasswordShow.value,
+                  suffixIcon: Icon(
+                    _authController.isPasswordShow.value
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  isPasswordShow: () {
+                    _authController.isPasswordShow.value =
+                        !_authController.isPasswordShow.value;
+                  },
+                ),
               ),
               SizedBox(height: 40.h),
               Obx(
@@ -132,19 +142,48 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               SizedBox(height: 24.h),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    _authController.isLoading.value
-                        ? null
-                        : _authController.signInWithGoogle(context);
-                  },
-                  child: const Text(
-                    'Sign in with Google',
-                    style: TextStyle(fontSize: 16),
+              // Obx(() {
+              //   return SizedBox(
+              //     width: double.maxFinite,
+              //     child: TextButton(
+              //       onPressed: () {
+              //         _authController.isGoogleLoading.value
+              //             ? const CircularProgressIndicator(color: Colors.white)
+              //             : _authController.signInWithGoogle(context);
+              //       },
+              //       child: const Text(
+              //         'Sign in with Google',
+              //         style: TextStyle(fontSize: 16),
+              //       ),
+              //     ),
+              //   );
+              // }),
+              Obx(() {
+                return SizedBox(
+                  width: double.maxFinite,
+                  child: TextButton(
+                    onPressed:
+                        _authController.isGoogleLoading.value
+                            ? null
+                            : () => _authController.signInWithGoogle(context),
+                    child:
+                        _authController.isGoogleLoading.value
+                            ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                            : const Text(
+                              'Sign in with Google',
+                              style: TextStyle(fontSize: 16),
+                            ),
                   ),
-                ),
-              ),
+                );
+              }),
+
               SizedBox(height: 24.h),
               Center(
                 child: Row(

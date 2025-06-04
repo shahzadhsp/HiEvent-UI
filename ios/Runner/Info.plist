@@ -5,6 +5,7 @@
 <key>NSContactsUsageDescription</key>  
 <string>This app requires contacts access to function properly.</string>
 <key>NSMicrophoneUsageDescription</key>
+<key>LSApplicationQueriesSchemes</key>
 <string>This app needs access to microphone to record audio</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
@@ -37,6 +38,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		 <string>whatsapp</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

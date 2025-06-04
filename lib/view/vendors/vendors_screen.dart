@@ -191,7 +191,7 @@ class _VendorsScreenState extends State<VendorsScreen> {
                     ),
                     SizedBox(height: 10.h),
                     SizedBox(
-                      height: 90.h,
+                      height: 95.h,
                       child: ListView.builder(
                         itemCount: vendorsList.length,
                         scrollDirection: Axis.horizontal,

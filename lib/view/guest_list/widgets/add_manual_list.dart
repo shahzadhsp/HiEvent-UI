@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:weddinghall/controllers/guests/add_manual_guests_controller.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/custom_text_form_field.dart';
 import 'package:weddinghall/view/guest_list/guest_list_screen.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddManualList extends StatefulWidget {
   const AddManualList({super.key});
