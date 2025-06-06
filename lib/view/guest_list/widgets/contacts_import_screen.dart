@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -63,7 +62,8 @@ class _ContactsImportScreenState extends State<ContactsImportScreen> {
       int count = 0;
       for (int i = 0; i < _contacts.length; i++) {
         if (_selectedContacts[i] && _contacts[i].phones.isNotEmpty) {
-          final docRef = collectionRef.doc();
+          String id = DateTime.now().microsecondsSinceEpoch.toString();
+          final docRef = collectionRef.doc(id);
           batch.set(docRef, {
             'name': _contacts[i].displayName,
             'phones': _contacts[i].phones.map((phone) => phone.number).toList(),

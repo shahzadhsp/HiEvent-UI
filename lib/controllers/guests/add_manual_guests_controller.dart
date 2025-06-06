@@ -1,26 +1,32 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class AddManualController extends GetxController {
-  final DatabaseReference _database = FirebaseDatabase.instance.ref();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final isLoading = false.obs;
 
   Future<void> addGuest(String name, String phone) async {
+    String id = DateTime.now().microsecondsSinceEpoch.toString();
     try {
       isLoading(true);
-      String key = _database.child('guests').push().key ?? '';
-      await _database.child('guests').child(key).set({
-        'name': name,
-        'phone': phone,
-        'createdAt': ServerValue.timestamp,
-      });
-      // Show snackbar before navigation
-      Get.snackbar(
-        'Success',
-        'Guest added successfully',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      // Add slight delay before navigation to ensure snackbar shows
+      await _firestore
+          .collection('guests')
+          .doc(id)
+          .set({
+            'name': name,
+            'phone': phone,
+            'createdAt': FieldValue.serverTimestamp(),
+          })
+          .then((value) {
+            Get.snackbar(
+              'Success',
+              'Guest added successfully',
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          });
+      // Show success snackbar
+
+      // Delay to show snackbar before going back
       await Future.delayed(Duration(milliseconds: 500));
       Get.back();
     } catch (e) {
