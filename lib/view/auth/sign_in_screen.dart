@@ -71,6 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 'Sign in',
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   fontWeight: FontWeight.w500,
+                  color: AppColors.whiteColor,
                 ),
               ),
               SizedBox(height: 16.h),
@@ -83,23 +84,25 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(height: 40.h),
               Text(
                 'Enter Email',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.whiteColor,
+                ),
               ),
               SizedBox(height: 8.h),
               CustomTextFormField(
                 controller: _emailController,
-                hintText: 'enter email',
+                hintText: 'Enter email',
                 validator: _validateEmail,
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: 24.h),
               Text(
-                'Password',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                'Enter Password',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.whiteColor,
+                ),
               ),
               SizedBox(height: 8.h),
               Obx(
@@ -126,38 +129,26 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: ElevatedButton(
                     onPressed:
                         _authController.isLoading.value ? null : _submitForm,
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white, // Button background color
+                      foregroundColor: Colors.white, // Text (and spinner) color
+                      padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     child:
                         _authController.isLoading.value
                             ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                            : const Text(
+                            : Text(
                               'Sign in',
-                              style: TextStyle(fontSize: 16),
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.blackColor),
                             ),
                   ),
                 ),
               ),
               SizedBox(height: 24.h),
-              // Obx(() {
-              //   return SizedBox(
-              //     width: double.maxFinite,
-              //     child: TextButton(
-              //       onPressed: () {
-              //         _authController.isGoogleLoading.value
-              //             ? const CircularProgressIndicator(color: Colors.white)
-              //             : _authController.signInWithGoogle(context);
-              //       },
-              //       child: const Text(
-              //         'Sign in with Google',
-              //         style: TextStyle(fontSize: 16),
-              //       ),
-              //     ),
-              //   );
-              // }),
+
               Obx(() {
                 return SizedBox(
                   width: double.maxFinite,
@@ -166,6 +157,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         _authController.isGoogleLoading.value
                             ? null
                             : () => _authController.signInWithGoogle(context),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
                     child:
                         _authController.isGoogleLoading.value
                             ? const SizedBox(
@@ -176,9 +172,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: Colors.white,
                               ),
                             )
-                            : const Text(
+                            : Text(
                               'Sign in with Google',
-                              style: TextStyle(fontSize: 16),
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.blackColor),
                             ),
                   ),
                 );
@@ -189,7 +186,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    Text(
+                      "Don't have an account?",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
                     TextButton(
                       onPressed: () {
                         Get.to(() => const SignUpScreen());

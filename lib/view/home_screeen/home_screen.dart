@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:weddinghall/models/home_menu.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
+import 'package:weddinghall/utils/utills.dart';
 import 'package:weddinghall/view/about_us/about.dart';
+import 'package:weddinghall/view/approved_list_screen/approved_list_screen.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/declined_list/declined_list_screen.dart';
 import 'package:weddinghall/view/event_cost/event_cost_screen.dart';
@@ -22,6 +25,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<void> _openInstagramProfile() async {
+    // final url =
+    //     'https://www.instagram.com/muhammad_shahzad1148?igsh=ODltbnd4YmJ5Mm50';
+    final url =
+        'https://www.instagram.com/matto_hun_yar?igsh=MW1yeTVhM2xqdGhneA==';
+
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
           children: [
             SizedBox(height: 10.h),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               child: Row(
@@ -160,6 +177,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) => VendorsScreen(),
                             ),
                           );
+                        } else if (index == 3) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ApprovedListScreen(),
+                            ),
+                          );
                         }
                       },
                       child: Container(
@@ -226,12 +250,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 0, right: 10.w),
-                  child: Image.asset(
-                    AppAssets.instagramLogo,
-                    height: 30.h,
-                    width: 30.w,
+                InkWell(
+                  overlayColor: WidgetStateProperty.all(Colors.transparent),
+                  onTap: () {
+                    _openInstagramProfile();
+                    setState(() {});
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 0, right: 10.w),
+                    child: Image.asset(
+                      AppAssets.instagramLogo,
+                      height: 30.h,
+                      width: 30.w,
+                    ),
                   ),
                 ),
               ],

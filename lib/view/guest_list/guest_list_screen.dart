@@ -47,7 +47,9 @@ class _GuestListScreenState extends State<GuestListScreen> {
                 children: [
                   Text(
                     'Guest List',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: AppColors.whiteColor,
+                    ),
                   ),
                   Image.asset(AppAssets.guestList2, height: 40.h, width: 40.w),
                 ],
@@ -55,9 +57,10 @@ class _GuestListScreenState extends State<GuestListScreen> {
               SizedBox(height: 26.h),
               Text(
                 'Wedding of Sarah & Danielo',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(fontSize: 16.sp),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontSize: 16.sp,
+                  color: AppColors.whiteColor,
+                ),
               ),
               SizedBox(height: 28.h),
               Padding(
@@ -83,12 +86,12 @@ class _GuestListScreenState extends State<GuestListScreen> {
                           ),
                         ),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
                           borderSide: BorderSide.none,
                         ),
                         contentPadding: EdgeInsets.symmetric(
                           vertical: 6,
-                          horizontal: 16,
+                          horizontal: 14,
                         ),
                       ),
                     ),

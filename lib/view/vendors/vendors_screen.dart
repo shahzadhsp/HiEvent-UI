@@ -45,9 +45,11 @@ class _VendorsScreenState extends State<VendorsScreen> {
                 children: [
                   Text(
                     'Vendors',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: AppColors.whiteColor,
+                    ),
                   ),
-                  SizedBox(width: 12.h),
+
                   Image.asset(
                     AppAssets.vendors,
                     height: 35.h,
@@ -64,16 +66,24 @@ class _VendorsScreenState extends State<VendorsScreen> {
                   children: [
                     Text(
                       'Complete your vendor team',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                     Text(
                       'Find and book your vendors step by step',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.labelMedium!.copyWith(height: 4.5),
+                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                        height: 3.5,
+                        color: AppColors.whiteColor,
+                      ),
                     ),
-                    SizedBox(height: 10.h),
-                    Text('2/9 Services Booked'),
+                    SizedBox(height: 6.h),
+                    Text(
+                      '2/9 Services Booked',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
                     SizedBox(height: 6.h),
                     Stack(
                       children: [
@@ -113,7 +123,9 @@ class _VendorsScreenState extends State<VendorsScreen> {
                     SizedBox(height: 16.h),
                     Text(
                       'Top Vendors',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                     SizedBox(height: 16.h),
                     SizedBox(
@@ -187,7 +199,9 @@ class _VendorsScreenState extends State<VendorsScreen> {
                     SizedBox(height: 18.h),
                     Text(
                       'Vendors',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                     SizedBox(height: 10.h),
                     SizedBox(
@@ -213,7 +227,8 @@ class _VendorsScreenState extends State<VendorsScreen> {
                                 SizedBox(height: 3.h),
                                 Text(
                                   vendorsList[index].text,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyMedium!
+                                      .copyWith(color: AppColors.whiteColor),
                                 ),
                               ],
                             ),

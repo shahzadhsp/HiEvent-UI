@@ -132,7 +132,9 @@ class _RecordScreenState extends State<RecordScreen> {
             SizedBox(height: 40.h),
             Text(
               'Wedding of Sarah & Daniel',
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall!.copyWith(color: AppColors.whiteColor),
             ),
             SizedBox(height: 40.h),
             Padding(
@@ -179,15 +181,17 @@ class _RecordScreenState extends State<RecordScreen> {
             SizedBox(height: 20.h),
             Text(
               'Press the button to start recording your',
-              style: Theme.of(
-                context,
-              ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w500,
+                color: AppColors.whiteColor,
+              ),
             ),
             Text(
               'message',
-              style: Theme.of(
-                context,
-              ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w500,
+                color: AppColors.whiteColor,
+              ),
             ),
             SizedBox(height: 20.h),
             GestureDetector(
@@ -201,10 +205,17 @@ class _RecordScreenState extends State<RecordScreen> {
             SizedBox(height: 12.h),
             Text(
               _formatDuration(_recordDuration),
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge!.copyWith(color: AppColors.whiteColor),
             ),
             SizedBox(height: 12.h),
-            Text(_recordStatus, style: Theme.of(context).textTheme.bodyMedium),
+            Text(
+              _recordStatus,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(color: AppColors.whiteColor),
+            ),
           ],
         ),
       ),

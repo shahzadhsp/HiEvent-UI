@@ -47,9 +47,11 @@ class _EventCostScreenState extends State<EventCostScreen> {
                 children: [
                   Text(
                     'Event Costs',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: AppColors.whiteColor,
+                    ),
                   ),
-                  SizedBox(width: 12.h),
+                  SizedBox(width: 8.h),
                   Image.asset(AppAssets.eventCost, height: 35.h, width: 35.w),
                 ],
               ),

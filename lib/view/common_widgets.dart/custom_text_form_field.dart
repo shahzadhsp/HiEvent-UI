@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final Icon? suffixIcon;
-  final VoidCallback? isPasswordShow; // ✅ Corrected type
+  final VoidCallback? isPasswordShow;
 
   const CustomTextFormField({
     Key? key,

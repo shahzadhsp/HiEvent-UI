@@ -65,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _passwordController.text.trim(),
         context,
       );
+
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Sign up Successfully')));
@@ -92,6 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 'Sign up',
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   fontWeight: FontWeight.w500,
+                  color: AppColors.whiteColor,
                 ),
               ),
               SizedBox(height: 16.h),
@@ -104,23 +106,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 40.h),
               Text(
                 'Enter Email',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.whiteColor,
+                ),
               ),
               SizedBox(height: 8.h),
               CustomTextFormField(
                 controller: _emailController,
-                hintText: 'enter email',
+                hintText: 'Enter email',
                 validator: _validateEmail,
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: 16.h),
               Text(
-                'Password',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                'Enter Password',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.whiteColor,
+                ),
               ),
               SizedBox(height: 8.h),
               Obx(
@@ -143,14 +147,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 16.h),
               Text(
                 'Confirm Password',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.whiteColor,
+                ),
               ),
               SizedBox(height: 8.h),
               CustomTextFormField(
                 controller: _confirmPasswordController,
-                hintText: 'confirm password',
+                hintText: 'Confirm password',
                 validator: _validateConfirmPassword,
                 obscureText: true,
               ),
@@ -169,30 +174,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                            : const Text(
+                            : Text(
                               'Sign up',
-                              style: TextStyle(fontSize: 16),
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.blackColor),
                             ),
                   ),
                 ),
               ),
               SizedBox(height: 24.h),
-              // Obx(() {
-              //   return SizedBox(
-              //     width: double.maxFinite,
-              //     child: TextButton(
-              //       onPressed: () {
-              //         _authController.isGoogleLoading.value
-              //             ? const CircularProgressIndicator(color: Colors.white)
-              //             : _authController.signInWithGoogle(context);
-              //       },
-              //       child: const Text(
-              //         'Sign up with Google',
-              //         style: TextStyle(fontSize: 16),
-              //       ),
-              //     ),
-              //   );
-              // }),
               Obx(() {
                 return SizedBox(
                   width: double.maxFinite,
@@ -201,6 +191,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         _authController.isGoogleLoading.value
                             ? null
                             : () => _authController.signInWithGoogle(context),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
                     child:
                         _authController.isGoogleLoading.value
                             ? const SizedBox(
@@ -211,9 +206,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: Colors.white,
                               ),
                             )
-                            : const Text(
+                            : Text(
                               'Sign up with Google',
-                              style: TextStyle(fontSize: 16),
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.blackColor),
                             ),
                   ),
                 );
@@ -223,7 +219,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account?"),
+                    Text(
+                      "Already have an account?",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
                     TextButton(
                       onPressed: () {
                         Navigator.push(

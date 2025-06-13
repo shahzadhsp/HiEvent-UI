@@ -1,6 +1,8 @@
-import 'package:appinio_social_share/appinio_social_share.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
@@ -14,9 +16,7 @@ class SmsScreen extends StatefulWidget {
 }
 
 class _SmsScreenState extends State<SmsScreen> {
-  final AppinioSocialShare appinioSocialShare = AppinioSocialShare();
-
-  final String phoneNumber = '923044978989';
+  final String phoneNumber = '92302 7820436';
   final String email = 'mshahzadofficial89@gmail.com';
 
   Future<void> _openWhatsApp() async {
@@ -27,37 +27,11 @@ class _SmsScreenState extends State<SmsScreen> {
       throw 'Could not launch $url';
     }
   }
-  // open email
-  // Future<void> _openEmail() async {
-  //   final Uri emailUri = Uri(
-  //     scheme: 'mailto',
-  //     path: email,
-  //     query: 'subject=Support&body=Salam! Mujhe app se related madad chahiye.',
-  //   );
-  //   if (await canLaunchUrl(emailUri,)) {
-  //     await launchUrl(emailUri);
-  //   } else {
-  //     throw 'Could not launch $emailUri';
-  //   }
-  // }
 
-  // Future<void> _openEmail() async {
-  //   final Uri emailUri = Uri(
-  //     scheme: 'mailto',
-  //     path: 'mshahzadofficial89@gmail.com',
-  //     query: 'subject=Support&body=Salam! Mujhe app se related madad chahiye.',
-  //   );
-
-  //   if (await canLaunchUrl(emailUri)) {
-  //     await launchUrl(emailUri, mode: LaunchMode.externalApplication);
-  //   } else {
-  //     debugPrint('Could not launch $emailUri');
-  //   }
-  // }
   Future<void> _openEmail() async {
     final Uri emailUri = Uri(
       scheme: 'mailto',
-      path: 'mshahzadofficial89@gmail.com',
+      path: 'humas6971@gmail.com',
       query: Uri.encodeFull(
         'subject=Support&body=Salam! Mujhe app se related madad chahiye.',
       ),
@@ -74,7 +48,7 @@ class _SmsScreenState extends State<SmsScreen> {
   Future<void> _openSMS() async {
     final Uri smsUri = Uri(
       scheme: 'sms',
-      path: '03044978989',
+      path: '03027820436',
       queryParameters: <String, String>{
         'body': 'Salam! Mujhe app se related madad chahiye.',
       },
@@ -151,7 +125,9 @@ class _SmsScreenState extends State<SmsScreen> {
                 children: [
                   Text(
                     'SMS',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: AppColors.whiteColor,
+                    ),
                   ),
                   SizedBox(width: 4.w),
                   Image.asset(
@@ -164,7 +140,9 @@ class _SmsScreenState extends State<SmsScreen> {
               SizedBox(height: 18.h),
               Text(
                 'Wedding of Sarah & Daniel',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(color: AppColors.whiteColor),
               ),
               SizedBox(height: 20.h),
               InkWell(

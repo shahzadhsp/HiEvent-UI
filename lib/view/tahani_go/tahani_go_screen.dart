@@ -90,7 +90,9 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
               children: [
                 Text(
                   'TahaniGo',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: AppColors.whiteColor,
+                  ),
                 ),
                 Image.asset(AppAssets.tahanigo2, height: 50.h, width: 50.w),
               ],
@@ -186,10 +188,11 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                                     SizedBox(width: 3.w),
                                     Text(
                                       'Record Now',
-                                      style:
-                                          Theme.of(
-                                            context,
-                                          ).textTheme.titleMedium,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleMedium!.copyWith(
+                                        color: AppColors.whiteColor,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -235,10 +238,11 @@ class _TahaniGoScreenState extends State<TahaniGoScreen> {
                                     child: Center(
                                       child: Text(
                                         'Choose From Gallery',
-                                        style:
-                                            Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.titleMedium!.copyWith(
+                                          color: AppColors.whiteColor,
+                                        ),
                                       ),
                                     ),
                                   ),

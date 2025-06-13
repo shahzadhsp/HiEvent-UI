@@ -17,6 +17,7 @@ class HallScreen extends StatefulWidget {
 class _HallScreenState extends State<HallScreen> {
   final tableShapes = TableShape.values;
   TableNumber? selectedTable;
+  bool isLoading = false;
 
   TableShape selectedTableShape = TableShape.round;
 
@@ -72,7 +73,8 @@ class _HallScreenState extends State<HallScreen> {
                   children: [
                     Text(
                       'Hall/Auditorium',
-                      style: Theme.of(context).textTheme.headlineMedium,
+                      style: Theme.of(context).textTheme.headlineMedium!
+                          .copyWith(color: AppColors.whiteColor),
                     ),
                     SizedBox(width: 4.w),
                     Image.asset(
@@ -146,7 +148,9 @@ class _HallScreenState extends State<HallScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Select Table',
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: AppColors.whiteColor,
+                    ),
                   ),
                 ),
                 SizedBox(height: 8.h),
@@ -327,7 +331,8 @@ class _HallScreenState extends State<HallScreen> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Choose Table Shape',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(color: AppColors.whiteColor),
                         ),
                       ),
                       SizedBox(height: 10.h),
@@ -384,7 +389,8 @@ class _HallScreenState extends State<HallScreen> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'No of Chairs',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(color: AppColors.whiteColor),
                         ),
                       ),
                       SizedBox(height: 12.h),
@@ -458,13 +464,15 @@ class _HallScreenState extends State<HallScreen> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Flexible Layout Builder',
-                                style: Theme.of(context).textTheme.bodyLarge,
+                                style: Theme.of(context).textTheme.bodyLarge!
+                                    .copyWith(color: AppColors.whiteColor),
                               ),
                             ),
                             SizedBox(height: 6.h),
                             Text(
                               'Row 1',
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.whiteColor),
                             ),
                             SizedBox(height: 8.h),
                             Row(
@@ -490,7 +498,8 @@ class _HallScreenState extends State<HallScreen> {
                             SizedBox(height: 8.h),
                             Text(
                               'Row 2',
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.whiteColor),
                             ),
                             SizedBox(height: 8.h),
                             Row(
@@ -593,13 +602,15 @@ class _HallScreenState extends State<HallScreen> {
                       Expanded(
                         child: Text(
                           'Accessebility',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(color: AppColors.whiteColor),
                         ),
                       ),
                       Expanded(
                         child: Text(
                           '  Meal Prefrences',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(color: AppColors.whiteColor),
                         ),
                       ),
                     ],
@@ -676,7 +687,11 @@ class _HallScreenState extends State<HallScreen> {
                               ],
                             ),
                             SizedBox(width: 4.w),
-                            Text('Left'),
+                            Text(
+                              'Left',
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.whiteColor),
+                            ),
                           ],
                         ),
                       ),
@@ -711,7 +726,11 @@ class _HallScreenState extends State<HallScreen> {
                               ],
                             ),
                             SizedBox(width: 4.w),
-                            Text('Right'),
+                            Text(
+                              'Right',
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(color: AppColors.whiteColor),
+                            ),
                           ],
                         ),
                       ),
@@ -743,6 +762,9 @@ class _HallScreenState extends State<HallScreen> {
                 SizedBox(height: 20.h),
                 ElevatedButton(
                   onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
                     log('selected table$selectTable');
                     log('selected table shape$selectedTableShape');
                     log('chair count$chairCount');
@@ -754,6 +776,9 @@ class _HallScreenState extends State<HallScreen> {
                       selectedSide: selectedSide,
                       chairCount: chairCount,
                     );
+                    setState(() {
+                      isLoading = false;
+                    });
                   },
 
                   style: ElevatedButton.styleFrom(
@@ -768,12 +793,23 @@ class _HallScreenState extends State<HallScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
-                    'Save',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.blackColor,
-                    ),
-                  ),
+                  child:
+                      isLoading
+                          ? const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.black,
+                              ),
+                            ),
+                          )
+                          : Text(
+                            'Save',
+                            style: Theme.of(context).textTheme.bodyLarge!
+                                .copyWith(color: AppColors.blackColor),
+                          ),
                 ),
                 SizedBox(height: 10.h),
               ],

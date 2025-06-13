@@ -1,4 +1,5 @@
 // lib/controller/auth_controller.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,38 @@ class AuthController extends GetxController {
   final RxBool isGoogleLoading = false.obs;
   final RxBool isPasswordShow = false.obs;
 
+  // Future<void> signUpWithEmailAndPassword(
+  //   String email,
+  //   String password,
+  //   BuildContext context,
+  // ) async {
+  //   try {
+  //     isLoading.value = true;
+  //     await _auth
+  //         .createUserWithEmailAndPassword(
+  //           email: email.trim(),
+  //           password: password.trim(),
+  //         )
+  //         .then((value) async {
+  //           await userCollection.doc().set({'email': email});
+  //         });
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => SignInScreen()),
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     Get.snackbar(
+  //       'Sign Up Failed',
+  //       e.message ?? 'An error occurred',
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.red,
+  //       colorText: Colors.white,
+  //     );
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
   Future<void> signUpWithEmailAndPassword(
     String email,
     String password,
@@ -38,14 +71,33 @@ class AuthController extends GetxController {
   ) async {
     try {
       isLoading.value = true;
-      await _auth.createUserWithEmailAndPassword(
+      // Create user
+      final userCredential = await _auth.createUserWithEmailAndPassword(
         email: email.trim(),
         password: password.trim(),
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SignInScreen()),
-      );
+
+      final user = userCredential.user;
+
+      if (user != null) {
+        // Reference to Firestore collection
+        final userCollection = FirebaseFirestore.instance.collection(
+          'user_collection',
+        );
+        final String id = DateTime.now().millisecondsSinceEpoch.toString();
+        // Save user data
+        await userCollection.doc(user.uid).set({
+          'uid': user.uid,
+          'email': user.email,
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+
+        // Navigate to sign-in screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SignInScreen()),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         'Sign Up Failed',
@@ -107,22 +159,17 @@ class AuthController extends GetxController {
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       isGoogleLoading.value = true;
-
       // Initialize Google Sign-In
       final GoogleSignIn googleSignIn = GoogleSignIn();
-
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-
       if (googleUser == null) {
         // User cancelled the sign-in
         return;
       }
-
       // Obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
         throw FirebaseAuthException(
           code: 'ERROR_MISSING_GOOGLE_AUTH_TOKEN',
@@ -138,7 +185,6 @@ class AuthController extends GetxController {
 
       // Sign in to Firebase with the credential
       await _auth.signInWithCredential(credential);
-
       // Navigate to home screen
       Navigator.pushAndRemoveUntil(
         context,
