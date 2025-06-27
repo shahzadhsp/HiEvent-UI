@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
+import 'package:weddinghall/view/approved_list_screen/approved_list_screen.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
+import 'package:weddinghall/view/declined_list/declined_list_screen.dart';
 import 'package:weddinghall/view/guest_list/widgets/add_manual_list.dart';
 import 'package:weddinghall/view/guest_list/widgets/contacts_import_screen.dart';
 import 'package:weddinghall/view/guest_list/widgets/custom_list_tile.dart';
 import 'package:weddinghall/view/guest_list/widgets/file_upload_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:weddinghall/view/pending_guests/pending_guest_screen.dart';
 
 class GuestListScreen extends StatefulWidget {
   const GuestListScreen({super.key});
@@ -239,24 +242,27 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                 onSelected: (String value) {
                                   log('selected value $value');
                                   if (value == 'pending') {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PendingList(),
+                                        builder:
+                                            (context) => PendingGuestScreen(),
                                       ),
                                     );
                                   } else if (value == 'accepted') {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => AcceptedList(),
+                                        builder:
+                                            (context) => ApprovedListScreen(),
                                       ),
                                     );
                                   } else if (value == 'declined') {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => DeclinedList(),
+                                        builder:
+                                            (context) => DeclinedListScreen(),
                                       ),
                                     );
                                   }
@@ -321,7 +327,7 @@ class _GuestListScreenState extends State<GuestListScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AddManualList(),

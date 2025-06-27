@@ -29,9 +29,6 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          // theme: AppTheme.theme,
-          // darkTheme: AppTheme.darkTheme,
-          // themeMode: ThemeMode.system,
           home: Obx(() {
             final authController = Get.find<AuthController>();
             return authController.isLoggedIn ? HomeScreen() : SignInScreen();

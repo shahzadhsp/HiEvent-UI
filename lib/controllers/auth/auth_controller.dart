@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/auth/sign_in_screen.dart';
 import 'package:weddinghall/view/auth/sign_up_screen.dart';
 import 'package:weddinghall/view/home_screeen/home_screen.dart';
@@ -32,39 +33,8 @@ class AuthController extends GetxController {
   final RxBool isGoogleLoading = false.obs;
   final RxBool isPasswordShow = false.obs;
 
-  // Future<void> signUpWithEmailAndPassword(
-  //   String email,
-  //   String password,
-  //   BuildContext context,
-  // ) async {
-  //   try {
-  //     isLoading.value = true;
-  //     await _auth
-  //         .createUserWithEmailAndPassword(
-  //           email: email.trim(),
-  //           password: password.trim(),
-  //         )
-  //         .then((value) async {
-  //           await userCollection.doc().set({'email': email});
-  //         });
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => SignInScreen()),
-  //     );
-  //   } on FirebaseAuthException catch (e) {
-  //     Get.snackbar(
-  //       'Sign Up Failed',
-  //       e.message ?? 'An error occurred',
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: Colors.red,
-  //       colorText: Colors.white,
-  //     );
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
-
   Future<void> signUpWithEmailAndPassword(
+    String name,
     String email,
     String password,
     BuildContext context,
@@ -84,10 +54,11 @@ class AuthController extends GetxController {
         final userCollection = FirebaseFirestore.instance.collection(
           'user_collection',
         );
-        final String id = DateTime.now().millisecondsSinceEpoch.toString();
-        // Save user data
+
+        // Save user data with name
         await userCollection.doc(user.uid).set({
           'uid': user.uid,
+          'name': name.trim(), // Added name field
           'email': user.email,
           'createdAt': FieldValue.serverTimestamp(),
         });
@@ -102,9 +73,9 @@ class AuthController extends GetxController {
       Get.snackbar(
         'Sign Up Failed',
         e.message ?? 'An error occurred',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
       );
     } finally {
       isLoading.value = false;
@@ -131,9 +102,9 @@ class AuthController extends GetxController {
       Get.snackbar(
         'Sign In Failed',
         e.message ?? 'An error occurred',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
       );
     } finally {
       isLoading.value = false;
@@ -195,18 +166,18 @@ class AuthController extends GetxController {
       Get.snackbar(
         'Google Sign In Failed',
         e.message ?? 'An error occurred',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
       );
       debugPrint('Google Sign-In Error: ${e.code} - ${e.message}');
     } catch (e) {
       Get.snackbar(
         'Google Sign In Failed',
         'An unexpected error occurred',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
       );
       debugPrint('Unexpected Error: $e');
     } finally {

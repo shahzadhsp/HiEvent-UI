@@ -10,12 +10,16 @@ import 'package:weddinghall/view/approved_list_screen/approved_list_screen.dart'
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/declined_list/declined_list_screen.dart';
 import 'package:weddinghall/view/event_cost/event_cost_screen.dart';
+import 'package:weddinghall/view/event_cost_summary/event_cost_one.dart';
 import 'package:weddinghall/view/guest_list/guest_list_screen.dart';
-import 'package:weddinghall/view/home_screeen/hall/hall_screen.dart';
+import 'package:weddinghall/view/home_screeen/hall/hall_screen.dart'
+    hide AppColors, AppAssets;
+import 'package:weddinghall/view/home_screeen/home_search_screen.dart';
 import 'package:weddinghall/view/pending_guests/pending_guest_screen.dart';
 import 'package:weddinghall/view/sms/sms_screen.dart';
 import 'package:weddinghall/view/tahani_go/record_screen.dart';
 import 'package:weddinghall/view/tahani_go/tahani_go_screen.dart';
+import 'package:weddinghall/view/testing/venue_selector.dart';
 import 'package:weddinghall/view/vendors/vendors_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,8 +30,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> _openInstagramProfile() async {
-    // final url =
-    //     'https://www.instagram.com/muhammad_shahzad1148?igsh=ODltbnd4YmJ5Mm50';
     final url =
         'https://www.instagram.com/matto_hun_yar?igsh=MW1yeTVhM2xqdGhneA==';
 
@@ -75,33 +77,42 @@ class _HomeScreenState extends State<HomeScreen> {
               ).textTheme.titleLarge!.copyWith(color: AppColors.whiteColor),
             ),
             SizedBox(height: 6.h),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 28.w),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'search...',
-                  hintStyle: Theme.of(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
                     context,
-                  ).textTheme.bodySmall!.copyWith(color: AppColors.blackColor),
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Image.asset(
-                      AppAssets.searchIcon2,
-                      height: 16.h,
-                      width: 16.w,
-                      color: AppColors.blackColor,
+                    MaterialPageRoute(builder: (_) => const HomeSearchScreen()),
+                  );
+                },
+                child: AbsorbPointer(
+                  absorbing: true,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'search...',
+                      hintStyle: Theme.of(context).textTheme.bodySmall!
+                          .copyWith(color: AppColors.blackColor),
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Image.asset(
+                          AppAssets.searchIcon2,
+                          height: 16.h,
+                          width: 16.w,
+                          color: AppColors.blackColor,
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
                     ),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
                   ),
                 ),
               ),
@@ -125,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HallScreen(),
+                              builder: (context) => VenueSelector(),
                             ),
                           );
                         } else if (index == 1) {
@@ -182,6 +193,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ApprovedListScreen(),
+                            ),
+                          );
+                        } else if (index == 6) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EventCostOne(),
+                            ),
+                          );
+                        } else if (index == 7) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EventCostOne(),
+                            ),
+                          );
+                        } else if (index == 8) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EventCostOne(),
                             ),
                           );
                         }
@@ -253,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   overlayColor: WidgetStateProperty.all(Colors.transparent),
                   onTap: () {
-                    _openInstagramProfile();
+                    // _openInstagramProfile();
                     setState(() {});
                   },
                   child: Padding(

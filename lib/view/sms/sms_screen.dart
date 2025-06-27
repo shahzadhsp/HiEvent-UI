@@ -1,11 +1,20 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
+import 'package:weddinghall/utils/utills.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/sms/widgets/custom_list_tile.dart';
 
@@ -61,47 +70,121 @@ class _SmsScreenState extends State<SmsScreen> {
     }
   }
 
+  final TextEditingController _messageController = TextEditingController();
+  File? _selectedFile;
+  bool _isLoading = false;
+
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+    );
+    if (result != null) {
+      setState(() {
+        _selectedFile = File(result.files.single.path!);
+      });
+    }
+  }
+
+  Future<void> _sendFeedback() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please sign in first')));
+      return;
+    }
+
+    if (_messageController.text.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please enter your message')));
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      String? fileUrl;
+      if (_selectedFile != null) {
+        final fileName = 'feedback_${DateTime.now().millisecondsSinceEpoch}';
+        final ref = FirebaseStorage.instance.ref().child('feedback/$fileName');
+        await ref.putFile(_selectedFile!);
+        fileUrl = await ref.getDownloadURL();
+      }
+
+      await FirebaseFirestore.instance.collection('feedback').add({
+        'userId': user.uid,
+        'message': _messageController.text,
+        'fileUrl': fileUrl,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      _messageController.clear();
+      setState(() => _selectedFile = null);
+      Get.snackbar(
+        'Success',
+        'Message sent successfully!',
+        snackPosition: SnackPosition.TOP,
+        duration: Duration(seconds: 3),
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
+        margin: EdgeInsets.all(16),
+      );
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to send message: ${e.toString()}',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
+        duration: Duration(seconds: 3),
+      );
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          color: Colors.white,
-          child: Row(
-            children: [
-              Icon(Icons.add, color: Colors.brown[800]),
-              SizedBox(width: 8),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: Colors.brown),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: '',
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                      Image.asset(AppAssets.sendSms, height: 20.h, width: 20.w),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: 8),
-              Icon(Icons.photo_camera, color: Colors.brown[800]),
-              SizedBox(width: 8),
-              Icon(Icons.mic, color: Colors.brown[800]),
-            ],
-          ),
-        ),
+        // bottomNavigationBar: Container(
+        //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        //   color: Colors.white,
+        //   child: Row(
+        //     children: [
+        //       Icon(Icons.add, color: Colors.brown[800]),
+        //       SizedBox(width: 8),
+        //       Expanded(
+        //         child: Container(
+        //           padding: EdgeInsets.symmetric(horizontal: 8),
+        //           decoration: BoxDecoration(
+        //             color: Colors.white,
+        //             borderRadius: BorderRadius.circular(24),
+        //             border: Border.all(color: Colors.brown),
+        //           ),
+        //           child: Row(
+        //             children: [
+        //               Expanded(
+        //                 child: TextField(
+        //                   decoration: InputDecoration(
+        //                     hintText: '',
+        //                     border: InputBorder.none,
+        //                   ),
+        //                 ),
+        //               ),
+        //               Image.asset(AppAssets.sendSms, height: 20.h, width: 20.w),
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //       SizedBox(width: 8),
+        //       Icon(Icons.photo_camera, color: Colors.brown[800]),
+        //       SizedBox(width: 8),
+        //       Icon(Icons.mic, color: Colors.brown[800]),
+        //     ],
+        //   ),
+        // ),
         backgroundColor: AppColors.primaryColor,
         body: SingleChildScrollView(
           child: Column(
@@ -212,28 +295,47 @@ class _SmsScreenState extends State<SmsScreen> {
                               width: 16.w,
                             ),
                             SizedBox(width: 4.w),
-                            Text(
-                              '10 Accepted',
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyLarge!.copyWith(
-                                color: AppColors.blackColor,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            StreamBuilder<List<DocumentSnapshot>>(
+                              stream: getCombinedAcceptedGuests(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Text('Loading...');
+                                }
+                                return Text(
+                                  '${snapshot.data!.length} Accepted ',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodyLarge?.copyWith(
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
                         SizedBox(height: 8.h),
                         Row(
                           children: [
-                            Text(
-                              ' 8',
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyLarge!.copyWith(
-                                color: AppColors.blackColor,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            StreamBuilder<int>(
+                              stream: getTotalGuestsCount(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text('Error loading count');
+                                }
+                                if (!snapshot.hasData) {
+                                  return Text('0');
+                                }
+                                return Text(
+                                  '${snapshot.data}',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodyLarge!.copyWith(
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                );
+                              },
                             ),
                             SizedBox(width: 9.w),
                             Text(
@@ -253,59 +355,177 @@ class _SmsScreenState extends State<SmsScreen> {
                 ),
               ),
               SizedBox(height: 10.h),
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Container(
-                  width: double.maxFinite,
-                  height: 140.h,
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: AppColors.borderColor),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Stack(
-                    children: [
-                      TextFormField(
-                        maxLines: 9,
-
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: "Type Your message here...",
-                          hintStyle: TextStyle(color: AppColors.borderColor),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                            top: 12,
-                            left: 12,
-                            right: 48,
-                            bottom: 36,
+                child: GestureDetector(
+                  onTap: _pickFile,
+                  child: Container(
+                    width: double.maxFinite,
+                    height: 140.h,
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: AppColors.borderColor),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Stack(
+                      children: [
+                        TextFormField(
+                          controller: _messageController,
+                          maxLines: 9,
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            hintText: "Type Your message here...",
+                            hintStyle: TextStyle(color: AppColors.borderColor),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                              top: 12,
+                              left: 12,
+                              right: 48,
+                              bottom: 36,
+                            ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 4,
-                        right: 4,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Image.asset(
-                              AppAssets.attachFile,
-                              height: 36.h,
-                              width: 36.w,
-                            ),
-                            SizedBox(width: 2.w),
-                            Text(
-                              "Attach file",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
+                        Positioned(
+                          bottom: 4,
+                          right: 4,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (_selectedFile != null)
+                                Padding(
+                                  padding: EdgeInsets.only(right: 8.w),
+                                  child: Text(
+                                    _selectedFile!.path.split('/').last,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                              Image.asset(
+                                AppAssets.attachFile,
+                                height: 36.h,
+                                width: 36.w,
                               ),
-                            ),
-                            SizedBox(width: 8.w),
-                          ],
+                              SizedBox(width: 2.w),
+                              Text(
+                                "Attach file",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: TextButton(
+              //     onPressed: _isLoading ? null : _sendFeedback,
+              //     child:
+              //         _isLoading
+              //             ? CircularProgressIndicator(color: Colors.white)
+              //             : Text(
+              //               'Send Message',
+              //               style: TextStyle(color: Colors.white),
+              //             ),
+              //   ),
+              // ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: TextButton(
+              //     onPressed: _isLoading ? null : _sendFeedback,
+              //     style: TextButton.styleFrom(
+              //       backgroundColor: AppColors.primaryColor,
+              //       padding: EdgeInsets.symmetric(
+              //         horizontal: 24.w,
+              //         vertical: 12.h,
+              //       ),
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(8.r),
+              //         side: BorderSide(
+              //           color: _isLoading ? Colors.grey : AppColors.borderColor,
+              //           width: 1,
+              //         ),
+              //       ),
+              //       elevation: 2,
+              //       shadowColor: Colors.black12,
+              //     ),
+              //     child:
+              //         _isLoading
+              //             ? SizedBox(
+              //               width: 40.w,
+              //               height: 20.h,
+              //               child: CircularProgressIndicator(
+              //                 strokeWidth: 2,
+              //                 color: Colors.white,
+              //               ),
+              //             )
+              //             : Text(
+              //               'Send Message',
+              //               style: TextStyle(
+              //                 color: Colors.white,
+              //                 fontSize: 14.sp,
+              //                 fontWeight: FontWeight.w500,
+              //               ),
+              //             ),
+              //   ),
+              // ),
+              SizedBox(height: 10.h),
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    right: 20.w,
+                  ), // Add right padding here
+                  child: TextButton(
+                    onPressed: _isLoading ? null : _sendFeedback,
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColors.darkYellow,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.w,
+                        vertical: 12.h,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.r),
+                        side: BorderSide(
+                          color:
+                              _isLoading ? Colors.grey : AppColors.borderColor,
+                          width: 1,
                         ),
                       ),
-                    ],
+                      elevation: 2,
+                      shadowColor: Colors.black12,
+                    ),
+                    child:
+                        _isLoading
+                            ? SizedBox(
+                              width: 40.w,
+                              height: 20.h,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                            : Text(
+                              'Send Message',
+                              style: TextStyle(
+                                color: AppColors.blackColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                   ),
                 ),
               ),

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:weddinghall/controllers/guests/add_manual_guests_controller.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/common_widgets.dart/custom_text_form_field.dart';
-import 'package:weddinghall/view/guest_list/guest_list_screen.dart';
 
 class AddManualList extends StatefulWidget {
   const AddManualList({super.key});
@@ -17,7 +16,6 @@ class _AddManualListState extends State<AddManualList> {
   final phoneController = TextEditingController();
   final nameController = TextEditingController();
   final AddManualController _controller = Get.put(AddManualController());
-
   @override
   void dispose() {
     phoneController.dispose();
@@ -25,15 +23,18 @@ class _AddManualListState extends State<AddManualList> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    Get.find<AddManualController>().isLoading.value = false;
+  }
+
   void _inviteGuest() {
     if (_formKey.currentState!.validate()) {
       _controller.addGuest(
         nameController.text.trim(),
         phoneController.text.trim(),
-      );
-      Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => GuestListScreen()),
       );
     }
   }
@@ -55,27 +56,32 @@ class _AddManualListState extends State<AddManualList> {
                 alignment: Alignment.center,
                 child: Text(
                   'Invite',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: AppColors.whiteColor,
+                  ),
                 ),
               ),
               Align(
                 alignment: Alignment.center,
                 child: Text(
                   'Guests Manualy',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: AppColors.whiteColor,
+                  ),
                 ),
               ),
               SizedBox(height: 40.h),
               Text(
                 'Enter Name',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.whiteColor,
+                ),
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: 6.h),
               CustomTextFormField(
                 controller: nameController,
-                hintText: 'entername',
+                hintText: 'Entername',
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Field cannot be empty';
@@ -86,14 +92,15 @@ class _AddManualListState extends State<AddManualList> {
               SizedBox(height: 16.h),
               Text(
                 'Enter phone',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.whiteColor,
+                ),
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: 6.h),
               CustomTextFormField(
                 controller: phoneController,
-                hintText: 'enterphone',
+                hintText: 'Enterphone',
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -106,8 +113,14 @@ class _AddManualListState extends State<AddManualList> {
               Obx(
                 () =>
                     _controller.isLoading.value
-                        ? CircularProgressIndicator()
+                        ? Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.whiteColor,
+                            strokeWidth: 5,
+                          ),
+                        )
                         : InkWell(
+                          borderRadius: BorderRadius.circular(20.r),
                           onTap: () {
                             _inviteGuest();
                           },

@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'dart:developer';
 import 'package:weddinghall/config/enums.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:weddinghall/res/app_colors.dart';
 
 Future<void> saveBooking({
   required BuildContext context,
@@ -13,6 +12,8 @@ Future<void> saveBooking({
   required TableShape selectedShape,
   required String selectedSide,
   required int chairCount,
+  required Set<String> selectedCells,
+  required Set<String> selectedRows,
 }) async {
   try {
     final booking = {
@@ -20,32 +21,36 @@ Future<void> saveBooking({
       'shape': selectedShape.name,
       'side': selectedSide,
       'chairCount': chairCount,
+      'selectedCells': selectedCells.toList(),
+      'selectedRows': selectedRows.toList(),
       'timestamp': FieldValue.serverTimestamp(),
     };
+
     final String id = DateTime.now().millisecondsSinceEpoch.toString();
     await FirebaseFirestore.instance.collection('booking').doc(id).set(booking);
 
     Get.snackbar(
       'Success',
       'Booking saved successfully!',
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: AppColors.whiteColor,
+      colorText: AppColors.primaryColor,
+      snackPosition: SnackPosition.TOP,
       margin: const EdgeInsets.all(16),
       duration: const Duration(seconds: 3),
     );
     log('✅ Booking saved: $booking');
   } catch (e) {
-    log('❌ Failed to save booking: $e');
+    log('Failed to save booking: $e');
     Get.snackbar(
       'Error',
       'Failed to save booking',
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: AppColors.whiteColor,
+      colorText: AppColors.primaryColor,
+      snackPosition: SnackPosition.TOP,
       margin: const EdgeInsets.all(16),
       duration: const Duration(seconds: 3),
     );
+    rethrow;
   }
 }
 

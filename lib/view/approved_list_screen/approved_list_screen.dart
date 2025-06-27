@@ -111,7 +111,6 @@ class _ApprovedListScreenState extends State<ApprovedListScreen> {
                             itemBuilder: (context, index) {
                               final guest = acceptedGuests[index];
                               final data = guest.data() as Map<String, dynamic>;
-
                               // Extract seat number (trying multiple possible field names)
                               final seatNo =
                                   data['seatNo'] ??
@@ -122,7 +121,6 @@ class _ApprovedListScreenState extends State<ApprovedListScreen> {
                                   data['tableNo'] ??
                                   data['table'] ??
                                   'Not assigned';
-
                               return Padding(
                                 padding: EdgeInsets.only(bottom: 12.h),
                                 child: Container(
@@ -207,7 +205,6 @@ class _ApprovedListScreenState extends State<ApprovedListScreen> {
 
 class _CustomDivider extends StatelessWidget {
   const _CustomDivider({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(

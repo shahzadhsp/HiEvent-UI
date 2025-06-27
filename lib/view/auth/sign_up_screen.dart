@@ -15,6 +15,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
+
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
@@ -35,6 +37,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
       return 'Please enter a valid email';
     }
+    return null;
+  }
+
+  String? _validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    }
+
     return null;
   }
 
@@ -61,14 +71,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       await _authController.signUpWithEmailAndPassword(
+        _nameController.text.trim(),
         _emailController.text.trim(),
         _passwordController.text.trim(),
         context,
       );
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Sign up Successfully')));
+      Get.snackbar(
+        'Success!',
+        'Sign up Successfully',
+        // Customization options
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.whiteColor,
+        colorText: AppColors.primaryColor,
+        borderRadius: 12,
+        margin: EdgeInsets.all(15),
+        duration: Duration(seconds: 3),
+        icon: Icon(Icons.check_circle, color: Colors.white),
+        shouldIconPulse: true,
+        dismissDirection: DismissDirection.horizontal,
+      );
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SignInScreen()),
@@ -105,6 +126,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SizedBox(height: 40.h),
               Text(
+                'Enter Name',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.whiteColor,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              CustomTextFormField(
+                controller: _nameController,
+                hintText: 'Enter name',
+                validator: _validateName,
+                keyboardType: TextInputType.name,
+              ),
+              SizedBox(height: 16.h),
+              Text(
                 'Enter Email',
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.bold,
@@ -112,6 +148,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               SizedBox(height: 8.h),
+
               CustomTextFormField(
                 controller: _emailController,
                 hintText: 'Enter email',
@@ -153,11 +190,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               SizedBox(height: 8.h),
-              CustomTextFormField(
-                controller: _confirmPasswordController,
-                hintText: 'Confirm password',
-                validator: _validateConfirmPassword,
-                obscureText: true,
+
+              Obx(
+                () => CustomTextFormField(
+                  controller: _confirmPasswordController,
+                  hintText: 'Confirm password',
+                  validator: _validateConfirmPassword,
+                  obscureText: !_authController.isPasswordShow.value,
+                  suffixIcon: Icon(
+                    _authController.isPasswordShow.value
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  isPasswordShow: () {
+                    _authController.isPasswordShow.value =
+                        !_authController.isPasswordShow.value;
+                  },
+                ),
               ),
               SizedBox(height: 40.h),
               Obx(

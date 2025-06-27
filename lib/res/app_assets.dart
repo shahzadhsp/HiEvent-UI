@@ -78,6 +78,10 @@ class AppAssets {
   static const String image3 = '$baseImagePath/image3.png';
   static const String etCamera2 = '$baseImagePath/et_camera2.png';
   static const String playIcon = '$baseImagePath/play_icon.png';
+  static const String brideStage = '$baseImagePath/bride_stage.png';
+
+  // chair
+  static const String chair = '$baseImagePath/chair_icon.png';
 
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';
