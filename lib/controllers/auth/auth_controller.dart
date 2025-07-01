@@ -1,6 +1,7 @@
 // lib/controller/auth_controller.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -93,6 +94,7 @@ class AuthController extends GetxController {
         email: email.trim(),
         password: password.trim(),
       );
+      await saveUserToken();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -156,6 +158,8 @@ class AuthController extends GetxController {
 
       // Sign in to Firebase with the credential
       await _auth.signInWithCredential(credential);
+      // 👇 Save FCM Token
+      await saveUserToken();
       // Navigate to home screen
       Navigator.pushAndRemoveUntil(
         context,
@@ -182,6 +186,20 @@ class AuthController extends GetxController {
       debugPrint('Unexpected Error: $e');
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> saveUserToken() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+
+    if (token != null) {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'fcm_token': token,
+      }, SetOptions(merge: true));
+
+      print("🔐 Token saved for user: $uid");
     }
   }
 }

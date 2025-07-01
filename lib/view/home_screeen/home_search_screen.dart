@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
 import 'package:weddinghall/view/approved_list_screen/approved_list_screen.dart';
-import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/declined_list/declined_list_screen.dart';
 import 'package:weddinghall/view/event_cost/event_cost_screen.dart';
 import 'package:weddinghall/view/event_cost_summary/event_cost_one.dart';

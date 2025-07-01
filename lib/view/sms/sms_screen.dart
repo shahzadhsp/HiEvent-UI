@@ -148,43 +148,6 @@ class _SmsScreenState extends State<SmsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // bottomNavigationBar: Container(
-        //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        //   color: Colors.white,
-        //   child: Row(
-        //     children: [
-        //       Icon(Icons.add, color: Colors.brown[800]),
-        //       SizedBox(width: 8),
-        //       Expanded(
-        //         child: Container(
-        //           padding: EdgeInsets.symmetric(horizontal: 8),
-        //           decoration: BoxDecoration(
-        //             color: Colors.white,
-        //             borderRadius: BorderRadius.circular(24),
-        //             border: Border.all(color: Colors.brown),
-        //           ),
-        //           child: Row(
-        //             children: [
-        //               Expanded(
-        //                 child: TextField(
-        //                   decoration: InputDecoration(
-        //                     hintText: '',
-        //                     border: InputBorder.none,
-        //                   ),
-        //                 ),
-        //               ),
-        //               Image.asset(AppAssets.sendSms, height: 20.h, width: 20.w),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //       SizedBox(width: 8),
-        //       Icon(Icons.photo_camera, color: Colors.brown[800]),
-        //       SizedBox(width: 8),
-        //       Icon(Icons.mic, color: Colors.brown[800]),
-        //     ],
-        //   ),
-        // ),
         backgroundColor: AppColors.primaryColor,
         body: SingleChildScrollView(
           child: Column(
@@ -429,66 +392,11 @@ class _SmsScreenState extends State<SmsScreen> {
                 ),
               ),
 
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: TextButton(
-              //     onPressed: _isLoading ? null : _sendFeedback,
-              //     child:
-              //         _isLoading
-              //             ? CircularProgressIndicator(color: Colors.white)
-              //             : Text(
-              //               'Send Message',
-              //               style: TextStyle(color: Colors.white),
-              //             ),
-              //   ),
-              // ),
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: TextButton(
-              //     onPressed: _isLoading ? null : _sendFeedback,
-              //     style: TextButton.styleFrom(
-              //       backgroundColor: AppColors.primaryColor,
-              //       padding: EdgeInsets.symmetric(
-              //         horizontal: 24.w,
-              //         vertical: 12.h,
-              //       ),
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(8.r),
-              //         side: BorderSide(
-              //           color: _isLoading ? Colors.grey : AppColors.borderColor,
-              //           width: 1,
-              //         ),
-              //       ),
-              //       elevation: 2,
-              //       shadowColor: Colors.black12,
-              //     ),
-              //     child:
-              //         _isLoading
-              //             ? SizedBox(
-              //               width: 40.w,
-              //               height: 20.h,
-              //               child: CircularProgressIndicator(
-              //                 strokeWidth: 2,
-              //                 color: Colors.white,
-              //               ),
-              //             )
-              //             : Text(
-              //               'Send Message',
-              //               style: TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 14.sp,
-              //                 fontWeight: FontWeight.w500,
-              //               ),
-              //             ),
-              //   ),
-              // ),
               SizedBox(height: 10.h),
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    right: 20.w,
-                  ), // Add right padding here
+                  padding: EdgeInsets.only(right: 20.w),
                   child: TextButton(
                     onPressed: _isLoading ? null : _sendFeedback,
                     style: TextButton.styleFrom(

@@ -8,8 +8,6 @@ import 'package:weddinghall/res/app_colors.dart';
 import 'dart:io';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
 import 'package:weddinghall/view/home_screeen/hall/hall_confirmation_screen.dart';
-import 'package:weddinghall/view/home_screeen/hall/hall_screen.dart'
-    hide AppColors, AppAssets;
 import 'package:weddinghall/view/home_screeen/hall/hall_screen2.dart';
 
 class VenueSelector extends StatefulWidget {

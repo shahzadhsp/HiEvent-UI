@@ -102,7 +102,6 @@ class TableConfirmationScreen extends StatelessWidget {
                             ),
                           ),
                         if (chairCount >= 2) SizedBox(height: 6.h),
-
                         // Middle row with side chairs
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -128,7 +127,6 @@ class TableConfirmationScreen extends StatelessWidget {
                                 ),
                               ),
                             if (chairCount >= 4) SizedBox(width: 6.w),
-
                             // Table
                             Image.asset(
                               tableShape == TableShape.round
@@ -146,7 +144,6 @@ class TableConfirmationScreen extends StatelessWidget {
                                       : 80.w,
                               fit: BoxFit.contain,
                             ),
-
                             if (chairCount >= 4) SizedBox(width: 6.w),
                             // Right chairs
                             if (chairCount >= 4)
