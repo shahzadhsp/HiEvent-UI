@@ -1,5 +1,3 @@
-// Flutter code with zoom enabled on HallScreen and PreviewScreen
-// import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math';
@@ -81,6 +79,7 @@ class _HallScreenState extends State<HallScreen> {
                 ],
               ),
             ),
+
             Expanded(
               child: InteractiveViewer(
                 minScale: 0.5,

@@ -24,6 +24,7 @@ class _HallScreenState extends State<HallScreen2> {
   String _stageSide = 'Left';
   String _searchText = '';
   TextEditingController _searchController = TextEditingController();
+  Offset position = Offset(100, 100);
 
   List<TableItem> tables = [];
   Offset stagePosition = Offset(150, 20);
@@ -143,47 +144,106 @@ class _HallScreenState extends State<HallScreen2> {
                 ),
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: InteractiveViewer(
-                  minScale: 0.5,
-                  maxScale: 3.0,
-                  child: Container(
-                    height: 1500.h,
-                    padding: const EdgeInsets.all(8),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: stagePosition.dx,
-                          top: stagePosition.dy,
-                          child: GestureDetector(
-                            onPanUpdate: (details) {
-                              setState(() {
-                                stagePosition += details.delta;
-                              });
-                            },
-                            child: Image.asset(
-                              AppAssets.brideStage,
-                              height: 50,
-                              width: 80,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        ...tables
-                            .where(
-                              (table) => _getTableLabel(
-                                table.asset,
-                              ).toLowerCase().contains(_searchText),
-                            )
-                            .map((table) => _buildDraggableTable(table))
-                            .toList(),
-                      ],
+            // Expanded(
+            //   child: SingleChildScrollView(
+            //     child: InteractiveViewer(
+            //       minScale: 0.5,
+            //       maxScale: 3.0,
+            //       child: Container(
+            //         height: 1500.h,
+            //         padding: const EdgeInsets.all(8),
+            //         child: Stack(
+            //           children: [
+            //             Positioned(
+            //               left: stagePosition.dx,
+            //               top: stagePosition.dy,
+            //               child: GestureDetector(
+            //                 onPanUpdate: (details) {
+            //                   setState(() {
+            //                     stagePosition += details.delta;
+            //                   });
+            //                 },
+            //                 child: Image.asset(
+            //                   AppAssets.brideStage,
+            //                   height: 50,
+            //                   width: 80,
+            //                   color: Colors.white,
+            //                 ),
+            //               ),
+            //             ),
+            //             ...tables
+            //                 .where(
+            //                   (table) => _getTableLabel(
+            //                     table.asset,
+            //                   ).toLowerCase().contains(_searchText),
+            //                 )
+            //                 .map((table) => _buildDraggableTable(table))
+            //                 .toList(),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            SizedBox(height: 60.h),
+
+            Positioned(
+              left: position.dx,
+              top: position.dy,
+              child: GestureDetector(
+                onPanUpdate: (details) {
+                  setState(() {
+                    position += details.delta;
+                  });
+                },
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    // Main container (slightly shorter height)
+                    Container(
+                      height: 180.h,
+                      width: 200.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.whiteColor),
+                      ),
                     ),
-                  ),
+
+                    // Top circles (evenly spaced)
+                    Positioned(top: -20, left: 30, child: CircleDecoration()),
+                    Positioned(top: -20, right: 30, child: CircleDecoration()),
+
+                    // Bottom circles
+                    Positioned(
+                      bottom: -20,
+                      left: 30,
+                      child: CircleDecoration(),
+                    ),
+                    Positioned(
+                      bottom: -20,
+                      right: 30,
+                      child: CircleDecoration(),
+                    ),
+
+                    // Left circles
+                    Positioned(left: -20, top: 30, child: CircleDecoration()),
+                    Positioned(
+                      left: -20,
+                      bottom: 30,
+                      child: CircleDecoration(),
+                    ),
+
+                    // Right circles
+                    Positioned(right: -20, top: 30, child: CircleDecoration()),
+                    Positioned(
+                      right: -20,
+                      bottom: 30,
+                      child: CircleDecoration(),
+                    ),
+                  ],
                 ),
               ),
             ),
+            SizedBox(height: 60.h),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -210,6 +270,19 @@ class _HallScreenState extends State<HallScreen2> {
             SizedBox(height: 20.h),
           ],
         ),
+      ),
+    );
+  }
+
+  // Reusable CircleDecoration widget for cleaner code
+  Widget CircleDecoration() {
+    return Container(
+      height: 24.h,
+      width: 24.w,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: AppColors.whiteColor, width: 2),
+        // color: AppColors.greyColor, // Uncomment if you want a fill color
       ),
     );
   }
