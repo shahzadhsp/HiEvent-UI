@@ -82,8 +82,14 @@ class AppAssets {
 
   // chair
   static const String chair = '$baseImagePath/chair_icon.png';
+  static const String chairPng = '$baseImagePath/chair_png.png';
 
   // cvgs
   static const String hallSvg = 'assets/icons/hall.svg';
   static const String etCameraSvg = '$baseIconPath/et_camera.svg';
+
+  // tablless
+  static const String squareTable = '$baseImagePath/square_table.png';
+  static const String rectangleTable = '$baseImagePath/rectangle_table.png';
+  static const String circleTable = '$baseImagePath/circle_table.png';
 }
