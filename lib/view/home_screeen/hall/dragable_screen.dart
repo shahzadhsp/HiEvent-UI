@@ -51,108 +51,134 @@ class TableWidget extends StatelessWidget {
     String imagePath;
     switch (table.shape) {
       case TableShape.square:
-        imagePath = AppAssets.squareTable;
+        imagePath = AppAssets.square;
         break;
       case TableShape.round:
-        imagePath = AppAssets.circleTable;
+        imagePath = AppAssets.circle;
         break;
       case TableShape.rectangle:
-        imagePath = AppAssets.rectangleTable;
+        imagePath = AppAssets.rectangle;
         break;
     }
 
-    double width = 200.w;
+    double width = 140.w;
     double height = table.shape == TableShape.rectangle ? 120.h : 100.h;
 
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Image.asset(imagePath, width: width, height: height, fit: BoxFit.cover),
-        ..._buildChairs(table, width, height),
+        ..._buildChairs(table, width, height, isPreview),
       ],
     );
   }
 
-  List<Widget> _buildChairs(TableItem table, double width, double height) {
-    const double chairSize = 80; // Updated to match ChairWidget size
-    const double paddingFromTable = 0;
-
-    if (table.shape == TableShape.round) {
-      final centerX = width / 2.5;
-      final centerY = height / 2.3;
-      final radius = min(centerX, centerY) + paddingFromTable;
-
-      return List.generate(table.chairCount, (index) {
-        final angle = (2 * pi / table.chairCount) * index;
-        final chairX = centerX + radius * cos(angle) - (chairSize / 2.4);
-        final chairY = centerY + radius * sin(angle) - (chairSize / 2.3);
-
-        return Positioned(
-          left: chairX,
-          top: chairY,
-          child: ChairWidget(size: chairSize),
-        );
-      });
+  List<Widget> _buildChairs(
+    TableItem table,
+    double width,
+    double height,
+    bool isPreview,
+  ) {
+    const double chairSize = 80;
+    List<Widget> chairs = [];
+    // Limit max chairs to 20
+    int totalChairs = table.chairCount.clamp(0, 20);
+    // Chairs per side: top, right, bottom, left
+    List<int> chairsPerSide = [0, 0, 0, 0];
+    if (table.shape == TableShape.rectangle) {
+      chairsPerSide = [4, 1, 4, 1];
+      totalChairs = 16;
+    } else if (table.shape == TableShape.round) {
+      chairsPerSide = [2, 2, 2, 2];
+      totalChairs = 8;
+    } else {
+      // Square or fallback: evenly distribute
+      for (int i = 0; i < totalChairs; i++) {
+        chairsPerSide[i % 4]++;
+      }
     }
 
-    List<Widget> chairs = [];
-
     int chairsPlaced = 0;
-    int chairsPerSide = 2; // fixed
 
-    for (int side = 0; side < 4 && chairsPlaced < table.chairCount; side++) {
-      for (
-        int i = 0;
-        i < chairsPerSide && chairsPlaced < table.chairCount;
-        i++
-      ) {
-        double positionOnSide = (i + 1) / (chairsPerSide + 1);
+    for (int side = 0; side < 4 && chairsPlaced < totalChairs; side++) {
+      int chairsOnThisSide = chairsPerSide[side];
+      for (int i = 0; i < chairsOnThisSide; i++) {
+        double positionOnSide = (i + 1) / (chairsOnThisSide + 1);
         double left = 0, top = 0;
 
-        // switch (side) {
-        //   case 0: // Top
-        //     left = width * positionOnSide - (chairSize / 2);
-        //     top = -chairSize / 2.5;
-        //     break;
-        //   case 1: // Right
-        //     left = width - chairSize / 2.5;
-        //     top = height * positionOnSide - (chairSize / 2);
-        //     break;
-        //   case 2: // Bottom
-        //     left = width * positionOnSide - (chairSize / 2.5);
-        //     top = height - chairSize / 3;
-        //     break;
-        //   case 3: // Left
-        //     left = -chairSize / 2.5;
-        //     top = height * positionOnSide - (chairSize / 2);
-        //     break;
-        // }
         switch (side) {
           case 0: // Top
+            left = width * positionOnSide - (chairSize / 1.7);
+            if (table.shape == TableShape.round) {
+              top = -35;
+            } else if (table.shape == TableShape.rectangle) {
+              top = 2;
+            } else if (table.shape == TableShape.square) {
+              top = -33;
+            }
+            break;
+
+          case 1: // Right
+            top = height * positionOnSide - (chairSize / 1.7);
+            if (table.shape == TableShape.round) {
+              left = 88;
+            } else if (table.shape == TableShape.rectangle) {
+              left = 85;
+            } else if (table.shape == TableShape.square) {
+              left = 83;
+            }
+            break;
+
+          case 2: // Bottom
             left = width * positionOnSide - (chairSize / 2);
-            top = -chairSize / 4;
-            break;
-
-          case 1: // Right ✅ Fix gap
-            left = 130.w; // was 2.5 → reduced to 1.8
-            top = height * positionOnSide - (chairSize / 2);
-            break;
-
-          case 2: // Bottom ✅ Fix gap
-            left =
-                width * positionOnSide -
-                (chairSize / 2); // was /2.5 → now centered
-            top = 40.h; // was /3 → slightly tighter
+            if (table.shape == TableShape.round) {
+              top = 65;
+            } else if (table.shape == TableShape.rectangle) {
+              top = 50;
+            } else if (table.shape == TableShape.square) {
+              top = 59;
+            }
             break;
 
           case 3: // Left
-            left = -chairSize / 2.5;
-            top = height * positionOnSide - (chairSize / 2);
+            top = height * positionOnSide - (chairSize / 1.7);
+            if (table.shape == TableShape.round) {
+              left = -22;
+            } else if (table.shape == TableShape.rectangle) {
+              left = -18;
+            } else if (table.shape == TableShape.square) {
+              left = -15;
+            }
             break;
         }
 
+        double rotationAngle;
+        switch (side) {
+          case 0:
+            rotationAngle = 0;
+            break;
+          case 1:
+            rotationAngle = pi / 2;
+            break;
+          case 2:
+            rotationAngle = pi;
+            break;
+          case 3:
+            rotationAngle = -pi / 2;
+            break;
+          default:
+            rotationAngle = 0;
+        }
+
         chairs.add(
-          Positioned(left: left, top: top, child: ChairWidget(size: chairSize)),
+          Positioned(
+            left: left,
+            top: top,
+            child: Transform.rotate(
+              angle: rotationAngle,
+              child: ChairWidget(size: chairSize),
+            ),
+          ),
         );
 
         chairsPlaced++;
@@ -192,6 +218,8 @@ class DraggableBoxScreen extends StatefulWidget {
 }
 
 class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
+  bool isShowTable = false;
+
   Future<SpecialTableItem?> showSpecialTableDialog(
     BuildContext context,
     SpecialTableItem table,
@@ -200,6 +228,8 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
       text: table.label,
     );
     int chairCount = table.chairCount;
+    bool isShowChairs = table.showChairs;
+
     String selectedOption =
         ['Bar', 'Cafe', 'Dj', 'Details'].contains(table.label)
             ? table.label
@@ -213,63 +243,116 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
           title: Text("Customize Table"),
           content: StatefulBuilder(
             builder:
-                (context, setState) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    DropdownButton<String>(
-                      value: selectedOption,
-                      items:
-                          [
-                                'Bar',
-                                'Cafe',
-                                'Dj',
-                                'Details',
-                                'Gifts',
-                                'Guestbook',
-                                'Podium',
-                                'Other',
-                                'Stage',
-                                'Photo Booth',
-                                'Dance Floor',
-                                'CustomName',
-                              ]
-                              .map(
-                                (label) => DropdownMenuItem(
-                                  value: label,
-                                  child: Text(label),
+                (context, setState) => SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      DropdownButton<String>(
+                        value: selectedOption,
+                        items:
+                            [
+                              'Bar',
+                              'Cafe',
+                              'Dj',
+                              'Details',
+                              'Gifts',
+                              'Guestbook',
+                              'Podium',
+                              'Other',
+                              'Stage',
+                              'Photo Booth',
+                              'Dance Floor',
+                              'CustomName',
+                            ].map((label) {
+                              return DropdownMenuItem(
+                                value: label,
+                                child: Text(label),
+                              );
+                            }).toList(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() => selectedOption = value);
+                          }
+                        },
+                      ),
+                      if (selectedOption == 'CustomName')
+                        TextField(
+                          controller: customLabelController,
+                          decoration: InputDecoration(
+                            hintText: "Enter custom name",
+                          ),
+                        ),
+                      const SizedBox(height: 12),
+                      Text(
+                        "Chairs: $chairCount",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Slider(
+                        value: chairCount.toDouble(),
+                        min: 4,
+                        max: 20,
+                        activeColor: AppColors.primaryColor,
+                        inactiveColor: AppColors.greyColor,
+                        divisions: 16,
+                        onChanged: (value) {
+                          setState(() => chairCount = value.toInt());
+                        },
+                      ),
+                      // Only show table+chairs preview if isShowChairs is true
+                      isShowChairs
+                          ? Column(
+                            children: [
+                              Container(
+                                width: 100,
+                                height: 100,
+                                color: AppColors.primaryColor,
+                                child: Stack(
+                                  children: List.generate(chairCount, (index) {
+                                    final angle =
+                                        2 * 3.1415926 * index / chairCount;
+                                    final radius = 40.0;
+                                    final dx =
+                                        50 +
+                                        radius * cos(angle) -
+                                        10; // center - half chair size
+                                    final dy = 50 + radius * sin(angle) - 10;
+                                    return Positioned(
+                                      left: dx,
+                                      top: dy,
+                                      child: ChairWidget(size: 28),
+                                    );
+                                  }),
                                 ),
-                              )
-                              .toList(),
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() => selectedOption = value);
-                        }
-                      },
-                    ),
-                    if (selectedOption == 'CustomName')
-                      TextField(
-                        controller: customLabelController,
-                        decoration: InputDecoration(
-                          hintText: "Enter custom name",
+                              ),
+                              const SizedBox(height: 12),
+                            ],
+                          )
+                          : const SizedBox.shrink(),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            isShowChairs = isShowChairs;
+                          });
+                        },
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                value: isShowChairs,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isShowChairs = value!;
+                                  });
+                                },
+                              ),
+                              Text(isShowChairs ? 'No chairs' : 'Add Chairs'),
+                            ],
+                          ),
                         ),
                       ),
-                    const SizedBox(height: 12),
-                    Text(
-                      "Chairs: $chairCount",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    Slider(
-                      value: chairCount.toDouble(),
-                      min: 4,
-                      max: 20,
-                      activeColor: AppColors.primaryColor,
-                      inactiveColor: AppColors.greyColor,
-                      divisions: 16,
-                      onChanged: (value) {
-                        setState(() => chairCount = value.toInt());
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
           ),
           actions: [
@@ -307,6 +390,7 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
                               : selectedOption;
 
                       Navigator.pop(context);
+
                       Future.delayed(const Duration(milliseconds: 100), () {
                         Navigator.push(
                           context,
@@ -317,6 +401,7 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
                                   specialTable: table.copyWith(
                                     label: label,
                                     chairCount: chairCount,
+                                    showChairs: isShowChairs,
                                   ),
                                 ),
                           ),
@@ -354,6 +439,7 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
     position: const Offset(150, 150),
     label: 'Bar',
     chairCount: 4,
+    showChairs: true,
   );
 
   List<TableItem> tables = [
@@ -463,7 +549,7 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
                   _updatePosition(i, tables[i].position + details.delta);
                 },
                 onTap: () => _editTable(i),
-                child: TableWidget(table: tables[i]),
+                child: TableWidget(table: tables[i], isPreview: false),
               ),
             ),
           Positioned(
@@ -567,7 +653,7 @@ class _TableEditDialogState extends State<TableEditDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: Colors.grey.shade300,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -588,68 +674,75 @@ class _TableEditDialogState extends State<TableEditDialog> {
         ],
       ),
       content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: 12.h),
-            TableWidget(
-              table: widget.table.copyWith(
-                label: labelController.text,
-                chairCount: chairCount,
-              ),
-              isPreview: true,
-            ),
-            SizedBox(height: 12.h),
-            DropdownButtonFormField<String>(
-              value: selectedRow,
-              items:
-                  ['Row 1', 'Row 2']
-                      .map(
-                        (row) => DropdownMenuItem(value: row, child: Text(row)),
-                      )
-                      .toList(),
-              decoration: const InputDecoration(labelText: "Select Row"),
-              onChanged: (value) {
-                if (value != null) {
-                  setState(() {
-                    selectedRow = value;
-                  });
-                }
-              },
-            ),
-            TextField(
-              controller: labelController,
-              decoration: const InputDecoration(
-                hintText: "Table Name (A1, A2...)",
-              ),
-            ),
-            TextField(
-              controller: notesController,
-              decoration: const InputDecoration(hintText: "Notes (optional)"),
-            ),
-            Row(
+        child: StatefulBuilder(
+          builder: (context, setInnerState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Chairs: "),
-                Expanded(
-                  child: Slider(
-                    value: chairCount.toDouble(),
-                    min: 4,
-                    max: 20,
-                    divisions: 16,
-                    thumbColor: AppColors.primaryColor,
-                    activeColor: AppColors.greyColor,
-                    inactiveColor: AppColors.greyColor,
-                    label: chairCount.toString(),
-                    onChanged: (value) {
+                SizedBox(height: 12.h),
+                TableWidget(
+                  table: widget.table.copyWith(
+                    label: labelController.text,
+                    chairCount: chairCount,
+                  ),
+                  isPreview: true,
+                ),
+                SizedBox(height: 12.h),
+                DropdownButtonFormField<String>(
+                  value: selectedRow,
+                  items:
+                      ['Row 1', 'Row 2']
+                          .map(
+                            (row) =>
+                                DropdownMenuItem(value: row, child: Text(row)),
+                          )
+                          .toList(),
+                  decoration: const InputDecoration(labelText: "Select Row"),
+                  onChanged: (value) {
+                    if (value != null) {
                       setState(() {
-                        chairCount = value.toInt();
+                        selectedRow = value;
                       });
-                    },
+                    }
+                  },
+                ),
+                TextField(
+                  controller: labelController,
+                  decoration: const InputDecoration(
+                    hintText: "Table Name (A1, A2...)",
                   ),
                 ),
+                TextField(
+                  controller: notesController,
+                  decoration: const InputDecoration(
+                    hintText: "Notes (optional)",
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Text("Chairs: "),
+                    Expanded(
+                      child: Slider(
+                        value: chairCount.toDouble(),
+                        min: 4,
+                        max: 20,
+                        divisions: 16,
+                        thumbColor: AppColors.primaryColor,
+                        activeColor: AppColors.greyColor,
+                        inactiveColor: AppColors.greyColor,
+                        label: chairCount.toString(),
+                        onChanged: (value) {
+                          setState(() {
+                            chairCount = value.toInt();
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
       actions: [
@@ -722,15 +815,17 @@ class PreviewScreen extends StatefulWidget {
 class _PreviewScreenState extends State<PreviewScreen> {
   late List<TableItem> tables;
   List<ChairItem> chairs = [];
+  SpecialTableItem? specialTable;
 
   @override
   void initState() {
     super.initState();
     tables = widget.tables.map((t) => t.copyWith()).toList();
+    specialTable = widget.specialTable?.copyWith();
     chairs = [
-      ChairItem(position: const Offset(50, 100)),
-      ChairItem(position: const Offset(80, 200)),
-      ChairItem(position: const Offset(150, 250)),
+      ChairItem(position: const Offset(50, 50)),
+      ChairItem(position: const Offset(60, 50)),
+      ChairItem(position: const Offset(70, 50)),
     ];
   }
 
@@ -748,7 +843,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
       chairs[index].position = newOffset;
       // Find if the chair is now over a table
       final newTableIndex = _getTableIndexUnderChair(chairs[index]);
-
       // If the chair was previously attached to a different table, remove it from that table's count
       if (oldTableIndex != null && oldTableIndex != newTableIndex) {
         tables[oldTableIndex] = tables[oldTableIndex].copyWith(
@@ -759,6 +853,14 @@ class _PreviewScreenState extends State<PreviewScreen> {
       }
 
       // If the chair is now over a table and wasn't already attached to this table
+      // if (newTableIndex != null &&
+      //     (oldTableIndex != newTableIndex || !chairs[index].attachedToTable)) {
+      //   tables[newTableIndex] = tables[newTableIndex].copyWith(
+      //     chairCount: tables[newTableIndex].chairCount + 1,
+      //   );
+      //   chairs[index].attachedToTable = true;
+      //   chairs[index].tableIndex = newTableIndex;
+      // }
       if (newTableIndex != null &&
           (oldTableIndex != newTableIndex || !chairs[index].attachedToTable)) {
         tables[newTableIndex] = tables[newTableIndex].copyWith(
@@ -766,6 +868,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
         );
         chairs[index].attachedToTable = true;
         chairs[index].tableIndex = newTableIndex;
+
+        // ✅ NEW: Remove the chair from screen once attached
+        chairs.removeAt(index);
       }
 
       // If the chair is no longer over any table (and was previously attached)
@@ -845,26 +950,39 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   _updateTablePosition(i, tables[i].position + details.delta);
                 },
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TableWidget(table: tables[i], isPreview: true),
                     SizedBox(height: 16.h),
                     Text(
                       "Name: ${tables[i].label}",
-                      style: TextStyle(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                     if (tables[i].notes.isNotEmpty)
                       Text(
                         "Notes: ${tables[i].notes}",
-                        style: TextStyle(color: Colors.white),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.whiteColor,
+                        ),
                       ),
                     Text(
                       "Chairs: ${tables[i].chairCount}",
-                      style: TextStyle(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                     Text(
                       "Row: ${tables[i].row}",
-                      style: TextStyle(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                   ],
                 ),
@@ -880,35 +998,43 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   _updateChairPosition(i, chairs[i].position + details.delta);
                 },
                 onLongPress: () => _deleteChair(i),
-                child: ChairWidget(size: 34),
+                child: ChairWidget(size: 80),
               ),
             ),
-
-          // special table
-          if (widget.specialTable != null)
+          if (specialTable != null)
             Positioned(
-              left: widget.specialTable!.position.dx,
-              top: widget.specialTable!.position.dy,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SpecialTableWidget(table: widget.specialTable!),
-                  SizedBox(height: 8.h),
-                  Text(
-                    "Name: ${widget.specialTable!.label}",
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w500,
+              left: specialTable!.position.dx,
+              top: specialTable!.position.dy,
+              child: GestureDetector(
+                onPanUpdate: (details) {
+                  setState(() {
+                    specialTable = specialTable!.copyWith(
+                      position: specialTable!.position + details.delta,
+                    );
+                  });
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SpecialTableWidget(table: specialTable!),
+                    SizedBox(height: 8.h),
+                    Text(
+                      "Name: ${specialTable!.label}",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Chairs: ${widget.specialTable!.chairCount}",
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.whiteColor,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      "Chairs: ${specialTable!.chairCount}",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: AppColors.whiteColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
         ],
@@ -941,26 +1067,54 @@ class ChairItem {
   }
 }
 
+// class SpecialTableItem {
+//   final Offset position;
+//   final String label;
+//   final int chairCount;
+
+//   SpecialTableItem({
+//     required this.position,
+//     required this.label,
+//     required this.chairCount,
+//   });
+
+//   SpecialTableItem copyWith({
+//     Offset? position,
+//     String? label,
+//     int? chairCount,
+//   }) {
+//     return SpecialTableItem(
+//       position: position ?? this.position,
+//       label: label ?? this.label,
+//       chairCount: chairCount ?? this.chairCount,
+//     );
+//   }
+// }
+
 class SpecialTableItem {
-  final Offset position;
   final String label;
   final int chairCount;
+  final Offset position;
+  final bool showChairs; // <-- Add this
 
   SpecialTableItem({
-    required this.position,
     required this.label,
     required this.chairCount,
+    required this.position,
+    required this.showChairs,
   });
 
   SpecialTableItem copyWith({
-    Offset? position,
     String? label,
     int? chairCount,
+    Offset? position,
+    bool? showChairs,
   }) {
     return SpecialTableItem(
-      position: position ?? this.position,
       label: label ?? this.label,
       chairCount: chairCount ?? this.chairCount,
+      position: position ?? this.position,
+      showChairs: showChairs ?? this.showChairs,
     );
   }
 }

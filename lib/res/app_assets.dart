@@ -92,4 +92,8 @@ class AppAssets {
   static const String squareTable = '$baseImagePath/square_table.png';
   static const String rectangleTable = '$baseImagePath/rectangle_table.png';
   static const String circleTable = '$baseImagePath/circle_table.png';
+
+  static const String square = '$baseImagePath/square.png';
+  static const String rectangle = '$baseImagePath/rectangle.png';
+  static const String circle = '$baseImagePath/circle.png';
 }
