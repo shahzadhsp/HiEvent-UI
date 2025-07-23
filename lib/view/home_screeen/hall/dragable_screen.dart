@@ -62,7 +62,7 @@ class TableWidget extends StatelessWidget {
     }
 
     double width = 140.w;
-    double height = table.shape == TableShape.rectangle ? 120.h : 100.h;
+    double height = table.shape == TableShape.rectangle ? 200.h : 100.h;
 
     return Stack(
       clipBehavior: Clip.none,
@@ -72,6 +72,9 @@ class TableWidget extends StatelessWidget {
       ],
     );
   }
+
+  // build chairs based on table shape and count
+  // This method calculates chair positions based on the table shape and chair count
 
   List<Widget> _buildChairs(
     TableItem table,
@@ -86,11 +89,17 @@ class TableWidget extends StatelessWidget {
     // Chairs per side: top, right, bottom, left
     List<int> chairsPerSide = [0, 0, 0, 0];
     if (table.shape == TableShape.rectangle) {
-      chairsPerSide = [4, 1, 4, 1];
-      totalChairs = 16;
+      // chairsPerSide = [4, 1, 4, 1];
+      // totalChairs = 16;
+      for (int i = 0; i < totalChairs; i++) {
+        chairsPerSide[i % 4]++;
+      }
     } else if (table.shape == TableShape.round) {
-      chairsPerSide = [2, 2, 2, 2];
-      totalChairs = 8;
+      // chairsPerSide = [2, 2, 2, 2];
+      // totalChairs = 8;
+      for (int i = 0; i < totalChairs; i++) {
+        chairsPerSide[i % 4]++;
+      }
     } else {
       // Square or fallback: evenly distribute
       for (int i = 0; i < totalChairs; i++) {
@@ -103,7 +112,21 @@ class TableWidget extends StatelessWidget {
     for (int side = 0; side < 4 && chairsPlaced < totalChairs; side++) {
       int chairsOnThisSide = chairsPerSide[side];
       for (int i = 0; i < chairsOnThisSide; i++) {
-        double positionOnSide = (i + 1) / (chairsOnThisSide + 1);
+        // double positionOnSide = (i + 1) / (chairsOnThisSide + 1);
+        double positionOnSide;
+        if (table.shape == TableShape.round) {
+          positionOnSide = (i + 1.2) / (chairsOnThisSide + 1.3);
+        } else if (table.shape == TableShape.rectangle) {
+          // Slightly more spacing for longer sides
+          positionOnSide = (i + 3) / (chairsOnThisSide + 5);
+        } else if (table.shape == TableShape.square) {
+          // Tighten spacing slightly for square
+          positionOnSide = (i + 1.1) / (chairsOnThisSide + 1.5);
+        } else {
+          // fallback
+          positionOnSide = (i + 1) / (chairsOnThisSide + 1);
+        }
+
         double left = 0, top = 0;
 
         switch (side) {
@@ -112,18 +135,17 @@ class TableWidget extends StatelessWidget {
             if (table.shape == TableShape.round) {
               top = -35;
             } else if (table.shape == TableShape.rectangle) {
-              top = 2;
+              top = 42;
             } else if (table.shape == TableShape.square) {
               top = -33;
             }
             break;
-
           case 1: // Right
             top = height * positionOnSide - (chairSize / 1.7);
             if (table.shape == TableShape.round) {
               left = 88;
             } else if (table.shape == TableShape.rectangle) {
-              left = 85;
+              left = 113;
             } else if (table.shape == TableShape.square) {
               left = 83;
             }
@@ -134,7 +156,7 @@ class TableWidget extends StatelessWidget {
             if (table.shape == TableShape.round) {
               top = 65;
             } else if (table.shape == TableShape.rectangle) {
-              top = 50;
+              top = 114;
             } else if (table.shape == TableShape.square) {
               top = 59;
             }
@@ -145,7 +167,7 @@ class TableWidget extends StatelessWidget {
             if (table.shape == TableShape.round) {
               left = -22;
             } else if (table.shape == TableShape.rectangle) {
-              left = -18;
+              left = -44;
             } else if (table.shape == TableShape.square) {
               left = -15;
             }
@@ -486,7 +508,6 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
     if (updatedTable != null) {
       setState(() {
         tables[index] = updatedTable;
-
         // If this table was edited before, update it, else add it
         final existingIndex = editedTables.indexWhere(
           (t) => t.label == updatedTable.label && t.row == updatedTable.row,
@@ -538,55 +559,62 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
         ),
         backgroundColor: AppColors.primaryColor,
       ),
-      body: Stack(
-        children: [
-          for (int i = 0; i < tables.length; i++)
+      body: InteractiveViewer(
+        panEnabled: true,
+        scaleEnabled: true,
+        minScale: 0.5,
+        maxScale: 3.0,
+        // boundaryMargin: const EdgeInsets.all(100),
+        child: Stack(
+          children: [
+            for (int i = 0; i < tables.length; i++)
+              Positioned(
+                left: tables[i].position.dx,
+                top: tables[i].position.dy,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onPanUpdate: (details) {
+                    _updatePosition(i, tables[i].position + details.delta);
+                  },
+                  onTap: () => _editTable(i),
+                  child: TableWidget(table: tables[i], isPreview: false),
+                ),
+              ),
             Positioned(
-              left: tables[i].position.dx,
-              top: tables[i].position.dy,
+              left: specialTable.position.dx,
+              top: specialTable.position.dy,
               child: GestureDetector(
                 onPanUpdate: (details) {
-                  _updatePosition(i, tables[i].position + details.delta);
+                  setState(() {
+                    specialTable = specialTable.copyWith(
+                      position: specialTable.position + details.delta,
+                    );
+                  });
                 },
-                onTap: () => _editTable(i),
-                child: TableWidget(table: tables[i], isPreview: false),
+                onTap: () async {
+                  final updated = await showSpecialTableDialog(
+                    context,
+                    specialTable,
+                  );
+                  if (updated != null) {
+                    setState(() => specialTable = updated);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (_) => PreviewScreen(
+                              tables: editedTables,
+                              specialTable: updated,
+                            ),
+                      ),
+                    );
+                  }
+                },
+                child: SpecialTableWidget(table: specialTable),
               ),
             ),
-          Positioned(
-            left: specialTable.position.dx,
-            top: specialTable.position.dy,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                setState(() {
-                  specialTable = specialTable.copyWith(
-                    position: specialTable.position + details.delta,
-                  );
-                });
-              },
-
-              onTap: () async {
-                final updated = await showSpecialTableDialog(
-                  context,
-                  specialTable,
-                );
-                if (updated != null) {
-                  setState(() => specialTable = updated);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (_) => PreviewScreen(
-                            tables: editedTables,
-                            specialTable: updated,
-                          ),
-                    ),
-                  );
-                }
-              },
-              child: SpecialTableWidget(table: specialTable),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
