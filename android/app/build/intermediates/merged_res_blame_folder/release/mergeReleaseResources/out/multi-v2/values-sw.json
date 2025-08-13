@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-mergeReleaseResources-53:/values-sw/values-sw.xml",
+            "outputFile": "com.hievent.app.weddinghall.app-mergeReleaseResources-53:/values-sw/values-sw.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\b85a1e0b033f1422e98a1ecc4e349b25\\transformed\\jetified-play-services-base-18.1.0\\res\\values-sw\\values.xml",

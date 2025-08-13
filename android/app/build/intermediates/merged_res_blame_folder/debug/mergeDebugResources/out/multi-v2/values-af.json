@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-mergeDebugResources-52:/values-af/values-af.xml",
+            "outputFile": "com.hievent.app.app-mergeDebugResources-52:/values-af/values-af.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-af\\values.xml",

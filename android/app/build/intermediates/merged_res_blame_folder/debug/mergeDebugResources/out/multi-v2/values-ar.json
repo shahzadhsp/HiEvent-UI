@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-mergeDebugResources-52:/values-ar/values-ar.xml",
+            "outputFile": "com.hievent.app.app-mergeDebugResources-52:/values-ar/values-ar.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-ar\\values-ar.xml",

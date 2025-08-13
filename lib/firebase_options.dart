@@ -63,7 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '93995081174',
     projectId: 'hi-event-6d353',
     storageBucket: 'hi-event-6d353.firebasestorage.app',
-    iosBundleId: 'com.example.weddinghall',
+    iosBundleId: 'com.hievent.app',
   );
-
 }

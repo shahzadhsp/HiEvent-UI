@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.weddinghall"
+3    package="com.hievent.app"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
@@ -138,12 +138,12 @@
 74
 75    <permission
 75-->[androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
-76        android:name="com.example.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+76        android:name="com.hievent.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 76-->[androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
 77        android:protectionLevel="signature" />
 77-->[androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
 78
-79    <uses-permission android:name="com.example.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+79    <uses-permission android:name="com.hievent.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 79-->[androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
 79-->[androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
 80
@@ -162,7 +162,7 @@
 88        <provider
 89            android:name="androidx.core.content.FileProvider"
 89-->E:\weddinghall\android\app\src\main\AndroidManifest.xml:21:5-54
-90            android:authorities="com.example.weddinghall.provider"
+90            android:authorities="com.hievent.app.provider"
 90-->E:\weddinghall\android\app\src\main\AndroidManifest.xml:22:5-52
 91            android:exported="false"
 91-->E:\weddinghall\android\app\src\main\AndroidManifest.xml:23:5-29
@@ -178,7 +178,7 @@
 97
 98        <activity
 98-->E:\weddinghall\android\app\src\main\AndroidManifest.xml:30:9-52:20
-99            android:name="com.example.weddinghall.MainActivity"
+99            android:name="com.hievent.app.MainActivity"
 99-->E:\weddinghall\android\app\src\main\AndroidManifest.xml:31:13-41
 100            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 100-->E:\weddinghall\android\app\src\main\AndroidManifest.xml:37:13-163
@@ -415,7 +415,7 @@
 225-->[:firebase_messaging] C:\Users\HP\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.7\android\build\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:41:9-45:38
 226            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
 226-->[:firebase_messaging] C:\Users\HP\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.7\android\build\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:42:13-102
-227            android:authorities="com.example.weddinghall.flutterfirebasemessaginginitprovider"
+227            android:authorities="com.hievent.app.flutterfirebasemessaginginitprovider"
 227-->[:firebase_messaging] C:\Users\HP\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.7\android\build\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:43:13-88
 228            android:exported="false"
 228-->[:firebase_messaging] C:\Users\HP\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.7\android\build\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml:44:13-37
@@ -600,7 +600,7 @@
 330-->[com.google.firebase:firebase-common:21.0.0] C:\Users\HP\.gradle\caches\8.9\transforms\bc5990153964fc0580d39c01fe483179\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
 331            android:name="com.google.firebase.provider.FirebaseInitProvider"
 331-->[com.google.firebase:firebase-common:21.0.0] C:\Users\HP\.gradle\caches\8.9\transforms\bc5990153964fc0580d39c01fe483179\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:24:13-77
-332            android:authorities="com.example.weddinghall.firebaseinitprovider"
+332            android:authorities="com.hievent.app.firebaseinitprovider"
 332-->[com.google.firebase:firebase-common:21.0.0] C:\Users\HP\.gradle\caches\8.9\transforms\bc5990153964fc0580d39c01fe483179\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:25:13-72
 333            android:directBootAware="true"
 333-->[com.google.firebase:firebase-common:21.0.0] C:\Users\HP\.gradle\caches\8.9\transforms\bc5990153964fc0580d39c01fe483179\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:26:13-43
@@ -622,7 +622,7 @@
 342-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\HP\.gradle\caches\8.9\transforms\7e956a68e9574ac40bba35fea89e7aa2\transformed\jetified-lifecycle-process-2.8.7\AndroidManifest.xml:24:9-32:20
 343            android:name="androidx.startup.InitializationProvider"
 343-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\HP\.gradle\caches\8.9\transforms\7e956a68e9574ac40bba35fea89e7aa2\transformed\jetified-lifecycle-process-2.8.7\AndroidManifest.xml:25:13-67
-344            android:authorities="com.example.weddinghall.androidx-startup"
+344            android:authorities="com.hievent.app.androidx-startup"
 344-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\HP\.gradle\caches\8.9\transforms\7e956a68e9574ac40bba35fea89e7aa2\transformed\jetified-lifecycle-process-2.8.7\AndroidManifest.xml:26:13-68
 345            android:exported="false" >
 345-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\HP\.gradle\caches\8.9\transforms\7e956a68e9574ac40bba35fea89e7aa2\transformed\jetified-lifecycle-process-2.8.7\AndroidManifest.xml:27:13-37

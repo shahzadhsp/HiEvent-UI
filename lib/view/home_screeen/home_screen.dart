@@ -1,9 +1,11 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weddinghall/models/home_menu.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
+import 'package:weddinghall/services/get_server_key.dart';
 import 'package:weddinghall/view/about_us/about.dart';
 import 'package:weddinghall/view/approved_list_screen/approved_list_screen.dart';
 import 'package:weddinghall/view/common_widgets.dart/transltor_widget.dart';
@@ -253,11 +255,15 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AboutUsScreen()),
                     );
+                    GetServerKey getServerKey = GetServerKey();
+                    String serverKey = await getServerKey.getServerKeyToken();
+                    log(getServerKey.toString());
+                    log('Server Key: $serverKey');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.whiteColor,

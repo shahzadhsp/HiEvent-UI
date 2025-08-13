@@ -1,6 +1,15 @@
+import 'dart:io';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:excel/excel.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:weddinghall/config/enums.dart';
 import 'package:weddinghall/res/app_assets.dart';
 import 'package:weddinghall/res/app_colors.dart';
@@ -11,7 +20,8 @@ class TableItem {
   final int chairCount;
   final Offset position;
   final TableShape shape;
-  final String row; // Add this
+  final String row;
+  final double rotationAngle;
 
   TableItem({
     required this.label,
@@ -20,6 +30,7 @@ class TableItem {
     required this.chairCount,
     required this.position,
     required this.row,
+    this.rotationAngle = 0.0,
   });
 
   TableItem copyWith({
@@ -27,15 +38,18 @@ class TableItem {
     String? notes,
     int? chairCount,
     Offset? position,
+    TableShape? shape,
     String? row,
+    double? rotationAngle,
   }) {
     return TableItem(
       label: label ?? this.label,
       notes: notes ?? this.notes,
       chairCount: chairCount ?? this.chairCount,
       position: position ?? this.position,
+      shape: shape ?? this.shape,
       row: row ?? this.row,
-      shape: shape,
+      rotationAngle: rotationAngle ?? this.rotationAngle,
     );
   }
 }
@@ -61,21 +75,48 @@ class TableWidget extends StatelessWidget {
         break;
     }
 
-    double width = 140.w;
-    double height = table.shape == TableShape.rectangle ? 200.h : 100.h;
+    // double width = 140.w;
+    // double height = table.shape == TableShape.rectangle ? 200.h : 100.h;
+    double baseSize = 80.0;
+    double sizeIncrement = 5.0;
+    double sizeDecrement = 4.0;
+
+    double width;
+    double height;
+
+    switch (table.shape) {
+      case TableShape.square:
+        width = baseSize + (table.chairCount * sizeIncrement);
+        height = width; // square: same width and height
+        break;
+
+      case TableShape.round:
+        width = baseSize + (table.chairCount * sizeIncrement);
+        height = width; // circle too: same width and height
+        break;
+
+      case TableShape.rectangle:
+        width = baseSize + (table.chairCount * sizeIncrement);
+        height = width * 1.4; // rectangle: longer height
+        break;
+    }
 
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Image.asset(imagePath, width: width, height: height, fit: BoxFit.cover),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: width,
+          height: height,
+          curve: Curves.easeInOut,
+          child: Image.asset(imagePath, fit: BoxFit.cover),
+        ),
         ..._buildChairs(table, width, height, isPreview),
       ],
     );
   }
 
-  // build chairs based on table shape and count
   // This method calculates chair positions based on the table shape and chair count
-
   List<Widget> _buildChairs(
     TableItem table,
     double width,
@@ -126,50 +167,481 @@ class TableWidget extends StatelessWidget {
           // fallback
           positionOnSide = (i + 1) / (chairsOnThisSide + 1);
         }
-
         double left = 0, top = 0;
 
         switch (side) {
           case 0: // Top
             left = width * positionOnSide - (chairSize / 1.7);
             if (table.shape == TableShape.round) {
-              top = -35;
+              // Top
+              if (table.chairCount < 3) {
+                top = 40;
+              } else if (table.chairCount < 4) {
+                top = -27;
+              } else if (table.chairCount < 5) {
+                top = -36;
+              } else if (table.chairCount < 6) {
+                top = -33;
+              } else if (table.chairCount < 7) {
+                top = -33;
+              } else if (table.chairCount < 8) {
+                top = -33;
+              } else if (table.chairCount < 9) {
+                top = -31;
+              } else if (table.chairCount < 10) {
+                top = -30;
+              } else if (table.chairCount < 11) {
+                top = -30;
+              } else if (table.chairCount < 12) {
+                top = -27;
+              } else if (table.chairCount < 13) {
+                top = -25;
+              } else if (table.chairCount < 14) {
+                top = -24;
+              } else if (table.chairCount < 15) {
+                top = -24;
+              } else if (table.chairCount < 16) {
+                top = -24;
+              } else if (table.chairCount < 17) {
+                top = -23;
+              } else if (table.chairCount < 18) {
+                top = -22;
+              } else if (table.chairCount < 19) {
+                top = -23;
+              } else if (table.chairCount < 20) {
+                top = -23;
+              } else {
+                top = -23; // 20 or more
+              }
             } else if (table.shape == TableShape.rectangle) {
-              top = 42;
+              if (table.chairCount < 3) {
+                top = 12;
+              } else if (table.chairCount < 4) {
+                top = -27;
+              } else if (table.chairCount < 5) {
+                top = 1;
+              } else if (table.chairCount < 6) {
+                top = 3;
+              } else if (table.chairCount < 7) {
+                top = 3.1;
+              } else if (table.chairCount < 8) {
+                top = 4.6;
+              } else if (table.chairCount < 9) {
+                top = 7;
+              } else if (table.chairCount < 10) {
+                top = 10.6;
+              } else if (table.chairCount < 11) {
+                top = 12;
+              } else if (table.chairCount < 12) {
+                top = 16;
+              } else if (table.chairCount < 13) {
+                top = 18;
+              } else if (table.chairCount < 14) {
+                top = 19;
+              } else if (table.chairCount < 15) {
+                top = 23;
+              } else if (table.chairCount < 16) {
+                top = 28;
+              } else if (table.chairCount < 17) {
+                top = 30;
+              } else if (table.chairCount < 18) {
+                top = 32;
+              } else if (table.chairCount < 19) {
+                top = 34.5;
+              } else if (table.chairCount < 20) {
+                top = 38;
+              } else {
+                top = 40; // 20 or more
+              }
             } else if (table.shape == TableShape.square) {
-              top = -33;
+              // Top
+              if (table.chairCount < 3) {
+                top = -25;
+              } else if (table.chairCount < 4) {
+                top = -27;
+              } else if (table.chairCount < 5) {
+                top = -30;
+              } else if (table.chairCount < 6) {
+                top = -30;
+              } else if (table.chairCount < 7) {
+                top = -28;
+              } else if (table.chairCount < 8) {
+                top = -27;
+              } else if (table.chairCount < 9) {
+                top = -26;
+              } else if (table.chairCount < 10) {
+                top = -26;
+              } else if (table.chairCount < 11) {
+                top = -25;
+              } else if (table.chairCount < 12) {
+                top = -24;
+              } else if (table.chairCount < 13) {
+                top = -22;
+              } else if (table.chairCount < 14) {
+                top = -22;
+              } else if (table.chairCount < 15) {
+                top = -21;
+              } else if (table.chairCount < 16) {
+                top = -20;
+              } else if (table.chairCount < 17) {
+                top = -19;
+              } else if (table.chairCount < 18) {
+                top = -18;
+              } else if (table.chairCount < 19) {
+                top = -17;
+              } else if (table.chairCount < 20) {
+                top = -17;
+              } else {
+                top = -15; // 20 or more
+              }
             }
             break;
           case 1: // Right
             top = height * positionOnSide - (chairSize / 1.7);
             if (table.shape == TableShape.round) {
-              left = 88;
+              if (table.chairCount < 5) {
+                left = width - (chairSize / 1.3);
+              } else if (table.chairCount < 6) {
+                left = width - (chairSize / 1.3);
+              } else if (table.chairCount < 7) {
+                left = width - (chairSize / 1.3);
+              } else if (table.chairCount < 8) {
+                left = width - (chairSize / 1.3);
+              } else if (table.chairCount < 9) {
+                left = width - (chairSize / 1.3);
+              } else if (table.chairCount < 10) {
+                left = width - (chairSize / 1.3);
+              } else if (table.chairCount < 11) {
+                left = width - (chairSize / 1.25);
+              } else if (table.chairCount < 12) {
+                left = width - (chairSize / 1.2);
+              } else if (table.chairCount < 13) {
+                left = width - (chairSize / 1.25);
+              } else if (table.chairCount < 14) {
+                left = width - (chairSize / 1.19);
+              } else if (table.chairCount < 15) {
+                left = width - (chairSize / 1.22);
+              } else if (table.chairCount < 16) {
+                left = width - (chairSize / 1.17);
+              } else if (table.chairCount < 17) {
+                left = width - (chairSize / 1.17);
+              } else if (table.chairCount < 18) {
+                left = width - (chairSize / 1.18);
+              } else if (table.chairCount < 19) {
+                left = width - (chairSize / 1.19);
+              } else if (table.chairCount < 20) {
+                left = width - (chairSize / 1.16);
+              } else {
+                left = width - (chairSize / 1.16); // 20 or more
+              }
             } else if (table.shape == TableShape.rectangle) {
-              left = 113;
+              // for right side
+              if (table.chairCount < 5) {
+                left = width - (chairSize / 1.5);
+              } else if (table.chairCount < 6) {
+                left = width - (chairSize / 1.6);
+              } else if (table.chairCount < 7) {
+                left = width - (chairSize / 1.65);
+              } else if (table.chairCount < 8) {
+                left = width - (chairSize / 1.69);
+              } else if (table.chairCount < 9) {
+                left = width - (chairSize / 1.68);
+              } else if (table.chairCount < 10) {
+                left = width - (chairSize / 1.66);
+              } else if (table.chairCount < 11) {
+                left = width - (chairSize / 1.65);
+              } else if (table.chairCount < 12) {
+                left = width - (chairSize / 1.66);
+              } else if (table.chairCount < 13) {
+                left = width - (chairSize / 1.65);
+              } else if (table.chairCount < 14) {
+                left = width - (chairSize / 1.65);
+              } else if (table.chairCount < 15) {
+                left = width - (chairSize / 1.65);
+              } else if (table.chairCount < 16) {
+                left = width - (chairSize / 1.67);
+              } else if (table.chairCount < 17) {
+                left = width - (chairSize / 1.68);
+              } else if (table.chairCount < 18) {
+                left = width - (chairSize / 1.65);
+              } else if (table.chairCount < 19) {
+                left = width - (chairSize / 1.62);
+              } else if (table.chairCount < 20) {
+                left = width - (chairSize / 1.59);
+              } else {
+                left = width - (chairSize / 1.57); // 20 or more
+              }
             } else if (table.shape == TableShape.square) {
-              left = 83;
+              // left = width - (chairSize / 1); // for right side
+              if (table.chairCount < 5) {
+                left = width - (chairSize / 1.19);
+              } else if (table.chairCount < 6) {
+                left = width - (chairSize / 1.24);
+              } else if (table.chairCount < 7) {
+                left = width - (chairSize / 1.22);
+              } else if (table.chairCount < 8) {
+                left = width - (chairSize / 1.2);
+              } else if (table.chairCount < 9) {
+                left = width - (chairSize / 1.2);
+              } else if (table.chairCount < 10) {
+                left = width - (chairSize / 1.15);
+              } else if (table.chairCount < 11) {
+                left = width - (chairSize / 1.1);
+              } else if (table.chairCount < 12) {
+                left = width - (chairSize / 1.12);
+              } else if (table.chairCount < 13) {
+                left = width - (chairSize / 1.12);
+              } else if (table.chairCount < 14) {
+                left = width - (chairSize / 1.11);
+              } else if (table.chairCount < 15) {
+                left = width - (chairSize / 1.09);
+              } else if (table.chairCount < 16) {
+                left = width - (chairSize / 1.08);
+              } else if (table.chairCount < 17) {
+                left = width - (chairSize / 1.07);
+              } else if (table.chairCount < 18) {
+                left = width - (chairSize / 1.06);
+              } else if (table.chairCount < 19) {
+                left = width - (chairSize / 1.05);
+              } else if (table.chairCount < 20) {
+                left = width - (chairSize / 1.025);
+              } else {
+                left = width - (chairSize / 1.01); // 20 or more
+              }
             }
             break;
-
           case 2: // Bottom
             left = width * positionOnSide - (chairSize / 2);
             if (table.shape == TableShape.round) {
-              top = 65;
+              // top = 37;
+              // top = height - (chairSize / 2); // for bottom side
+              if (table.chairCount < 5) {
+                top = height - (chairSize / 1.2);
+              } else if (table.chairCount < 6) {
+                top = height - (chairSize / 1.2);
+              } else if (table.chairCount < 7) {
+                top = height - (chairSize / 1.2);
+              } else if (table.chairCount < 8) {
+                top = height - (chairSize / 1.2);
+              } else if (table.chairCount < 9) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 10) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 11) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 12) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 13) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 14) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 15) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 16) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 17) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 18) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 19) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 20) {
+                top = height - (chairSize / 1.1);
+              } else {
+                top = height - (chairSize / 1.05); // 20 or more
+              }
             } else if (table.shape == TableShape.rectangle) {
-              top = 114;
+              // top = 114;
+              // top = height - (chairSize / 2); // for bottom side
+              if (table.chairCount < 5) {
+                top = height - (chairSize / .8);
+              } else if (table.chairCount < 6) {
+                top = height - (chairSize / .8);
+              } else if (table.chairCount < 7) {
+                top = height - (chairSize / .78);
+              } else if (table.chairCount < 8) {
+                top = height - (chairSize / .76);
+              } else if (table.chairCount < 9) {
+                top = height - (chairSize / .76);
+              } else if (table.chairCount < 10) {
+                top = height - (chairSize / .73);
+              } else if (table.chairCount < 11) {
+                top = height - (chairSize / .72);
+              } else if (table.chairCount < 12) {
+                top = height - (chairSize / .70);
+              } else if (table.chairCount < 13) {
+                top = height - (chairSize / .68);
+              } else if (table.chairCount < 14) {
+                top = height - (chairSize / .67);
+              } else if (table.chairCount < 15) {
+                top = height - (chairSize / .65);
+              } else if (table.chairCount < 16) {
+                top = height - (chairSize / .64);
+              } else if (table.chairCount < 17) {
+                top = height - (chairSize / .63);
+              } else if (table.chairCount < 18) {
+                top = height - (chairSize / .63);
+              } else if (table.chairCount < 19) {
+                top = height - (chairSize / .61);
+              } else if (table.chairCount < 20) {
+                top = height - (chairSize / .60);
+              } else {
+                top = height - (chairSize / .59); // 20 or more
+              }
             } else if (table.shape == TableShape.square) {
-              top = 59;
+              // top = 58;
+              // top = height - (chairSize / 1); // for bottom side
+              if (table.chairCount < 5) {
+                top = height - (chairSize / 1.13);
+              } else if (table.chairCount < 6) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 7) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 8) {
+                top = height - (chairSize / 1.1);
+              } else if (table.chairCount < 9) {
+                top = height - (chairSize / 1.08);
+              } else if (table.chairCount < 10) {
+                top = height - (chairSize / 1.06);
+              } else if (table.chairCount < 11) {
+                top = height - (chairSize / 1.04);
+              } else if (table.chairCount < 12) {
+                top = height - (chairSize / 1.03);
+              } else if (table.chairCount < 13) {
+                top = height - (chairSize / 1.033);
+              } else if (table.chairCount < 14) {
+                top = height - (chairSize / 1.028);
+              } else if (table.chairCount < 15) {
+                top = height - (chairSize / 1.02);
+              } else if (table.chairCount < 16) {
+                top = height - (chairSize / 1);
+              } else if (table.chairCount < 17) {
+                top = height - (chairSize / .95);
+              } else if (table.chairCount < 18) {
+                top = height - (chairSize / .93);
+              } else if (table.chairCount < 19) {
+                top = height - (chairSize / .92);
+              } else if (table.chairCount < 20) {
+                top = height - (chairSize / .91);
+              } else {
+                top = height - (chairSize / .90); // 20 or more
+              }
             }
             break;
 
           case 3: // Left
             top = height * positionOnSide - (chairSize / 1.7);
             if (table.shape == TableShape.round) {
-              left = -22;
+              // left = -22;
+              if (table.chairCount < 5) {
+                left = -30;
+              } else if (table.chairCount < 6) {
+                left = -30;
+              } else if (table.chairCount < 7) {
+                left = -30;
+              } else if (table.chairCount < 8) {
+                left = -30;
+              } else if (table.chairCount < 9) {
+                left = -29;
+              } else if (table.chairCount < 10) {
+                left = -28;
+              } else if (table.chairCount < 11) {
+                left = -28;
+              } else if (table.chairCount < 12) {
+                left = -27;
+              } else if (table.chairCount < 13) {
+                left = -26;
+              } else if (table.chairCount < 14) {
+                left = -25;
+              } else if (table.chairCount < 15) {
+                left = -25;
+              } else if (table.chairCount < 16) {
+                left = -24;
+              } else if (table.chairCount < 17) {
+                left = -24;
+              } else if (table.chairCount < 18) {
+                left = -23.5;
+              } else if (table.chairCount < 19) {
+                left = -23;
+              } else if (table.chairCount < 20) {
+                left = -23;
+              } else {
+                left = -23; // for 20 or more
+              }
             } else if (table.shape == TableShape.rectangle) {
-              left = -44;
+              // left = -44;
+              if (table.chairCount < 5) {
+                left = -39;
+              } else if (table.chairCount < 6) {
+                left = -40;
+              } else if (table.chairCount < 7) {
+                left = -40;
+              } else if (table.chairCount < 8) {
+                left = -40;
+              } else if (table.chairCount < 9) {
+                left = -40;
+              } else if (table.chairCount < 10) {
+                left = -40;
+              } else if (table.chairCount < 11) {
+                left = -40;
+              } else if (table.chairCount < 12) {
+                left = -40;
+              } else if (table.chairCount < 13) {
+                left = -40;
+              } else if (table.chairCount < 14) {
+                left = -40;
+              } else if (table.chairCount < 15) {
+                left = -40;
+              } else if (table.chairCount < 16) {
+                left = -40;
+              } else if (table.chairCount < 17) {
+                left = -40;
+              } else if (table.chairCount < 18) {
+                left = -40;
+              } else if (table.chairCount < 19) {
+                left = -40;
+              } else if (table.chairCount < 20) {
+                left = -40;
+              } else {
+                left = -40; // for 20 or more
+              }
             } else if (table.shape == TableShape.square) {
-              left = -15;
+              // left = -15;
+              if (table.chairCount < 5) {
+                left = -26;
+              } else if (table.chairCount < 6) {
+                left = -24;
+              } else if (table.chairCount < 7) {
+                left = -21;
+              } else if (table.chairCount < 8) {
+                left = -20;
+              } else if (table.chairCount < 9) {
+                left = -19;
+              } else if (table.chairCount < 10) {
+                left = -18;
+              } else if (table.chairCount < 11) {
+                left = -17;
+              } else if (table.chairCount < 12) {
+                left = -16;
+              } else if (table.chairCount < 13) {
+                left = -15;
+              } else if (table.chairCount < 14) {
+                left = -16;
+              } else if (table.chairCount < 15) {
+                left = -17;
+              } else if (table.chairCount < 16) {
+                left = -18;
+              } else if (table.chairCount < 17) {
+                left = -18;
+              } else if (table.chairCount < 18) {
+                left = -19;
+              } else if (table.chairCount < 19) {
+                left = -16;
+              } else if (table.chairCount < 20) {
+                left = -16;
+              } else {
+                left = -15; // for 20 or more
+              }
             }
             break;
         }
@@ -206,7 +678,6 @@ class TableWidget extends StatelessWidget {
         chairsPlaced++;
       }
     }
-
     return chairs;
   }
 }
@@ -214,7 +685,6 @@ class TableWidget extends StatelessWidget {
 // chair widget
 class ChairWidget extends StatelessWidget {
   final double size;
-
   const ChairWidget({super.key, this.size = 50});
 
   @override
@@ -500,23 +970,22 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
   }
 
   void _editTable(int index) async {
-    final updatedTable = await showDialog<TableItem>(
+    final editedTemplate = tables[index]; // use as base
+
+    final newTable = await showDialog<TableItem>(
       context: context,
-      builder: (context) => TableEditDialog(table: tables[index]),
+      builder: (context) => TableEditDialog(table: editedTemplate),
     );
 
-    if (updatedTable != null) {
+    if (newTable != null) {
       setState(() {
-        tables[index] = updatedTable;
-        // If this table was edited before, update it, else add it
-        final existingIndex = editedTables.indexWhere(
-          (t) => t.label == updatedTable.label && t.row == updatedTable.row,
+        // ✅ generate unique label (A1 → A2 → A3...)
+        String nextLabel = _generateNextLabel();
+        TableItem newTableWithLabel = newTable.copyWith(
+          label: nextLabel,
+          position: editedTemplate.position + const Offset(30, 30),
         );
-        if (existingIndex >= 0) {
-          editedTables[existingIndex] = updatedTable;
-        } else {
-          editedTables.add(updatedTable);
-        }
+        editedTables.add(newTableWithLabel);
       });
 
       Navigator.push(
@@ -529,6 +998,17 @@ class _DraggableBoxScreenState extends State<DraggableBoxScreen> {
               ),
         ),
       );
+    }
+  }
+
+  String _generateNextLabel() {
+    int counter = 1;
+    while (true) {
+      final label = "A$counter";
+      if (!tables.any((t) => t.label == label)) {
+        return label;
+      }
+      counter++;
     }
   }
 
@@ -636,7 +1116,7 @@ class SpecialTableWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.whiteColor,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.black),
+            // border: Border.all(color: Colors.black),
           ),
           alignment: Alignment.center,
           child: Text(table.label, style: TextStyle(color: Colors.black)),
@@ -711,29 +1191,31 @@ class _TableEditDialogState extends State<TableEditDialog> {
                 TableWidget(
                   table: widget.table.copyWith(
                     label: labelController.text,
+                    notes: notesController.text,
                     chairCount: chairCount,
+                    row: selectedRow,
                   ),
                   isPreview: true,
                 ),
                 SizedBox(height: 12.h),
-                DropdownButtonFormField<String>(
-                  value: selectedRow,
-                  items:
-                      ['Row 1', 'Row 2']
-                          .map(
-                            (row) =>
-                                DropdownMenuItem(value: row, child: Text(row)),
-                          )
-                          .toList(),
-                  decoration: const InputDecoration(labelText: "Select Row"),
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedRow = value;
-                      });
-                    }
-                  },
-                ),
+                // DropdownButtonFormField<String>(
+                //   value: selectedRow,
+                //   items:
+                //       ['Row 1', 'Row 2']
+                //           .map(
+                //             (row) =>
+                //                 DropdownMenuItem(value: row, child: Text(row)),
+                //           )
+                //           .toList(),
+                //   decoration: const InputDecoration(labelText: "Select Row"),
+                //   onChanged: (value) {
+                //     if (value != null) {
+                //       setState(() {
+                //         selectedRow = value;
+                //       });
+                //     }
+                //   },
+                // ),
                 TextField(
                   controller: labelController,
                   decoration: const InputDecoration(
@@ -749,22 +1231,37 @@ class _TableEditDialogState extends State<TableEditDialog> {
                 Row(
                   children: [
                     const Text("Chairs: "),
-                    Expanded(
-                      child: Slider(
-                        value: chairCount.toDouble(),
-                        min: 4,
-                        max: 20,
-                        divisions: 16,
-                        thumbColor: AppColors.primaryColor,
-                        activeColor: AppColors.greyColor,
-                        inactiveColor: AppColors.greyColor,
-                        label: chairCount.toString(),
-                        onChanged: (value) {
-                          setState(() {
-                            chairCount = value.toInt();
-                          });
-                        },
-                      ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_drop_up, size: 30),
+                          onPressed: () {
+                            if (chairCount < 20) {
+                              setState(() {
+                                chairCount++;
+                              });
+                            }
+                          },
+                        ),
+                        Text(
+                          '$chairCount',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_drop_down, size: 30),
+                          onPressed: () {
+                            if (chairCount > 4) {
+                              setState(() {
+                                chairCount--;
+                              });
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -844,6 +1341,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
   late List<TableItem> tables;
   List<ChairItem> chairs = [];
   SpecialTableItem? specialTable;
+  TableItem? headTable;
 
   @override
   void initState() {
@@ -855,6 +1353,15 @@ class _PreviewScreenState extends State<PreviewScreen> {
       ChairItem(position: const Offset(60, 50)),
       ChairItem(position: const Offset(70, 50)),
     ];
+    headTable = TableItem(
+      position: const Offset(100, 50),
+      label: 'Head Table',
+      notes: '',
+      shape: TableShape.rectangle,
+      chairCount: 6,
+      row: '',
+      rotationAngle: 0,
+    );
   }
 
   void _updateTablePosition(int index, Offset newOffset) {
@@ -879,16 +1386,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
         chairs[index].attachedToTable = false;
         chairs[index].tableIndex = null;
       }
-
-      // If the chair is now over a table and wasn't already attached to this table
-      // if (newTableIndex != null &&
-      //     (oldTableIndex != newTableIndex || !chairs[index].attachedToTable)) {
-      //   tables[newTableIndex] = tables[newTableIndex].copyWith(
-      //     chairCount: tables[newTableIndex].chairCount + 1,
-      //   );
-      //   chairs[index].attachedToTable = true;
-      //   chairs[index].tableIndex = newTableIndex;
-      // }
       if (newTableIndex != null &&
           (oldTableIndex != newTableIndex || !chairs[index].attachedToTable)) {
         tables[newTableIndex] = tables[newTableIndex].copyWith(
@@ -896,11 +1393,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
         );
         chairs[index].attachedToTable = true;
         chairs[index].tableIndex = newTableIndex;
-
         // ✅ NEW: Remove the chair from screen once attached
         chairs.removeAt(index);
       }
-
       // If the chair is no longer over any table (and was previously attached)
       if (newTableIndex == null && oldTableIndex != null) {
         chairs[index].attachedToTable = false;
@@ -918,7 +1413,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
         260.w,
         table.shape == TableShape.rectangle ? 140.h : 140.h,
       );
-
       // You might need to adjust this radius based on your chair size
       final chairRect = Rect.fromCircle(center: chair.position, radius: 15.w);
       if (tableRect.overlaps(chairRect)) {
@@ -940,22 +1434,301 @@ class _PreviewScreenState extends State<PreviewScreen> {
     });
   }
 
+  // screen shot controller
+  final ScreenshotController _screenshotController = ScreenshotController();
+
+  // generate pdf file
+  Future<void> _generatePdfFromLayout({
+    required BuildContext context,
+    required String venueName,
+    required String yourName,
+    required String partnerName,
+    required bool isSeatingChart,
+  }) async {
+    final pdf = pw.Document();
+
+    try {
+      if (isSeatingChart) {
+        // Capture seating chart as image
+        final image = await _screenshotController.capture();
+        if (image == null) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Error: Could not capture screenshot"),
+              ),
+            );
+          }
+          return;
+        }
+
+        final pdfImage = pw.MemoryImage(image);
+
+        pdf.addPage(
+          pw.Page(
+            build: (pw.Context context) {
+              return pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Venue: $venueName",
+                    style: pw.TextStyle(fontSize: 18),
+                  ),
+                  pw.Text(
+                    "Couple: $yourName & $partnerName",
+                    style: pw.TextStyle(fontSize: 16),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.Center(child: pw.Image(pdfImage, width: 400)),
+                ],
+              );
+            },
+          ),
+        );
+      } else {
+        // Guest list layout
+        pdf.addPage(
+          pw.Page(
+            build: (pw.Context context) {
+              return pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    "Venue: $venueName",
+                    style: pw.TextStyle(fontSize: 18),
+                  ),
+                  pw.Text(
+                    "Couple: $yourName & $partnerName",
+                    style: pw.TextStyle(fontSize: 16),
+                  ),
+                  pw.SizedBox(height: 20),
+                  pw.Text(
+                    "Guest List",
+                    style: pw.TextStyle(
+                      fontSize: 20,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
+                  ),
+                  pw.SizedBox(height: 10),
+                  if (tables.isNotEmpty)
+                    ...tables.map(
+                      (table) => pw.Text(
+                        "- ${table.label} (Chairs: ${table.chairCount})",
+                        style: pw.TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  if (headTable != null)
+                    pw.Text(
+                      "- ${headTable!.label} (Chairs: ${headTable!.chairCount})",
+                      style: pw.TextStyle(fontSize: 14),
+                    ),
+                  if (specialTable != null)
+                    pw.Text(
+                      "- ${specialTable!.label} (Chairs: ${specialTable!.chairCount})",
+                      style: pw.TextStyle(fontSize: 14),
+                    ),
+                ],
+              );
+            },
+          ),
+        );
+      }
+
+      final bytes = await pdf.save();
+
+      // Upload to Firebase Storage
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('pdfs')
+          .child('${DateTime.now().millisecondsSinceEpoch}.pdf');
+
+      final uploadTask = await storageRef.putData(
+        bytes,
+        SettableMetadata(contentType: 'application/pdf'),
+      );
+
+      final downloadUrl = await uploadTask.ref.getDownloadURL();
+
+      // Save to Firestore
+      await FirebaseFirestore.instance.collection('pdf_urls').add({
+        'venueName': venueName,
+        'yourName': yourName,
+        'partnerName': partnerName,
+        'isSeatingChart': isSeatingChart,
+        'url': downloadUrl,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("PDF uploaded & URL saved successfully!"),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+
+      // Print
+      await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => bytes);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      }
+    }
+  }
+
+  // show download dialogue
+  void _showDownloadDialog() async {
+    final venueController = TextEditingController();
+    final yourNameController = TextEditingController();
+    final partnerNameController = TextEditingController();
+    bool isSeatingChart = true;
+
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Download PDF"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: venueController,
+                  decoration: const InputDecoration(labelText: "Venue Name"),
+                ),
+                TextField(
+                  controller: yourNameController,
+                  decoration: const InputDecoration(labelText: "Your Name"),
+                ),
+                TextField(
+                  controller: partnerNameController,
+                  decoration: const InputDecoration(labelText: "Partner Name"),
+                ),
+                const SizedBox(height: 20),
+                const Text("Select Format:"),
+                RadioListTile<bool>(
+                  title: const Text("Seating Chart (with layout)"),
+                  value: true,
+                  groupValue: isSeatingChart,
+                  onChanged: (value) {
+                    setState(() {
+                      isSeatingChart = value!;
+                    });
+                    Navigator.of(context).pop();
+                    _showDownloadDialog();
+                  },
+                ),
+                RadioListTile<bool>(
+                  title: const Text("List as Guest (table names only)"),
+                  value: false,
+                  groupValue: isSeatingChart,
+                  onChanged: (value) {
+                    setState(() {
+                      isSeatingChart = value!;
+                    });
+                    Navigator.of(context).pop();
+                    _showDownloadDialog();
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final venue = venueController.text.trim();
+                final yourName = yourNameController.text.trim();
+                final partner = partnerNameController.text.trim();
+
+                if (venue.isEmpty || yourName.isEmpty || partner.isEmpty)
+                  return;
+
+                Navigator.pop(context);
+
+                _generatePdfFromLayout(
+                  context: context,
+                  venueName: venue,
+                  yourName: yourName,
+                  partnerName: partner,
+                  isSeatingChart: isSeatingChart,
+                );
+              },
+              child: const Text("Generate PDF"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // export as pdf
+  void exportAsPdf() async {
+    final image = await _screenshotController.capture();
+    if (image != null) {
+      final pdf = pw.Document();
+      final pdfImage = pw.MemoryImage(image);
+
+      pdf.addPage(
+        pw.Page(build: (context) => pw.Center(child: pw.Image(pdfImage))),
+      );
+
+      final file = File('${(await getTemporaryDirectory()).path}/layout.pdf');
+      await file.writeAsBytes(await pdf.save());
+
+      await Printing.sharePdf(bytes: await pdf.save(), filename: 'layout.pdf');
+    }
+  }
+
+  // export as image
+  void exportAsImage() async {
+    final image = await _screenshotController.capture();
+
+    if (image != null) {
+      // Save image as PNG
+      final file = File('${(await getTemporaryDirectory()).path}/layout.png');
+      await file.writeAsBytes(image);
+
+      // Convert image to PDF
+      final pdf = pw.Document();
+      final pdfImage = pw.MemoryImage(image);
+
+      pdf.addPage(
+        pw.Page(build: (context) => pw.Center(child: pw.Image(pdfImage))),
+      );
+
+      // Share as PDF
+      await Printing.sharePdf(bytes: await pdf.save(), filename: 'layout.pdf');
+    }
+  }
+
+  // // export as excel
+
+  // void exportAsExcel(List<Guest> guestList) async {
+  //   final excel = Excel.createExcel();
+  //   final sheet = excel['Guest List'];
+  //   sheet.appendRow(['Guest Name', 'Seat Number']);
+  //   for (var guest in guestList) {
+  //     sheet.appendRow([guest.name, guest.seatNumber]);
+  //   }
+  //   final dir = await getApplicationDocumentsDirectory();
+  //   final file =
+  //       File('${dir.path}/guest_list.xlsx')
+  //         ..createSync(recursive: true)
+  //         ..writeAsBytesSync(excel.encode()!);
+  //   // Share or handle file
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      appBar: AppBar(
-        leading: Center(
-          child: InkWell(
-            borderRadius: BorderRadius.circular(10.r),
-            onTap: () => Navigator.pop(context),
-            child: Icon(Icons.arrow_back, size: 24.sp, color: Colors.white),
-          ),
-        ),
-        centerTitle: true,
-        title: Text("Preview Layout", style: TextStyle(color: Colors.white)),
-        backgroundColor: AppColors.primaryColor,
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -965,106 +1738,354 @@ class _PreviewScreenState extends State<PreviewScreen> {
         backgroundColor: Colors.white,
         child: const Icon(Icons.chair, color: Colors.deepPurple),
       ),
-      body: Stack(
-        clipBehavior: Clip.none,
+      body: Column(
         children: [
-          // Tables
-          for (int i = 0; i < tables.length; i++)
-            Positioned(
-              left: tables[i].position.dx,
-              top: tables[i].position.dy,
-              child: GestureDetector(
-                onPanUpdate: (details) {
-                  _updateTablePosition(i, tables[i].position + details.delta);
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
+          SizedBox(height: 12.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Back button
+                InkWell(
+                  borderRadius: BorderRadius.circular(10.r),
+                  onTap: () => Navigator.pop(context),
+                  child: Row(
+                    children: [
+                      Icon(Icons.arrow_back, size: 24.sp, color: Colors.white),
+                    ],
+                  ),
+                ),
+
+                // Title
+                Text(
+                  "Preview Layout",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                // Download section
+                Column(
+                  // mainAxisSize: MainAxisSize.min,
                   children: [
-                    TableWidget(table: tables[i], isPreview: true),
-                    SizedBox(height: 16.h),
+                    GestureDetector(
+                      onTap: _showDownloadDialog,
+                      child: Icon(Icons.download, color: Colors.white),
+                    ),
+
                     Text(
-                      "Name: ${tables[i].label}",
+                      "Download PDF",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.whiteColor,
+                        color: Colors.white,
+                        fontSize: 12.sp,
                       ),
                     ),
-                    if (tables[i].notes.isNotEmpty)
-                      Text(
-                        "Notes: ${tables[i].notes}",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.whiteColor,
+                  ],
+                ),
+              ],
+            ),
+          ),
+          ElevatedButton(
+            onPressed:
+                () => showModalBottomSheet(
+                  context: context,
+                  builder:
+                      (_) => Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: Icon(Icons.picture_as_pdf),
+                            title: Text('Export as PDF'),
+                            onTap: exportAsPdf,
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.image),
+                            title: Text('Export as Image'),
+                            onTap: exportAsImage,
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.table_chart),
+                            title: Text('Export as Excel'),
+                            // onTap:
+                            //     () =>
+                            //         exportAsExcel(guestList), // Pass your data
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                ),
+            child: Text('🖨 Export & Print Options'),
+          ),
+          Expanded(
+            child: Screenshot(
+              controller: _screenshotController,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  if (headTable != null)
+                    Positioned(
+                      left: headTable!.position.dx,
+                      top: headTable!.position.dy,
+                      child: GestureDetector(
+                        onPanUpdate: (details) {
+                          setState(() {
+                            headTable = headTable!.copyWith(
+                              position: headTable!.position + details.delta,
+                            );
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Transform.rotate(
+                              angle: headTable!.rotationAngle,
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                alignment: Alignment.topCenter,
+                                children: [
+                                  TableWidget(
+                                    table: headTable!,
+                                    isPreview: false,
+                                  ), // ✅
+                                ],
+                              ),
+                            ),
+
+                            Text(
+                              "Name: ${headTable!.label}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
+                            Text(
+                              "Chairs: ${headTable!.chairCount}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () async {
+                                    final updated = await showDialog<TableItem>(
+                                      context: context,
+                                      builder:
+                                          (_) => TableEditDialog(
+                                            table: headTable!,
+                                          ),
+                                    );
+                                    if (updated != null) {
+                                      setState(() {
+                                        headTable = updated;
+                                      });
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.rotate_right,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      headTable = headTable!.copyWith(
+                                        rotationAngle:
+                                            headTable!.rotationAngle +
+                                            (3.14159 / 2),
+                                      );
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    Text(
-                      "Chairs: ${tables[i].chairCount}",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.whiteColor,
+                    ),
+
+                  // Tables
+                  for (int i = 0; i < tables.length; i++)
+                    Positioned(
+                      left: tables[i].position.dx,
+                      top: tables[i].position.dy,
+                      child: GestureDetector(
+                        onPanUpdate: (details) {
+                          _updateTablePosition(
+                            i,
+                            tables[i].position + details.delta,
+                          );
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Transform.rotate(
+                              angle: tables[i].rotationAngle,
+                              child: TableWidget(
+                                table: tables[i],
+                                isPreview: true,
+                              ),
+                            ),
+                            Text(
+                              "Name: ${tables[i].label}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
+                            if (tables[i].notes.isNotEmpty)
+                              Text(
+                                "Notes: ${tables[i].notes}",
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium!.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.whiteColor,
+                                ),
+                              ),
+                            Text(
+                              "Chairs: ${tables[i].chairCount}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
+                            Text(
+                              "Row: ${tables[i].row}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () async {
+                                    final updatedTable =
+                                        await showDialog<TableItem>(
+                                          context: context,
+                                          builder:
+                                              (_) => TableEditDialog(
+                                                table: tables[i],
+                                              ),
+                                        );
+                                    if (updatedTable != null) {
+                                      setState(() {
+                                        tables[i] = updatedTable;
+                                      });
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.rotate_right,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      final newAngle =
+                                          tables[i].rotationAngle +
+                                          (3.14159 / 2);
+                                      tables[i] = tables[i].copyWith(
+                                        rotationAngle: newAngle,
+                                      );
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    Text(
-                      "Row: ${tables[i].row}",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.whiteColor,
+                  // Chairs
+                  for (int i = 0; i < chairs.length; i++)
+                    Positioned(
+                      left: chairs[i].position.dx,
+                      top: chairs[i].position.dy,
+                      child: GestureDetector(
+                        onPanUpdate: (details) {
+                          _updateChairPosition(
+                            i,
+                            chairs[i].position + details.delta,
+                          );
+                        },
+                        onLongPress: () => _deleteChair(i),
+                        child: ChairWidget(size: 80),
                       ),
                     ),
-                  ],
-                ),
+                  if (specialTable != null)
+                    Positioned(
+                      left: specialTable!.position.dx,
+                      top: specialTable!.position.dy,
+                      child: GestureDetector(
+                        onPanUpdate: (details) {
+                          setState(() {
+                            specialTable = specialTable!.copyWith(
+                              position: specialTable!.position + details.delta,
+                            );
+                          });
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SpecialTableWidget(table: specialTable!),
+                            SizedBox(height: 8.h),
+                            Text(
+                              "Name: ${specialTable!.label}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyLarge!.copyWith(
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "Chairs: ${specialTable!.chairCount}",
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyLarge!.copyWith(
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
-          // Chairs
-          for (int i = 0; i < chairs.length; i++)
-            Positioned(
-              left: chairs[i].position.dx,
-              top: chairs[i].position.dy,
-              child: GestureDetector(
-                onPanUpdate: (details) {
-                  _updateChairPosition(i, chairs[i].position + details.delta);
-                },
-                onLongPress: () => _deleteChair(i),
-                child: ChairWidget(size: 80),
-              ),
-            ),
-          if (specialTable != null)
-            Positioned(
-              left: specialTable!.position.dx,
-              top: specialTable!.position.dy,
-              child: GestureDetector(
-                onPanUpdate: (details) {
-                  setState(() {
-                    specialTable = specialTable!.copyWith(
-                      position: specialTable!.position + details.delta,
-                    );
-                  });
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SpecialTableWidget(table: specialTable!),
-                    SizedBox(height: 8.h),
-                    Text(
-                      "Name: ${specialTable!.label}",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: AppColors.whiteColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Text(
-                      "Chairs: ${specialTable!.chairCount}",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: AppColors.whiteColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          ),
         ],
       ),
     );
@@ -1095,30 +2116,6 @@ class ChairItem {
   }
 }
 
-// class SpecialTableItem {
-//   final Offset position;
-//   final String label;
-//   final int chairCount;
-
-//   SpecialTableItem({
-//     required this.position,
-//     required this.label,
-//     required this.chairCount,
-//   });
-
-//   SpecialTableItem copyWith({
-//     Offset? position,
-//     String? label,
-//     int? chairCount,
-//   }) {
-//     return SpecialTableItem(
-//       position: position ?? this.position,
-//       label: label ?? this.label,
-//       chairCount: chairCount ?? this.chairCount,
-//     );
-//   }
-// }
-
 class SpecialTableItem {
   final String label;
   final int chairCount;
@@ -1145,4 +2142,11 @@ class SpecialTableItem {
       showChairs: showChairs ?? this.showChairs,
     );
   }
+}
+
+class Guest {
+  final String name;
+  final String seatNumber;
+
+  Guest({required this.name, required this.seatNumber});
 }

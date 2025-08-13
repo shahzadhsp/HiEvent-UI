@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.weddinghall"
+    package="com.hievent.app.weddinghall"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -75,10 +75,10 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <permission
-        android:name="com.example.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.hievent.app.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.hievent.app.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="android.app.Application"
@@ -90,7 +90,7 @@
         android:label="HiEvent" >
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.weddinghall.provider"
+            android:authorities="com.hievent.app.weddinghall.provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -99,7 +99,7 @@
         </provider>
 
         <activity
-            android:name="com.example.weddinghall.MainActivity"
+            android:name="com.hievent.app.weddinghall.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -227,7 +227,7 @@
 
         <provider
             android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
-            android:authorities="com.example.weddinghall.flutterfirebasemessaginginitprovider"
+            android:authorities="com.hievent.app.weddinghall.flutterfirebasemessaginginitprovider"
             android:exported="false"
             android:initOrder="99" />
 
@@ -339,7 +339,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.weddinghall.firebaseinitprovider"
+            android:authorities="com.hievent.app.weddinghall.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
@@ -351,7 +351,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.weddinghall.androidx-startup"
+            android:authorities="com.hievent.app.weddinghall.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"

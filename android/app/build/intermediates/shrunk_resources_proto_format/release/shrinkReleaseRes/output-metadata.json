@@ -4,7 +4,7 @@
     "type": "SHRUNK_RESOURCES_PROTO_FORMAT",
     "kind": "Directory"
   },
-  "applicationId": "com.example.weddinghall",
+  "applicationId": "com.hievent.app.weddinghall",
   "variantName": "release",
   "elements": [
     {

@@ -2902,7 +2902,7 @@ com.google.android.gms.internal.auth.zzn
 com.google.android.gms.internal.firebase-auth-api.zzpl
 com.google.android.play.core.integrity.bn
 com.google.android.gms.internal.auth-api-phone.zzx
-com.example.weddinghall.MainActivity
+com.hievent.app.weddinghall.MainActivity
 com.google.android.gms.internal.stats.zzd
 com.google.android.gms.internal.firebase-auth-api.zzaih
 com.google.firebase.messaging.FirebaseMessagingKtxRegistrar
@@ -15072,7 +15072,7 @@ com.google.android.recaptcha.internal.zzkk: long zza(long,long)
 com.google.android.recaptcha.internal.zzpy: void zze(int,java.util.List)
 org.apache.tika.pipes.fetcher.Fetcher: java.lang.String getName()
 com.google.android.recaptcha.internal.zzos: zzos()
-com.example.weddinghall.MainActivity: MainActivity()
+com.hievent.app.weddinghall.MainActivity: MainActivity()
 com.google.android.gms.internal.auth.zzcj: java.lang.Object zza(com.google.android.gms.internal.auth.zzck)
 androidx.appcompat.widget.ActionBarOverlayLayout: void setUiOptions(int)
 com.google.android.gms.internal.firebase-auth-api.zzafm: java.lang.String zza(java.lang.String,int,boolean)

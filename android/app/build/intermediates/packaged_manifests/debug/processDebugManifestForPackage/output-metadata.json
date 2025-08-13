@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.weddinghall",
+  "applicationId": "com.hievent.app.weddinghall",
   "variantName": "debug",
   "elements": [
     {

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-mergeDebugResources-38:/values-w820dp-v13/values-w820dp-v13.xml",
+            "outputFile": "com.hievent.app.weddinghall.app-mergeDebugResources-38:/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\f939c69f5c011a103525fe9118ae0a4f\\transformed\\jetified-flutter_sound_core-9.28.0\\res\\values-w820dp-v13\\values-w820dp-v13.xml",

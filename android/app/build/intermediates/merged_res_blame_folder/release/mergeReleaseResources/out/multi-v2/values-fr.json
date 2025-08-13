@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-mergeReleaseResources-53:/values-fr/values-fr.xml",
+            "outputFile": "com.hievent.app.app-mergeReleaseResources-53:/values-fr/values-fr.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\e6e626e6c3c9d12a6f7f55a7c07b8474\\transformed\\core-1.15.0\\res\\values-fr\\values-fr.xml",

@@ -1,6 +1,6 @@
 <variant
     name="release"
-    package="com.example.weddinghall"
+    package="com.hievent.app"
     minSdkVersion="24"
     targetSdkVersion="35"
     shrinking="true"
@@ -30,7 +30,7 @@
   <artifact
       classOutputs="build\intermediates\javac\release\compileReleaseJavaWithJavac\classes;build\tmp\kotlin-classes\release;build\kotlinToolingMetadata;build\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\processReleaseResources\R.jar"
       type="MAIN"
-      applicationId="com.example.weddinghall"
+      applicationId="com.hievent.app"
       generatedSourceFolders="build\generated\ap_generated_sources\release\out;build\generated\source\buildConfig\release"
       generatedResourceFolders="build\generated\res\google-services\release;build\generated\res\resValues\release"
       desugaredMethodsFiles="C:\Users\HP\.gradle\caches\8.9\transforms\2546e9724e8caa3626ea587536740f9f\transformed\desugar_jdk_libs_configuration-2.1.4-desugar-lint.txt;C:\Users\HP\.gradle\caches\8.9\transforms\b2eef9cb92d4a6c58ffbb55f7b0522ca\transformed\D8BackportedDesugaredMethods.txt">

@@ -10,6 +10,7 @@ import 'package:weddinghall/view/home_screeen/home_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 // 👇 Background message handler
+@pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   print("🔕 Background Message: ${message.notification?.title}");

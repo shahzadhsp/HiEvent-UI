@@ -1,4 +1,4 @@
-package com.example.weddinghall
+package com.hievent.app
 
 import io.flutter.embedding.android.FlutterActivity
 

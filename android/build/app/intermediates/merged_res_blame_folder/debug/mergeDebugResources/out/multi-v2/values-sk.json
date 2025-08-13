@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-mergeDebugResources-38:/values-sk/values-sk.xml",
+            "outputFile": "com.hievent.app.weddinghall.app-mergeDebugResources-38:/values-sk/values-sk.xml",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\f627e8a1630bdb5e2ab66bead199b2f6\\transformed\\appcompat-1.2.0\\res\\values-sk\\values-sk.xml",

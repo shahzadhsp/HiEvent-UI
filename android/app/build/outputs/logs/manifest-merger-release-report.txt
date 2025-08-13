@@ -309,7 +309,7 @@ ADDED from E:\weddinghall\android\app\src\main\AndroidManifest.xml:25:5-27:46
 		ADDED from E:\weddinghall\android\app\src\main\AndroidManifest.xml:27:9-43
 	android:name
 		ADDED from E:\weddinghall\android\app\src\main\AndroidManifest.xml:26:9-59
-activity#com.example.weddinghall.MainActivity
+activity#com.hievent.app.weddinghall.MainActivity
 ADDED from E:\weddinghall\android\app\src\main\AndroidManifest.xml:30:9-52:20
 	android:screenOrientation
 		ADDED from E:\weddinghall\android\app\src\main\AndroidManifest.xml:32:13-49
@@ -1023,7 +1023,7 @@ ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms
 		ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
-permission#com.example.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.hievent.app.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
@@ -1033,7 +1033,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
-uses-permission#com.example.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.hievent.app.weddinghall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.15.0] C:\Users\HP\.gradle\caches\8.9\transforms\e6e626e6c3c9d12a6f7f55a7c07b8474\transformed\core-1.15.0\AndroidManifest.xml:26:22-94

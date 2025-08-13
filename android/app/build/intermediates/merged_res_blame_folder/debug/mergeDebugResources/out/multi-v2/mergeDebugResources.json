@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-es_values-es.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-es_values-es.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-es\\values.xml",
@@ -108,7 +108,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-pt-rBR_values-pt-rBR.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-pt-rBR_values-pt-rBR.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-pt-rBR\\values-pt-rBR.xml",
@@ -215,7 +215,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-tr_values-tr.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-tr_values-tr.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-tr\\values.xml",
@@ -322,7 +322,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ml_values-ml.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ml_values-ml.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-ml\\values-ml.xml",
@@ -429,7 +429,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ar_values-ar.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ar_values-ar.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-ar\\values-ar.xml",
@@ -536,7 +536,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-it_values-it.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-it_values-it.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-it\\values-it.xml",
@@ -643,7 +643,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-be_values-be.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-be_values-be.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-be\\values-be.xml",
@@ -750,7 +750,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ky_values-ky.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ky_values-ky.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-ky\\values-ky.xml",
@@ -857,7 +857,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-bn_values-bn.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-bn_values-bn.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-bn\\values.xml",
@@ -964,7 +964,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-h720dp-v13_values-h720dp-v13.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-h720dp-v13_values-h720dp-v13.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
@@ -979,7 +979,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-si_values-si.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-si_values-si.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-si\\values.xml",
@@ -1086,7 +1086,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sr_values-sr.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sr_values-sr.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-sr\\values.xml",
@@ -1193,7 +1193,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v17_values-v17.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v17_values-v17.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v17\\values-v17.xml",
@@ -1209,7 +1209,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-da_values-da.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-da_values-da.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-da\\values-da.xml",
@@ -1316,7 +1316,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-fr-rCA_values-fr-rCA.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-fr-rCA_values-fr-rCA.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-fr-rCA\\values-fr-rCA.xml",
@@ -1423,7 +1423,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sv_values-sv.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sv_values-sv.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-sv\\values-sv.xml",
@@ -1530,7 +1530,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-en-rGB_values-en-rGB.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-en-rGB_values-en-rGB.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-en-rGB\\values-en-rGB.xml",
@@ -1637,7 +1637,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ca_values-ca.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ca_values-ca.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-ca\\values.xml",
@@ -1744,7 +1744,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-pt-rPT_values-pt-rPT.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-pt-rPT_values-pt-rPT.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-pt-rPT\\values.xml",
@@ -1851,7 +1851,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-de_values-de.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-de_values-de.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-de\\values-de.xml",
@@ -1958,7 +1958,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-kk_values-kk.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-kk_values-kk.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-kk\\values.xml",
@@ -2065,7 +2065,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-lt_values-lt.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-lt_values-lt.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-lt\\values.xml",
@@ -2172,7 +2172,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-am_values-am.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-am_values-am.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-am\\values-am.xml",
@@ -2279,7 +2279,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-cs_values-cs.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-cs_values-cs.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-cs\\values-cs.xml",
@@ -2386,7 +2386,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-te_values-te.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-te_values-te.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-te\\values-te.xml",
@@ -2493,7 +2493,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-watch-v20_values-watch-v20.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-watch-v20_values-watch-v20.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-watch-v20\\values-watch-v20.xml",
@@ -2534,7 +2534,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-hdpi-v4_values-hdpi-v4.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-hdpi-v4_values-hdpi-v4.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
@@ -2550,7 +2550,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-my_values-my.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-my_values-my.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-my\\values-my.xml",
@@ -2657,7 +2657,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ko_values-ko.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ko_values-ko.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-ko\\values-ko.xml",
@@ -2764,7 +2764,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-land_values-land.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-land_values-land.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-land\\values-land.xml",
@@ -2779,7 +2779,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-or_values-or.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-or_values-or.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-or\\values-or.xml",
@@ -2886,7 +2886,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-xlarge-v4_values-xlarge-v4.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-xlarge-v4_values-xlarge-v4.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
@@ -2901,7 +2901,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ru_values-ru.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ru_values-ru.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-ru\\values-ru.xml",
@@ -3008,7 +3008,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-b+sr+Latn_values-b+sr+Latn.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-b+sr+Latn_values-b+sr+Latn.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
@@ -3115,7 +3115,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-as_values-as.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-as_values-as.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-as\\values.xml",
@@ -3222,7 +3222,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-lo_values-lo.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-lo_values-lo.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-lo\\values-lo.xml",
@@ -3329,7 +3329,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-mk_values-mk.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-mk_values-mk.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-mk\\values.xml",
@@ -3436,7 +3436,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-fi_values-fi.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-fi_values-fi.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-fi\\values.xml",
@@ -3543,7 +3543,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values_values.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values_values.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\e131fa85f6d68ac95170f8bada6fc9b7\\transformed\\jetified-activity-1.8.1\\res\\values\\values.xml",
@@ -3908,7 +3908,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sq_values-sq.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sq_values-sq.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-sq\\values-sq.xml",
@@ -4015,7 +4015,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sw_values-sw.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sw_values-sw.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-sw\\values.xml",
@@ -4122,7 +4122,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-gu_values-gu.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-gu_values-gu.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-gu\\values-gu.xml",
@@ -4229,7 +4229,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-hr_values-hr.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-hr_values-hr.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-hr\\values.xml",
@@ -4336,7 +4336,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ne_values-ne.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ne_values-ne.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-ne\\values-ne.xml",
@@ -4443,7 +4443,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v23_values-v23.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v23_values-v23.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v23\\values-v23.xml",
@@ -4467,7 +4467,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-pt_values-pt.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-pt_values-pt.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-pt\\values-pt.xml",
@@ -4540,7 +4540,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-hi_values-hi.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-hi_values-hi.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-hi\\values-hi.xml",
@@ -4647,7 +4647,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-zu_values-zu.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-zu_values-zu.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-zu\\values.xml",
@@ -4754,7 +4754,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-en-rAU_values-en-rAU.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-en-rAU_values-en-rAU.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-en-rAU\\values-en-rAU.xml",
@@ -4827,7 +4827,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v25_values-v25.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v25_values-v25.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v25\\values-v25.xml",
@@ -4843,7 +4843,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ur_values-ur.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ur_values-ur.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-ur\\values.xml",
@@ -4950,7 +4950,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ro_values-ro.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ro_values-ro.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-ro\\values-ro.xml",
@@ -5057,7 +5057,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ta_values-ta.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ta_values-ta.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-ta\\values.xml",
@@ -5164,7 +5164,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-et_values-et.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-et_values-et.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-et\\values-et.xml",
@@ -5271,7 +5271,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-fr_values-fr.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-fr_values-fr.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-fr\\values-fr.xml",
@@ -5378,7 +5378,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v21_values-v21.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v21_values-v21.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\3b5c7cb5a9176f47c8d1ecaeeca3e7ad\\transformed\\media-1.4.1\\res\\values-v21\\values-v21.xml",
@@ -5459,7 +5459,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ldltr-v21_values-ldltr-v21.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ldltr-v21_values-ldltr-v21.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
@@ -5474,7 +5474,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-zh-rCN_values-zh-rCN.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-zh-rCN_values-zh-rCN.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-zh-rCN\\values-zh-rCN.xml",
@@ -5581,7 +5581,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sw600dp-v13_values-sw600dp-v13.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sw600dp-v13_values-sw600dp-v13.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
@@ -5596,7 +5596,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sk_values-sk.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sk_values-sk.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-sk\\values.xml",
@@ -5703,7 +5703,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-mn_values-mn.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-mn_values-mn.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-mn\\values-mn.xml",
@@ -5810,7 +5810,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-eu_values-eu.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-eu_values-eu.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-eu\\values-eu.xml",
@@ -5917,7 +5917,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v28_values-v28.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v28_values-v28.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v28\\values-v28.xml",
@@ -5941,7 +5941,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-night-v8_values-night-v8.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
                     "source": "E:\\weddinghall\\android\\app\\src\\main\\res\\values-night\\styles.xml",
@@ -5982,7 +5982,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-bg_values-bg.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-bg_values-bg.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-bg\\values-bg.xml",
@@ -6089,7 +6089,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-pa_values-pa.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-pa_values-pa.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-pa\\values.xml",
@@ -6196,7 +6196,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-mr_values-mr.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-mr_values-mr.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-mr\\values-mr.xml",
@@ -6303,7 +6303,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-w820dp-v13_values-w820dp-v13.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-w820dp-v13_values-w820dp-v13.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\3884dc816fa31dbcdac6fe90649dcbe3\\transformed\\jetified-flutter_sound_core-9.28.0\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
@@ -6318,7 +6318,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-zh-rTW_values-zh-rTW.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-zh-rTW_values-zh-rTW.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
@@ -6425,7 +6425,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-port_values-port.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-port_values-port.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-port\\values-port.xml",
@@ -6440,7 +6440,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ka_values-ka.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ka_values-ka.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-ka\\values-ka.xml",
@@ -6547,7 +6547,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-km_values-km.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-km_values-km.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-km\\values.xml",
@@ -6654,7 +6654,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-el_values-el.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-el_values-el.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-el\\values-el.xml",
@@ -6761,7 +6761,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-sl_values-sl.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-sl_values-sl.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-sl\\values-sl.xml",
@@ -6868,7 +6868,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-af_values-af.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-af_values-af.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-af\\values.xml",
@@ -6975,7 +6975,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-tl_values-tl.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-tl_values-tl.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-tl\\values-tl.xml",
@@ -7082,7 +7082,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-gl_values-gl.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-gl_values-gl.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-gl\\values-gl.xml",
@@ -7189,7 +7189,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-th_values-th.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-th_values-th.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-th\\values-th.xml",
@@ -7296,7 +7296,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v16_values-v16.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v16_values-v16.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v16\\values-v16.xml",
@@ -7312,7 +7312,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-en-rCA_values-en-rCA.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-en-rCA_values-en-rCA.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-en-rCA\\values-en-rCA.xml",
@@ -7385,7 +7385,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-uz_values-uz.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-uz_values-uz.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-uz\\values.xml",
@@ -7492,7 +7492,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v18_values-v18.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v18_values-v18.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v18\\values-v18.xml",
@@ -7507,7 +7507,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-hu_values-hu.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-hu_values-hu.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-hu\\values-hu.xml",
@@ -7614,7 +7614,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-hy_values-hy.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-hy_values-hy.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-hy\\values.xml",
@@ -7721,7 +7721,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-lv_values-lv.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-lv_values-lv.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-lv\\values.xml",
@@ -7828,7 +7828,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-en-rXC_values-en-rXC.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-en-rXC_values-en-rXC.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-en-rXC\\values-en-rXC.xml",
@@ -7901,7 +7901,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ja_values-ja.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ja_values-ja.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-ja\\values-ja.xml",
@@ -8008,7 +8008,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-in_values-in.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-in_values-in.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-in\\values-in.xml",
@@ -8115,7 +8115,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-es-rUS_values-es-rUS.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-es-rUS_values-es-rUS.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-es-rUS\\values-es-rUS.xml",
@@ -8222,7 +8222,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-zh-rHK_values-zh-rHK.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-zh-rHK_values-zh-rHK.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-zh-rHK\\values-zh-rHK.xml",
@@ -8329,7 +8329,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-bs_values-bs.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-bs_values-bs.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-bs\\values-bs.xml",
@@ -8436,7 +8436,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-nb_values-nb.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-nb_values-nb.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-nb\\values.xml",
@@ -8543,7 +8543,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-watch-v21_values-watch-v21.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-watch-v21_values-watch-v21.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-watch-v21\\values-watch-v21.xml",
@@ -8559,7 +8559,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-is_values-is.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-is_values-is.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-is\\values.xml",
@@ -8666,7 +8666,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-az_values-az.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-az_values-az.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-az\\values-az.xml",
@@ -8773,7 +8773,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v24_values-v24.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v24_values-v24.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v24\\values-v24.xml",
@@ -8805,7 +8805,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-uk_values-uk.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-uk_values-uk.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-uk\\values.xml",
@@ -8912,7 +8912,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-pl_values-pl.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-pl_values-pl.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-pl\\values.xml",
@@ -9019,7 +9019,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-large-v4_values-large-v4.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-large-v4_values-large-v4.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-large-v4\\values-large-v4.xml",
@@ -9034,7 +9034,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v26_values-v26.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v26_values-v26.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v26\\values-v26.xml",
@@ -9058,7 +9058,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-vi_values-vi.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-vi_values-vi.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-vi\\values-vi.xml",
@@ -9165,7 +9165,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-iw_values-iw.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-iw_values-iw.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\7711b693f4833f627a22ef960554b630\\transformed\\jetified-credentials-1.2.0-rc01\\res\\values-iw\\values-iw.xml",
@@ -9272,7 +9272,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-en-rIN_values-en-rIN.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-en-rIN_values-en-rIN.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-en-rIN\\values-en-rIN.xml",
@@ -9345,7 +9345,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-kn_values-kn.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-kn_values-kn.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\c655c3a03df6e56424955b6b85128ed2\\transformed\\core-1.15.0\\res\\values-kn\\values-kn.xml",
@@ -9452,7 +9452,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-ms_values-ms.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-ms_values-ms.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad7d406cc37401e2579d535c843fb010\\transformed\\jetified-play-services-base-18.1.0\\res\\values-ms\\values.xml",
@@ -9559,7 +9559,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-v22_values-v22.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-v22_values-v22.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\ad43a00a0187a9ab17e5e91a47e235bc\\transformed\\appcompat-1.2.0\\res\\values-v22\\values-v22.xml",
@@ -9583,7 +9583,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-fa_values-fa.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-fa_values-fa.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\493f6fdf80b43b91637427b703856fac\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-fa\\values.xml",
@@ -9690,7 +9690,7 @@
             ]
         },
         {
-            "outputFile": "com.example.weddinghall.app-debug-54:/values-nl_values-nl.arsc.flat",
+            "outputFile": "com.hievent.app.app-debug-54:/values-nl_values-nl.arsc.flat",
             "map": [
                 {
                     "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\321912b34413a9f87dfb49a283aa1cfd\\transformed\\browser-1.8.0\\res\\values-nl\\values-nl.xml",

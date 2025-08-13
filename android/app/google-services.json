@@ -8,20 +8,48 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:93995081174:android:129654144c7507662e1877",
+        "mobilesdk_app_id": "1:93995081174:android:6dd01efc30a79eba2e1877",
         "android_client_info": {
-          "package_name": "com.example.weddinghall"
+          "package_name": "com.example.hieventadmin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "93995081174-mf1cs96neniuprn9q074b46o17j6qe3k.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.weddinghall",
-            "certificate_hash": "f77ed4d4bc4b80158e35b175ccbc42cb9351c995"
-          }
-        },
+          "client_id": "93995081174-6gar7imgk6m3qnl174onqsl9s7pnn3bf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBstVZ2xd18xDKKlhQlS8ZNndfc5d-qM4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93995081174-6gar7imgk6m3qnl174onqsl9s7pnn3bf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "93995081174-0h9o73bklqcf8vjpd3j1pcp6unhsm59u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.weddinghall"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93995081174:android:b59efd6b1d5943c72e1877",
+        "android_client_info": {
+          "package_name": "com.hievent.app"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "93995081174-6gar7imgk6m3qnl174onqsl9s7pnn3bf.apps.googleusercontent.com",
           "client_type": 3

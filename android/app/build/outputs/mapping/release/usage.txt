@@ -9206,13 +9206,13 @@ com.dexterous.flutterlocalnotifications.isolate.IsolatePreferences:
     private static final java.lang.String SHARED_PREFS_FILE_NAME
 com.dexterous.flutterlocalnotifications.utils.LongUtils:
     public void <init>()
-com.example.weddinghall.BuildConfig
-com.example.weddinghall.R$drawable
-com.example.weddinghall.R$mipmap
-com.example.weddinghall.R$string
-com.example.weddinghall.R$style
-com.example.weddinghall.R$xml
-com.example.weddinghall.R
+com.hievent.app.weddinghall.BuildConfig
+com.hievent.app.weddinghall.R$drawable
+com.hievent.app.weddinghall.R$mipmap
+com.hievent.app.weddinghall.R$string
+com.hievent.app.weddinghall.R$style
+com.hievent.app.weddinghall.R$xml
+com.hievent.app.weddinghall.R
 com.getkeepsafe.relinker.ApkLibraryInstaller:
     private static final int COPY_BUFFER_SIZE
     private static final int MAX_TRIES
